@@ -21,6 +21,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
 
+
 export default function Login(props) {
 
     const { text, navigation } = props;
