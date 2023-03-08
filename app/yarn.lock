@@ -1706,6 +1706,14 @@
     "opencollective-postinstall" "^2.0.1"
     "superstruct" "^0.6.2"
 
+"@react-native-firebase/auth@^17.3.2":
+  "integrity" "sha512-YvVvKTwpMMWnDThKh4btgAh6XYo7ie1hwwrTOGNd8Vpsr+nGmiPPB0COdiVaQu8KWX1CzPbOuxJdPwWaz9lW/w=="
+  "resolved" "https://registry.npmjs.org/@react-native-firebase/auth/-/auth-17.3.2.tgz"
+  "version" "17.3.2"
+  dependencies:
+    "@expo/config-plugins" "^5.0.4"
+    "plist" "^3.0.5"
+
 "@react-native-firebase/firestore@^17.3.2":
   "integrity" "sha512-ZqdtYcZExAdfFXIntfy5/hTRK8jAyZnQCbpCyvC3O8f1m4C2pDo57xLzTdukORtJjiBGkxBpcULLBrSbOJ/SXw=="
   "resolved" "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-17.3.2.tgz"

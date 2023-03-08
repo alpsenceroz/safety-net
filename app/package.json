@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/geolocation": "^3.0.5",
     "@react-native-firebase/app": "^17.3.2",
+    "@react-native-firebase/auth": "^17.3.2",
     "@react-native-firebase/firestore": "^17.3.2",
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/material-bottom-tabs": "^6.2.15",
