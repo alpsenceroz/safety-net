@@ -6,6 +6,7 @@ import SignUp from './screens/SignUp';
 
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import TestScreen from './screens/TestScreen';
+import MapScreen from './screens/MapScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,11 @@ export default function MainNavigation() {
                 <Tab.Screen name="TestScreen" component={TestScreen}
                     options={{
 
+                    }}
+                />
+                <Tab.Screen name="Map" component={MapScreen}
+                    options={{
+                        tabBarIcon: () => <FaIcon name="map" size={30} color="#900" />
                     }}
                 />
             </Tab.Navigator>
