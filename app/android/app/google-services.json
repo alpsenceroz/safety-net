@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "666631908076",
+    "project_id": "natural-disaster-app-157a0",
+    "storage_bucket": "natural-disaster-app-157a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666631908076:android:a34022f6e5c7a6989e53c9",
+        "android_client_info": {
+          "package_name": "com.challenger.naturaldisaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666631908076-01o1m4c961hatumade5op2kq6865ktbi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.challenger.naturaldisaster",
+            "certificate_hash": "266684e6f94e65a2b09228c52bc66e5906ab4d7d"
+          }
+        },
+        {
+          "client_id": "666631908076-8l8ro457ktugtbmgoumcq3hs4m3htkc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANd4dBMMAvJ7RD3opVPPuqERcSrzDoVPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666631908076-8l8ro457ktugtbmgoumcq3hs4m3htkc3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

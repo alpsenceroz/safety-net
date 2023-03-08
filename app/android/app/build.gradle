@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.google.gms.google-services'
 apply plugin: "com.facebook.react"
 
 import com.android.build.OutputFile
@@ -95,7 +96,7 @@ android {
 
     namespace "com.app"
     defaultConfig {
-        applicationId "com.app"
+        applicationId "com.challenger.naturaldisaster"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
