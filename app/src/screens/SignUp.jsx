@@ -9,9 +9,13 @@ import {
     View,
 } from 'react-native';
 
+import Geolocation from '@react-native-community/geolocation';
+
 export default function SignUp(props) {
 
     const { text } = props;
+
+    Geolocation.getCurrentPosition(info => console.log(info));
 
     return (
 
