@@ -16,10 +16,11 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Login from './src/screens/Login';
+import Login from './src/screens/Home';
 import MainNavigation from './src/MainNavigation';
 
 import { Provider as PaperProvider } from 'react-native-paper';
+import ParentNavigation from './src/ParentNavigation';
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -27,7 +28,7 @@ export default function App() {
 
   return (
     <PaperProvider>
-      <MainNavigation />
+      <ParentNavigation/>
     </PaperProvider>
 
   );
