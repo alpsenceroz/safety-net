@@ -19,6 +19,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import EmergencyNavigation from '../EmergencyNavigation';
 
 
 
@@ -32,6 +33,7 @@ export default function Home(props) {
         navigation.replace('Authentication', {screen: "Login"});
     }
 
+
     return (
 
         <View>
@@ -39,6 +41,8 @@ export default function Home(props) {
             <Button onPress={ () => navigation.navigate( "SignUp" ) }>Navigate</Button>
             <Icon name="rocket" size={30} color="#900" />
             <Button onPress={handleLogOut}>Log out</Button>
+            <Button onPress={ () => navigation.navigate('Emergency', {screen: "ChooseVictim"})} >Help</Button>
+
         </View>
     );
 

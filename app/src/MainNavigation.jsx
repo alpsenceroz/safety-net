@@ -43,6 +43,7 @@ export default function MainNavigation() {
                         tabBarIcon: () => <FaIcon name="map" size={30} color="#900" />
                     }}
                 />
+                
             </Tab.Navigator>
        
     )
