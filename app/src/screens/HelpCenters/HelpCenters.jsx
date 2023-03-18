@@ -5,10 +5,9 @@ import { useEffect, useState } from "react";
 
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
-import { Button, Card, Chip, Text } from "react-native-paper";
+import { Button, Card, Checkbox, Chip, Text } from "react-native-paper";
 
 import auth from '@react-native-firebase/auth';
-
 
 
 function HelpCenterItem(props) {
@@ -44,6 +43,8 @@ export default function HelpCenters({ navigation }) {
 
     const [isShowDropdown, setIsShowDropdown] = useState(false);
     const [citySelection, setCitySelection] = useState(null);
+
+    const [onlyUser, setOnlyUser] = useState(false);
 
     const user = auth().currentUser;
 
@@ -89,20 +90,12 @@ export default function HelpCenters({ navigation }) {
                 setValue={setCitySelection}
                 list={getCities()}
             ></DropDown>
-
-            <View>
-                <Text style={styles.sectionTitle}>Your Help Centers</Text>
-                <FlatList
-                    data={yourHelpCenters}
-                    renderItem={({ item }) => <HelpCenterItem name={item.data.name} provided={item.data.needs} city={item.data.city} />}
-                    keyExtractor={item => item.id}
-                />
-            </View>
+            <Checkbox.Item label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser( (current) => !current )}/>
 
             <View>
                 <Text style={styles.sectionTitle}>Help Centers</Text>
                 <FlatList
-                    data={helpCenters}
+                    data={onlyUser ? yourHelpCenters : helpCenters}
                     renderItem={({ item }) => <HelpCenterItem name={item.data.name} provided={item.data.needs} city={item.data.city} />}
                     keyExtractor={item => item.id}
                 />
