@@ -16,6 +16,7 @@ import {
 import SignUp from './SignUp';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Geolocation from '@react-native-community/geolocation';
 
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
@@ -34,6 +35,22 @@ export default function Home(props) {
     }
 
 
+    // Geolocation.getCurrentPosition(
+    //     //Will give you the current location
+    //     (position) => {
+    //       //getting the Longitude from the location json
+    //       const currentLongitude =
+    //         JSON.stringify(position.coords.longitude);
+      
+    //       //getting the Latitude from the location json
+    //       const currentLatitude =
+    //         JSON.stringify(position.coords.latitude);
+            
+    //      }, (error) => alert(error.message), { 
+    //        enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 
+    //      }
+    //   );
+      
     return (
 
         <View>

@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     SafeAreaView,
     ScrollView,
     StatusBar,
     StyleSheet,
     Text,
+    TextInput,
     useColorScheme,
     View,
 } from 'react-native';
@@ -15,24 +16,48 @@ import {
 } from 'react-native-paper';
 
 
+const ChooseCondition = ({route, navigation}) => {
+    // const [emergency, setEmergency] = useState(route.params.emergency);
+    const [evacuation, setEvacuation] = useState(emergency.needEvacuation)
+    const [injured, setInjured] = useState(emergency.isInjured)
+    
+    // useEffect(() => {
+    //     console.log('CONDITION:', emergency);
+    //   }, [emergency]
+    // )
+    // const handleCheckBox = (key) =>{
+    //     setEmergency((prevEmergency) => ({...prevEmergency, [key]: !prevEmergency[key]}))
+    // }
 
+ 
+    emergency = route.params.emergency
 
-const ChooseCondition = ({navigation}) => {
-    const [checked1, setChecked1] = React.useState(false);
-    const [checked2, setChecked2] = React.useState(false);
+        return(
+            <View>
+                <Checkbox.Item
+                label="Need Evacuation"
+                status={evacuation ? 'checked' : 'unchecked'}
+                onPress={() => { 
+                    // handleCheckBox("needEvacuation")
+                    setEvacuation(!emergency['needEvacuation'] )
+                    emergency.needEvacuation = !emergency['needEvacuation'] 
 
-    return(
-        <View>
-            <Checkbox.Item
-            label="Need Evacuation"
-            status={checked1 ? 'checked' : 'unchecked'}
-            onPress={() => { setChecked1(!checked1);}}/>
-            <Checkbox.Item
-            label="Injured"
-            status={checked2 ? 'checked' : 'unchecked'}
-            onPress={() => { setChecked2(!checked2);}}/>
-            <Button onPress={ () => navigation.navigate("EmergencyReported")}>Continue</Button>
-        </View>
-    )
+                    }}/>
+                <Checkbox.Item
+                label="Injured"
+                status={injured ? 'checked' : 'unchecked'}
+                onPress={() => { 
+                    // handleCheckBox("isInjured")
+                    setInjured(!emergency['isInjured'] )
+                    emergency['isInjured']= !emergency['isInjured']
+                    }}/>
+                <Button onPress= {() => {
+                    navigation.navigate("EmergencyReported", {emergency: emergency})
+
+                
+            }}>Continue</Button>
+            </View>
+        )
+
 }
 export default ChooseCondition
