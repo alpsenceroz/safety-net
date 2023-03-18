@@ -1,11 +1,14 @@
-import { View } from "react-native";
-import { Button, Checkbox, Chip, TextInput } from 'react-native-paper';
+import { StyleSheet, View } from "react-native";
+import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
 import helpCenterNeeds from '../../utils/helpCenterNeeds.json'
 import { useState } from "react";
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
+import SelectLocationModal from "../../components/SelectLocationModal";
+
+import auth from '@react-native-firebase/auth';
 
 export default function AddHelpCenter({ navigation }) {
 
@@ -15,6 +18,9 @@ export default function AddHelpCenter({ navigation }) {
 
     const [isShowDropdown, setIsShowDropdown] = useState(false);
     const [citySelection, setCitySelection] = useState(null);
+
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [modalSelection, setModalSelection] = useState(false);
 
     function setSelectionData(index) {
         const newChipsData = chipsData.map((value) => value);
@@ -38,14 +44,18 @@ export default function AddHelpCenter({ navigation }) {
 
     async function addHelpCenter() {
 
-        filteredNeeds = chipsData.filter( (value) => {
+        filteredNeeds = chipsData.filter((value) => {
             return value.selected ? value.selected : false;
-        } );
+        });
+
+        const userId = auth().currentUser.uid;
 
         const newHelpCenter = {
             name: name,
             city: citySelection,
-            needs: filteredNeeds.map( (value) => value.name ),
+            location: modalSelection,
+            needs: filteredNeeds.map((value) => value.name),
+            user: userId,
         }
         console.log(newHelpCenter)
 
@@ -58,11 +68,32 @@ export default function AddHelpCenter({ navigation }) {
         setName(text);
     }
 
-    console.log(chipsData)
+    function handleSelectLocation() {
+        setModalVisible(true);
+    }
 
+    function hideModal() {
+        setModalVisible(false);
+    }
+
+
+    function handleModalConfirm(coordinates) {
+        setModalSelection(coordinates);
+        setModalVisible(false);
+    }
+
+console.log(modalSelection)
     return (
 
         <View>
+            <Portal>
+                <SelectLocationModal 
+                isModalVisible={isModalVisible} 
+                hideModal={hideModal} 
+                onConfirm={handleModalConfirm}
+                
+                />
+            </Portal>
             <TextInput
                 mode="outlined"
                 label="Name"
@@ -80,8 +111,30 @@ export default function AddHelpCenter({ navigation }) {
                 setValue={setCitySelection}
                 list={getCities()}
             ></DropDown>
+            <Button onPress={handleSelectLocation}>Select Location</Button>
+            {modalSelection ?
+             <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3) }, {modalSelection.longitude.toFixed(3)}</Text>
+             :
+             <Text style={styles.locationText}>Location: Not Selected</Text>
+            }
             {chips}
             <Button onPress={addHelpCenter}>Add Help Center</Button>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    textInput: {
+
+    },
+    locationText: {
+        textAlign: 'center',
+    },
+    modalContainerStyle: {
+        backgroundColor: 'white',
+        padding: 40,
+        margin: 20,
+        flex: 1,
+    },
+
+})
