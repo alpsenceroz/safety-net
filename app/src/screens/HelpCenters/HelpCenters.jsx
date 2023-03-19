@@ -12,19 +12,18 @@ import auth from '@react-native-firebase/auth';
 const ALL_CITIES_LABEL = "All Cities";
 
 function HelpCenterItem(props) {
-    const { name, provided, city } = props;
+    const { name, provided, city, onPress } = props;
 
     let chips;
     if (provided) {
         chips = provided.map((item) => {
-            console.log("item", item)
             return (<Chip key={item} style={styles.providedChip}>{item}</Chip>)
         })
     }
 
 
     return (
-        <Card>
+        <Card onPress={onPress}>
             <Card.Title
                 title={name}
                 subtitle={city}
@@ -56,7 +55,7 @@ export default function HelpCenters({ navigation }) {
         let newSub;
 
         if (citySelection && citySelection !== ALL_CITIES_LABEL) {
-            newSub = firestore().collection('helpCenters').orderBy("timestamp").where("city", "==", citySelection).onSnapshot(
+            newSub = firestore().collection('helpCenters').where("city", "==", citySelection).onSnapshot(
                 {
                     next: (snapshot) => {
                         
@@ -75,7 +74,6 @@ export default function HelpCenters({ navigation }) {
             newSub = firestore().collection('helpCenters').onSnapshot(
                 (querySnapshot) => {
                 
-                        console.log("snapshot", querySnapshot)
                         const formattedData = querySnapshot.docs.map((item) => {
                             return {
                                 data: item.data(),
@@ -101,7 +99,6 @@ export default function HelpCenters({ navigation }) {
     function addHelpCenter() {
         navigation.navigate("AddHelpCenter");
     }
-    console.log("help centers", helpCenters)
 
     function handleCitySelection(city) {
         setCitySelection(city);
@@ -118,6 +115,17 @@ export default function HelpCenters({ navigation }) {
     }, ...getCities()];
 
 
+    function handleCardPressEdit(id) {
+        navigation.push("EditHelpCenter", {
+            helpCenterId: id,
+        });
+    }
+
+    function handleCardPressDisplay(id) {
+        navigation.push("DisplayHelpCenter", {
+            helpCenterId: id,
+        });
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -134,11 +142,17 @@ export default function HelpCenters({ navigation }) {
             ></DropDown>
             <Checkbox.Item label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
-            <View>
+            <View style={{ flex: 1 }}>
                 <Text style={styles.sectionTitle}>Help Centers</Text>
                 <FlatList
                     data={onlyUser ? yourHelpCenters : helpCenters}
-                    renderItem={({ item }) => <HelpCenterItem name={item.data.name} provided={item.data.needs} city={item.data.city} />}
+                    renderItem={({ item }) => <HelpCenterItem 
+                    name={item.data.name} 
+                    provided={item.data.needs} 
+                    city={item.data.city} 
+                    onPress={ item.data.user === user.uid ? () => handleCardPressEdit(item.id) : () => handleCardPressDisplay(item.id)} 
+                    />
+                }
                     keyExtractor={item => item.id}
                 />
 

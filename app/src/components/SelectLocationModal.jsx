@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button, Modal, Text } from 'react-native-paper';
@@ -8,10 +8,15 @@ import { Button, Modal, Text } from 'react-native-paper';
 
 export default function SelectLocation(props) {
 
-  const { isModalVisible, hideModal, onConfirm } = props;
 
-  const [selection, setSelection] = useState();
 
+  const { isModalVisible, hideModal, onConfirm, modalSelection } = props;
+
+  useEffect( () => {
+    setSelection(modalSelection);
+  },[modalSelection] )
+
+  const [selection, setSelection] = useState(modalSelection);
   function handleMapClick(coordinate) {
     setSelection(coordinate);
   }

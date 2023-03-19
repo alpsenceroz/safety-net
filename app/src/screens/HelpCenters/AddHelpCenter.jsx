@@ -25,7 +25,7 @@ export default function AddHelpCenter({ navigation }) {
     const [address, setAddress] = useState();
 
     function setSelectionData(index) {
-        const newChipsData = chipsData.map((value) => value);
+        const newChipsData = chipsData.map((value) => {return {...value}});
         const newValue = newChipsData[index].selected ? !newChipsData[index].selected : true;
         newChipsData[index].selected = newValue;
         setChipsData(newChipsData);
@@ -61,7 +61,6 @@ export default function AddHelpCenter({ navigation }) {
             user: userId,
             timestamp: (new Date()),
         }
-        console.log(newHelpCenter)
 
         await firestore().collection('helpCenters').add(newHelpCenter);
 
@@ -90,7 +89,6 @@ export default function AddHelpCenter({ navigation }) {
         setModalVisible(false);
     }
 
-    console.log(modalSelection)
     return (
 
         <View>
@@ -99,7 +97,7 @@ export default function AddHelpCenter({ navigation }) {
                     isModalVisible={isModalVisible}
                     hideModal={hideModal}
                     onConfirm={handleModalConfirm}
-
+                    modalSelection={modalSelection}
                 />
             </Portal>
             <TextInput
