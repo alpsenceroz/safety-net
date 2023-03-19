@@ -1,8 +1,8 @@
 import { View } from "react-native";
 
 
-export default function EditHelpCenter({route, navigation}) {
 
+export default function DisplayHelpCenter({route, navigation}) {
 
 
     return (

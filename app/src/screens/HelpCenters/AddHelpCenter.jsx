@@ -22,6 +22,8 @@ export default function AddHelpCenter({ navigation }) {
     const [isModalVisible, setModalVisible] = useState(false);
     const [modalSelection, setModalSelection] = useState(false);
 
+    const [address, setAddress] = useState();
+
     function setSelectionData(index) {
         const newChipsData = chipsData.map((value) => value);
         const newValue = newChipsData[index].selected ? !newChipsData[index].selected : true;
@@ -53,9 +55,11 @@ export default function AddHelpCenter({ navigation }) {
         const newHelpCenter = {
             name: name,
             city: citySelection,
+            address: address,
             location: modalSelection,
             needs: filteredNeeds.map((value) => value.name),
             user: userId,
+            timestamp: (new Date()),
         }
         console.log(newHelpCenter)
 
@@ -66,6 +70,10 @@ export default function AddHelpCenter({ navigation }) {
 
     function handleNameChange(text) {
         setName(text);
+    }
+
+    function handleAddressChange(text) {
+        setAddress(text);
     }
 
     function handleSelectLocation() {
@@ -82,16 +90,16 @@ export default function AddHelpCenter({ navigation }) {
         setModalVisible(false);
     }
 
-console.log(modalSelection)
+    console.log(modalSelection)
     return (
 
         <View>
             <Portal>
-                <SelectLocationModal 
-                isModalVisible={isModalVisible} 
-                hideModal={hideModal} 
-                onConfirm={handleModalConfirm}
-                
+                <SelectLocationModal
+                    isModalVisible={isModalVisible}
+                    hideModal={hideModal}
+                    onConfirm={handleModalConfirm}
+
                 />
             </Portal>
             <TextInput
@@ -101,6 +109,13 @@ console.log(modalSelection)
                 error={nameError}
                 onChangeText={(text) =>
                     handleNameChange(text)} />
+            <TextInput
+                mode="outlined"
+                label="Address"
+                //placeholder="E-mail"
+                //error={addressError}
+                onChangeText={(text) =>
+                    handleAddressChange(text)} />
             <DropDown
                 label="City"
                 mode='outlined'
@@ -113,9 +128,9 @@ console.log(modalSelection)
             ></DropDown>
             <Button onPress={handleSelectLocation}>Select Location</Button>
             {modalSelection ?
-             <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3) }, {modalSelection.longitude.toFixed(3)}</Text>
-             :
-             <Text style={styles.locationText}>Location: Not Selected</Text>
+                <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
+                :
+                <Text style={styles.locationText}>Location: Not Selected</Text>
             }
             {chips}
             <Button onPress={addHelpCenter}>Add Help Center</Button>

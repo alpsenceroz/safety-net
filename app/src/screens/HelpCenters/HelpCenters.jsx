@@ -9,16 +9,17 @@ import { Button, Card, Checkbox, Chip, Text } from "react-native-paper";
 
 import auth from '@react-native-firebase/auth';
 
+const ALL_CITIES_LABEL = "All Cities";
 
 function HelpCenterItem(props) {
     const { name, provided, city } = props;
 
     let chips;
-    if(provided) {
-        chips = provided.map( (item) => {
+    if (provided) {
+        chips = provided.map((item) => {
             console.log("item", item)
-            return( <Chip key={item} style={styles.providedChip}>{item}</Chip> )
-        } )
+            return (<Chip key={item} style={styles.providedChip}>{item}</Chip>)
+        })
     }
 
 
@@ -46,39 +47,80 @@ export default function HelpCenters({ navigation }) {
 
     const [onlyUser, setOnlyUser] = useState(false);
 
+
+
     const user = auth().currentUser;
 
     useEffect(() => {
 
-        fetchHelpCenters();
+        let newSub;
 
-    }, []);
+        if (citySelection && citySelection !== ALL_CITIES_LABEL) {
+            newSub = firestore().collection('helpCenters').orderBy("timestamp").where("city", "==", citySelection).onSnapshot(
+                {
+                    next: (snapshot) => {
+                        
+                        const formattedData = snapshot.docs.map((item) => {
+                            return {
+                                data: item.data(),
+                                id: item.id,
+                            }
+                        })
+                        setHelpCenters(formattedData);
+                    }
+                }
+            );
+
+        } else {
+            newSub = firestore().collection('helpCenters').onSnapshot(
+                (querySnapshot) => {
+                
+                        console.log("snapshot", querySnapshot)
+                        const formattedData = querySnapshot.docs.map((item) => {
+                            return {
+                                data: item.data(),
+                                id: item.id,
+                            }
+                        })
+                        setHelpCenters(formattedData);
+                }
+                
+            );
+        }
 
 
-    async function fetchHelpCenters() {
+        return () => {
+            newSub();
+        }
+    }, [citySelection]);
 
-        const newHelpCenters = await firestore().collection('helpCenters').get();
-        const formattedData = newHelpCenters.docs.map((item) => {
-            return {
-                data: item.data(),
-                id: item.id,
-            }
-        })
-        setHelpCenters(formattedData);
 
-    }
+
+
 
     function addHelpCenter() {
         navigation.navigate("AddHelpCenter");
     }
     console.log("help centers", helpCenters)
 
-    const yourHelpCenters = helpCenters.filter( (item) => {
+    function handleCitySelection(city) {
+        setCitySelection(city);
+    }
+
+    const yourHelpCenters = helpCenters.filter((item) => {
         return item.data.user === user.uid;
-    } )
+    })
+
+
+    const allCities = [{
+        label: ALL_CITIES_LABEL,
+        value: ALL_CITIES_LABEL,
+    }, ...getCities()];
+
+
 
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={{ flex: 1 }}>
             <Button onPress={addHelpCenter}>Add Help Center</Button>
             <DropDown
                 label="City"
@@ -87,10 +129,10 @@ export default function HelpCenters({ navigation }) {
                 showDropDown={() => setIsShowDropdown(true)}
                 onDismiss={() => setIsShowDropdown(false)}
                 value={citySelection}
-                setValue={setCitySelection}
-                list={getCities()}
+                setValue={handleCitySelection}
+                list={allCities}
             ></DropDown>
-            <Checkbox.Item label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser( (current) => !current )}/>
+            <Checkbox.Item label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
             <View>
                 <Text style={styles.sectionTitle}>Help Centers</Text>
@@ -101,7 +143,6 @@ export default function HelpCenters({ navigation }) {
                 />
 
             </View>
-
         </SafeAreaView>
     )
 
