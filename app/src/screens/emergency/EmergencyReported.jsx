@@ -28,24 +28,32 @@ import Geolocation from '@react-native-community/geolocation';
  
 const EmergencyReported = ({route, navigation}) => {
     // import all the components we are going to use
-    const [location, setLocation] = useState(null);
+    const emergency = route.params.emergency
+    const [location, setLocation] = useState({
+         latitude: 37.78825,
+            longitude: -122.432,
+    });
 
     useEffect(() => {
-        try {
-            console.log(route.params.emergency)
-            Geolocation.getCurrentPosition(info => {
-                console.log(info.coords)
-                setLocation(info)
-                emergency.latitude = info.coords.latitude
-                emergency.longitude = info.coords.longitude
+        const unsubscribe = navigation.addListener('focus', () => {
                 console.log(emergency)
-                saveToFirestore()
-            });
-        } catch (e) {
-
-        }
-
-    }, [])
+                Geolocation.getCurrentPosition(info => {
+                    console.log(info.coords)
+                    setLocation(info.coords)
+                    emergency.latitude = info.coords.latitude
+                    emergency.longitude = info.coords.longitude
+                    console.log(emergency)
+                    saveToFirestore()
+                },
+                error => {
+                    // See error code charts below.
+                    console.log(error.code, error.message);},
+                {enableHighAccuracy: true, timeout: 15000, maximumAge: 0}
+                );
+    
+          });
+          return unsubscribe;
+    }, [navigation])
 
     async function saveToFirestore() {
         await firestore().collection('emergencies').add(emergency)
@@ -62,8 +70,8 @@ const EmergencyReported = ({route, navigation}) => {
             <Text>Your situation is reported. Stay calm.</Text>
             <Text>Your location is: </Text>
 
-            <Text>Latitude: {location ? JSON.stringify(location.coords.latitude) : null}</Text>
-            <Text>Longitude: {location ? JSON.stringify(location.coords.longitude)  : null}</Text>
+            <Text>Latitude: {location ? JSON.stringify(location.latitude) : null}</Text>
+            <Text>Longitude: {location ? JSON.stringify(location.longitude)  : null}</Text>
             <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button>
 
         </View>

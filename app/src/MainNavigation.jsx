@@ -9,6 +9,7 @@ import MiIcon from 'react-native-vector-icons/MaterialIcons';
 import TestScreen from './screens/TestScreen';
 import MapScreen from './screens/MapScreen';
 import Home from './screens/Home';
+import EmergencyList from './screens/EmergencyList';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,11 @@ export default function MainNavigation() {
                 <Tab.Screen name="Map" component={MapScreen}
                     options={{
                         tabBarIcon: () => <FaIcon name="map" size={30} color="#900" />
+                    }}
+                />
+                <Tab.Screen name="EmergencyList" component={EmergencyList}
+                    options={{
+                        tabBarIcon: () => <FaIcon name="hourglass" size={30} color="#900" />
                     }}
                 />
                 

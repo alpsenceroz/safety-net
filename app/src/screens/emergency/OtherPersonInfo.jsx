@@ -14,6 +14,7 @@ import {
 } from 'react-native-paper';
 
 
+
 const OtherPersonInfo = ({route, navigation}) => {
     // const [emergency, setEmergency] = useState(route.params.emergency)
     
@@ -24,27 +25,28 @@ const OtherPersonInfo = ({route, navigation}) => {
     //     setEmergency((prevEmergency) => ({...prevEmergency, other_note: text}))
     // }
     emergency = route.params.emergency
-    return(
-        <View>
-            <TextInput 
 
-            placeholder="Name"
-            // onChangeText={(text) => handleName(text)}
-            onChangeText={(text)=>emergency.otherName = text}
-            >
-            </TextInput>
-            <TextInput 
+        return(
+            <View>
+                <TextInput 
 
-            placeholder="Other Notes" 
-            onChangeText={(text)=>emergency.otherNotes = text}
-            ></TextInput>
-            <Button onPress={ () => {
-                navigation.navigate("ChooseCondition",{emergency: emergency 
-                })
-                }   
-                }>Continue</Button>
+                placeholder="Name"
+                // onChangeText={(text) => handleName(text)}
+                onChangeText={(text)=>emergency.otherName = text}
+                >
+                </TextInput>
+                <TextInput 
 
-        </View>
-    )
+                placeholder="Other Notes" 
+                onChangeText={(text)=>emergency.otherNotes = text}
+                ></TextInput>
+                <Button onPress={ () => {
+                    navigation.navigate("ChooseCondition",{emergency: emergency 
+                    })
+                    }   
+                    }>Continue</Button>
+
+            </View>
+        )
 }
 export default OtherPersonInfo
