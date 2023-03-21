@@ -27,11 +27,14 @@ import firestore from '@react-native-firebase/firestore';
 
 
 const EditEmergency = ({route, navigation}) => {
-    const {userID} = route.params;
-    const [emergency, setEmergency] = useState(null)
+    const emergencyID = route.params.emergencyID;
+    const [emergency, setEmergency] = useState({"doesUserNeed": true, 
+    "isInjured": true, "latitude": 36, "longitude": 42, 
+    "needEvacuation": true, "otherName": '', "otherNotes": '', 
+    "userID": ''})
     useEffect(() => {
         console.log('BBBBBBBBBBBBBBB')
-        const subscription = firestore().collection('emergencies').doc(userID).onSnapshot(
+        const subscription = firestore().collection('emergencies').doc(emergencyID).onSnapshot(
             (snapshot) => {
                 setEmergency(snapshot.data())
                 console.log(snapshot.data())
@@ -46,8 +49,8 @@ const EditEmergency = ({route, navigation}) => {
         <View>
             <TextInput
             mode="outlined"
-            label="Name"
-            value={emergency?.name}
+            label="Notes"
+            value={emergency.otherNotes}
             // error={nameError}
             onChangeText={(text) => setEmergency((prevEmergency) => ({...prevEmergency, needEvacuation: text}))} />
             <Checkbox.Item
@@ -57,13 +60,22 @@ const EditEmergency = ({route, navigation}) => {
             onPress={ () =>  setEmergency((prevEmergency) => ({...prevEmergency, isInjured: !emergency.isInjured}))}
             />
             <Checkbox.Item
-            key={'Need Help'}
-            label={'Need Help'}
+            key={'Need Evacuation'}
+            label={'Need Evacuation'}
             status={emergency?.needEvacuation ? 'checked' : 'unchecked'}
             onPress={ () =>  setEmergency((prevEmergency) => ({...prevEmergency, needEvacuation: !emergency.needEvacuation}))}
             />
-            <Button>Save Changes</Button>
-            <Button>Delete Emergency</Button>
+            <Button onPress={ async()=> {
+                await firestore().collection('emergencies').doc(emergencyID).set(emergency)
+                navigation.pop()
+
+            }}>Save Changes</Button>
+            <Button onPress={ async()=> {
+                await firestore().collection('emergencies').doc(emergencyID).delete()
+                navigation.pop()
+
+            }}>Delete Emergency</Button>
+            <Button>Mark as rescued</Button>
         </View>
     )
     

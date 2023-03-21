@@ -108,7 +108,7 @@ const EmergencyList = ({navigation}) => {
                 title = { marker.ID}
             >
               <Callout onPress={() => {
-                  navigation.navigate('MapNav', {screen: 'EditEmergency', params:{userID: marker.ID}})
+                  navigation.navigate('MapNav', {screen: 'EditEmergency', params:{emergencyID: marker.ID}})
                 }}>
                 <Text>{marker.ID}</Text>
                 <Text>(Click to edit)</Text>
