@@ -14,7 +14,8 @@ import {
 
 import {
     Button,
-    List
+    List,
+    SegmentedButtons
 } from 'react-native-paper';
 
 import firestore from '@react-native-firebase/firestore';
@@ -78,7 +79,23 @@ const EmergencyList = ({navigation}) => {
       console.log(helpCenters)
       return(
         <View>
-          <Button onPress={() => setViewType(0)}> Switch View</Button>
+          <SegmentedButtons
+          value={viewType}
+          onValueChange={setViewType}
+          density='medium'
+          buttons={[
+          {
+            value: 0,
+            label: 'list',
+            icon: 'walk'
+          },
+          {
+            value: 1,
+            label: 'map',
+            icon: 'map'
+
+          }
+          ]}/>
           <Text>map view</Text>
 
           <MapView
@@ -138,7 +155,6 @@ const EmergencyList = ({navigation}) => {
                 <View>
                 <Text>{marker.name}</Text>
                 <Text>(Click to edit)</Text>
-
                 </View>
               </Callout>
             </Marker>
@@ -153,7 +169,23 @@ const EmergencyList = ({navigation}) => {
       return(
 
       <View>
-      <Button onPress={() => setViewType(1)}> Switch View</Button>
+      <SegmentedButtons
+          value={viewType}
+          onValueChange={setViewType}
+          density='medium'
+          buttons={[
+          {
+            value: 0,
+            label: 'list',
+            icon: 'walk'
+          },
+          {
+            value: 1,
+            label: 'map',
+            icon: 'map'
+
+          }
+          ]}/>
           <FlatList
             data ={ emergencies }
             extraData={ emergencies }

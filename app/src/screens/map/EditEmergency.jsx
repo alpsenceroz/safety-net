@@ -52,7 +52,7 @@ const EditEmergency = ({route, navigation}) => {
             label="Notes"
             value={emergency.otherNotes}
             // error={nameError}
-            onChangeText={(text) => setEmergency((prevEmergency) => ({...prevEmergency, needEvacuation: text}))} />
+            onChangeText={(text) => setEmergency((prevEmergency) => ({...prevEmergency, otherNotes: text}))} />
             <Checkbox.Item
             key={'Injured'}
             label={'Injured'}
