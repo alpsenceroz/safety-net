@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "name": "Food",
+            "icon": "food"
+
+        },
+        {
+            "name": "Water",
+            "icon": "water"
+        },
+        {
+            "name": "Accommodation",
+            "icon": "bed"
+        },
+        {
+            "name": "Transportation",
+            "icon": "car"
+        }
+    ]
+}

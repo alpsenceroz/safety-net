@@ -10,6 +10,7 @@ import MapScreen from './screens/MapScreen';
 import Home from './screens/Home';
 import HelpCenterNavigation from './HelpCenterNavigation';
 import EmergencyList from './screens/EmergencyList';
+import OtherNeedsNavigation from './OtherNeedsNavigation';
 
 
 
@@ -49,11 +50,16 @@ export default function MainNavigation() {
                     tabBarIcon: () => <Fa5Icon name="hands-helping" size={30} color="#900" />
                 }}
             />
-                <Tab.Screen name="EmergencyList" component={EmergencyList}
-                    options={{
-                        tabBarIcon: () => <FaIcon name="hourglass" size={30} color="#900" />
-                    }}
-                />
+            <Tab.Screen name="Other Needs" component={OtherNeedsNavigation}
+                options={{
+                    tabBarIcon: () => <Fa5Icon name="hands-helping" size={30} color="#900" />
+                }}
+            />
+            <Tab.Screen name="EmergencyList" component={EmergencyList}
+                options={{
+                    tabBarIcon: () => <FaIcon name="hourglass" size={30} color="#900" />
+                }}
+            />
         </Tab.Navigator>
     )
 

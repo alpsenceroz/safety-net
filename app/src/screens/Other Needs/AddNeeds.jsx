@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
-import helpCenterNeeds from '../../utils/helpCenterNeeds.json'
+import helpCenterNeeds from '../../utils/userNeeds.json'
 import { useState } from "react";
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
@@ -10,7 +10,7 @@ import SelectLocationModal from "../../components/SelectLocationModal";
 
 import auth from '@react-native-firebase/auth';
 
-export default function AddHelpCenter({ navigation }) {
+export default function AddNeeds({ navigation }) {
 
     const [chipsData, setChipsData] = useState(helpCenterNeeds.data);
     const [name, setName] = useState('');
@@ -62,7 +62,7 @@ export default function AddHelpCenter({ navigation }) {
             timestamp: (new Date()),
         }
 
-        await firestore().collection('helpCenters').add(newHelpCenter);
+        await firestore().collection('otherNeeds').add(newHelpCenter);
 
         navigation.pop();
     }

@@ -3,7 +3,7 @@ import { FlatList, SectionList, StyleSheet, View, SafeAreaView } from "react-nat
 import firestore from '@react-native-firebase/firestore';
 import { useEffect, useState } from "react";
 
-import helpCenterNeeds from '../../utils/helpCenterNeeds.json'
+import helpCenterNeeds from '../../utils/userNeeds.json'
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
 import { Button, Card, Checkbox, Chip, Text } from "react-native-paper";
@@ -14,13 +14,12 @@ import auth from '@react-native-firebase/auth';
 
 const ALL_CITIES_LABEL = "All Cities";
 
-
 const iconMap = new Map();
 helpCenterNeeds.data.forEach( (value) => {
     iconMap.set(value.name, value.icon);
 } )
 
-function HelpCenterItem(props) {
+function NeedsItem(props) {
     const { name, provided, city, onPress } = props;
 
     let chips;
@@ -49,7 +48,7 @@ function HelpCenterItem(props) {
     )
 }
 
-export default function HelpCenters({ navigation }) {
+export default function Needs({ navigation }) {
 
 
     const [helpCenters, setHelpCenters] = useState([]);
@@ -68,7 +67,7 @@ export default function HelpCenters({ navigation }) {
         let newSub;
 
         if (citySelection && citySelection !== ALL_CITIES_LABEL) {
-            newSub = firestore().collection('helpCenters').where("city", "==", citySelection).onSnapshot(
+            newSub = firestore().collection('otherNeeds').where("city", "==", citySelection).onSnapshot(
                 {
                     next: (snapshot) => {
                         
@@ -84,7 +83,7 @@ export default function HelpCenters({ navigation }) {
             );
 
         } else {
-            newSub = firestore().collection('helpCenters').onSnapshot(
+            newSub = firestore().collection('otherNeeds').onSnapshot(
                 (querySnapshot) => {
                 
                         const formattedData = querySnapshot.docs.map((item) => {
@@ -110,7 +109,7 @@ export default function HelpCenters({ navigation }) {
 
 
     function addHelpCenter() {
-        navigation.navigate("AddHelpCenter");
+        navigation.navigate("AddNeeds");
     }
 
     function handleCitySelection(city) {
@@ -129,13 +128,13 @@ export default function HelpCenters({ navigation }) {
 
 
     function handleCardPressEdit(id) {
-        navigation.push("EditHelpCenter", {
+        navigation.push("EditNeeds", {
             helpCenterId: id,
         });
     }
 
     function handleCardPressDisplay(id) {
-        navigation.push("DisplayHelpCenter", {
+        navigation.push("DisplayNeeds", {
             helpCenterId: id,
         });
     }
@@ -159,7 +158,7 @@ export default function HelpCenters({ navigation }) {
                 <Text style={styles.sectionTitle}>Help Centers</Text>
                 <FlatList
                     data={onlyUser ? yourHelpCenters : helpCenters}
-                    renderItem={({ item }) => <HelpCenterItem 
+                    renderItem={({ item }) => <NeedsItem 
                     name={item.data.name} 
                     provided={item.data.needs} 
                     city={item.data.city} 
@@ -192,6 +191,7 @@ const styles = StyleSheet.create({
     providedChip: {
         backgroundColor: 'lightblue',
         marginRight: 10,
+
     },
 
 })

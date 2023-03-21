@@ -2,15 +2,55 @@ import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
-import helpCenterNeeds from '../../utils/helpCenterNeeds.json'
-import { useState } from "react";
+import helpCenterNeeds from '../../utils/userNeeds.json'
+import { useState, useEffect } from "react";
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
 import SelectLocationModal from "../../components/SelectLocationModal";
 
 import auth from '@react-native-firebase/auth';
 
-export default function AddHelpCenter({ navigation }) {
+export default function EditNeeds({route, navigation}) {
+
+    const {helpCenterId} = route.params;
+
+    
+
+
+    useEffect( () => {
+        
+        const newSub = firestore().collection('otherNeeds').doc(helpCenterId).onSnapshot(
+            (snapshot) => {
+                const data = snapshot.data()
+                setName(data.name);
+                setCitySelection(data.city);
+                setAddress(data.address);
+                setModalSelection(data.location);
+                
+                const newChipsData = helpCenterNeeds.data.map( (value) => {
+                    if( data.needs.includes(value.name) ) {
+                        return {
+                            ...value,
+                            selected: true,
+                        };
+                   } else {
+                    return value;
+                   }
+                } );
+
+                setChipsData(newChipsData);
+
+            }
+        );
+
+
+        return () => {
+            newSub();
+        }
+
+    }, [] );
+
+
 
     const [chipsData, setChipsData] = useState(helpCenterNeeds.data);
     const [name, setName] = useState('');
@@ -35,7 +75,7 @@ export default function AddHelpCenter({ navigation }) {
         return (
 
             <Checkbox.Item
-                key={index}
+                key={data.name}
                 label={data.name}
                 status={data.selected ? 'checked' : 'unchecked'}
                 onPress={() => setSelectionData(index)}
@@ -44,9 +84,10 @@ export default function AddHelpCenter({ navigation }) {
 
 
 
-    async function addHelpCenter() {
+    async function editHelpCenter() {
 
         filteredNeeds = chipsData.filter((value) => {
+        
             return value.selected ? value.selected : false;
         });
 
@@ -62,7 +103,7 @@ export default function AddHelpCenter({ navigation }) {
             timestamp: (new Date()),
         }
 
-        await firestore().collection('helpCenters').add(newHelpCenter);
+        await firestore().collection('otherNeeds').doc(helpCenterId).set(newHelpCenter);
 
         navigation.pop();
     }
@@ -89,20 +130,24 @@ export default function AddHelpCenter({ navigation }) {
         setModalVisible(false);
     }
 
+
     return (
 
         <View>
             <Portal>
+    
                 <SelectLocationModal
-                    isModalVisible={isModalVisible}
-                    hideModal={hideModal}
-                    onConfirm={handleModalConfirm}
-                    modalSelection={modalSelection}
-                />
+                isModalVisible={isModalVisible}
+                hideModal={hideModal}
+                onConfirm={handleModalConfirm}
+                modalSelection={modalSelection}
+            />
+                
             </Portal>
             <TextInput
                 mode="outlined"
                 label="Name"
+                value={name}
                 //placeholder="E-mail"
                 error={nameError}
                 onChangeText={(text) =>
@@ -110,6 +155,7 @@ export default function AddHelpCenter({ navigation }) {
             <TextInput
                 mode="outlined"
                 label="Address"
+                value={address}
                 //placeholder="E-mail"
                 //error={addressError}
                 onChangeText={(text) =>
@@ -132,7 +178,7 @@ export default function AddHelpCenter({ navigation }) {
             }
             <Text style={styles.providedText}>Provided</Text>
             {chips}
-            <Button onPress={addHelpCenter}>Add Help Center</Button>
+            <Button onPress={editHelpCenter}>Edit Help Center</Button>
         </View>
     )
 }
@@ -154,3 +200,4 @@ const styles = StyleSheet.create({
 
     },
 })
+
