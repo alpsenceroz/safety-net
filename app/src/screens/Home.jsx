@@ -13,7 +13,6 @@ import {
     Button
 } from 'react-native-paper';
 
-import SignUp from './SignUp';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Geolocation from '@react-native-community/geolocation';
@@ -54,9 +53,6 @@ export default function Home(props) {
     return (
 
         <View>
-            <Text>Sign In</Text>
-            <Button onPress={ () => navigation.navigate( "SignUp" ) }>Navigate</Button>
-            <Icon name="rocket" size={30} color="#900" />
             <Button onPress={handleLogOut}>Log out</Button>
             <Button onPress={ () => navigation.navigate('Emergency', {screen: "ChooseVictim"})} >Help</Button>
 
