@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
-import helpCenterNeeds from '../../utils/userNeeds.json'
+import needsNeeds from '../../utils/userNeeds.json'
 import { useState, useEffect } from "react";
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
@@ -12,14 +12,14 @@ import auth from '@react-native-firebase/auth';
 
 export default function EditNeeds({route, navigation}) {
 
-    const {helpCenterId} = route.params;
+    const {needsId} = route.params;
 
     
 
 
     useEffect( () => {
         
-        const newSub = firestore().collection('otherNeeds').doc(helpCenterId).onSnapshot(
+        const newSub = firestore().collection('otherNeeds').doc(needsId).onSnapshot(
             (snapshot) => {
                 const data = snapshot.data()
                 setName(data.name);
@@ -27,7 +27,7 @@ export default function EditNeeds({route, navigation}) {
                 setAddress(data.address);
                 setModalSelection(data.location);
                 
-                const newChipsData = helpCenterNeeds.data.map( (value) => {
+                const newChipsData = needsNeeds.data.map( (value) => {
                     if( data.needs.includes(value.name) ) {
                         return {
                             ...value,
@@ -52,7 +52,7 @@ export default function EditNeeds({route, navigation}) {
 
 
 
-    const [chipsData, setChipsData] = useState(helpCenterNeeds.data);
+    const [chipsData, setChipsData] = useState(needsNeeds.data);
     const [name, setName] = useState('');
     const [nameError, setNameError] = useState(false);
 
@@ -103,7 +103,7 @@ export default function EditNeeds({route, navigation}) {
             timestamp: (new Date()),
         }
 
-        await firestore().collection('otherNeeds').doc(helpCenterId).set(newHelpCenter);
+        await firestore().collection('otherNeeds').doc(needsId).set(newHelpCenter);
 
         navigation.pop();
     }
@@ -176,9 +176,9 @@ export default function EditNeeds({route, navigation}) {
                 :
                 <Text style={styles.locationText}>Location: Not Selected</Text>
             }
-            <Text style={styles.providedText}>Provided</Text>
+            <Text style={styles.providedText}>Needs</Text>
             {chips}
-            <Button onPress={editHelpCenter}>Edit Help Center</Button>
+            <Button onPress={editHelpCenter}>Edit Needs</Button>
         </View>
     )
 }

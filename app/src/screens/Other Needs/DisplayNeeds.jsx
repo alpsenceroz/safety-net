@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
-import helpCenterNeeds from '../../utils/userNeeds.json'
+import needsNeeds from '../../utils/userNeeds.json'
 import { useState, useEffect, createRef } from "react";
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
@@ -13,13 +13,13 @@ import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 export default function DisplayNeeds({ route, navigation }) {
 
-    const { helpCenterId } = route.params;
+    const { needsId } = route.params;
 
 
 
     useEffect(() => {
 
-        const newSub = firestore().collection('otherNeeds').doc(helpCenterId).onSnapshot(
+        const newSub = firestore().collection('otherNeeds').doc(needsId).onSnapshot(
             (snapshot) => {
                 const data = snapshot.data()
                 setName(data.name);
@@ -27,7 +27,7 @@ export default function DisplayNeeds({ route, navigation }) {
                 setAddress(data.address);
                 setModalSelection(data.location);
 
-                const newChipsData = helpCenterNeeds.data.map((value) => {
+                const newChipsData = needsNeeds.data.map((value) => {
                     if (data.needs.includes(value.name)) {
                         return {
                             ...value,
@@ -53,7 +53,7 @@ export default function DisplayNeeds({ route, navigation }) {
 
 
     const [doesShowMap, setShowMap] = useState(false);
-    const [chipsData, setChipsData] = useState(helpCenterNeeds.data);
+    const [chipsData, setChipsData] = useState(needsNeeds.data);
     const [name, setName] = useState('');
     const [nameError, setNameError] = useState(false);
 
@@ -152,7 +152,7 @@ export default function DisplayNeeds({ route, navigation }) {
                 :
                 <Text style={styles.locationText}>Location: Not Selected</Text>
             }
-            <Text style={styles.providedText}>Provided</Text>
+            <Text style={styles.providedText}>Needs</Text>
             {chips}
 
             <Checkbox.Item 

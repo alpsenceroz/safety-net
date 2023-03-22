@@ -3,7 +3,7 @@ import { FlatList, SectionList, StyleSheet, View, SafeAreaView } from "react-nat
 import firestore from '@react-native-firebase/firestore';
 import { useEffect, useState } from "react";
 
-import helpCenterNeeds from '../../utils/userNeeds.json'
+import needsNeeds from '../../utils/userNeeds.json'
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
 import { Button, Card, Checkbox, Chip, Text } from "react-native-paper";
@@ -15,7 +15,7 @@ import auth from '@react-native-firebase/auth';
 const ALL_CITIES_LABEL = "All Cities";
 
 const iconMap = new Map();
-helpCenterNeeds.data.forEach( (value) => {
+needsNeeds.data.forEach( (value) => {
     iconMap.set(value.name, value.icon);
 } )
 
@@ -51,7 +51,7 @@ function NeedsItem(props) {
 export default function Needs({ navigation }) {
 
 
-    const [helpCenters, setHelpCenters] = useState([]);
+    const [needs, setHelpCenters] = useState([]);
 
     const [isShowDropdown, setIsShowDropdown] = useState(false);
     const [citySelection, setCitySelection] = useState(null);
@@ -116,7 +116,7 @@ export default function Needs({ navigation }) {
         setCitySelection(city);
     }
 
-    const yourHelpCenters = helpCenters.filter((item) => {
+    const yourHelpCenters = needs.filter((item) => {
         return item.data.user === user.uid;
     })
 
@@ -129,19 +129,19 @@ export default function Needs({ navigation }) {
 
     function handleCardPressEdit(id) {
         navigation.push("EditNeeds", {
-            helpCenterId: id,
+            needsId: id,
         });
     }
 
     function handleCardPressDisplay(id) {
         navigation.push("DisplayNeeds", {
-            helpCenterId: id,
+            needsId: id,
         });
     }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <Button onPress={addHelpCenter}>Add Help Center</Button>
+            <Button onPress={addHelpCenter}>Add Needs</Button>
             <DropDown
                 label="City"
                 mode='outlined'
@@ -152,12 +152,12 @@ export default function Needs({ navigation }) {
                 setValue={handleCitySelection}
                 list={allCities}
             ></DropDown>
-            <Checkbox.Item label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
+            <Checkbox.Item label="Only Your Needs" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
             <View style={{ flex: 1 }}>
-                <Text style={styles.sectionTitle}>Help Centers</Text>
+                <Text style={styles.sectionTitle}>Needs</Text>
                 <FlatList
-                    data={onlyUser ? yourHelpCenters : helpCenters}
+                    data={onlyUser ? yourHelpCenters : needs}
                     renderItem={({ item }) => <NeedsItem 
                     name={item.data.name} 
                     provided={item.data.needs} 
