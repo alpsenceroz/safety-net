@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -27,6 +27,18 @@ import EmergencyNavigation from '../EmergencyNavigation';
 export default function Home(props) {
 
     const { text, navigation } = props;
+    const [location, setLocation] = useState(null)    
+
+    useEffect(() => {
+        Geolocation.getCurrentPosition(info => {
+            console.log(info.coords)
+            setLocation(info.coords)
+          },
+          error => {
+            console.log(error.code, error.message);},
+          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}
+          )
+    }, [])
 
 
     async function handleLogOut() {
@@ -34,23 +46,6 @@ export default function Home(props) {
         navigation.replace('Authentication', {screen: "Login"});
     }
 
-
-    // Geolocation.getCurrentPosition(
-    //     //Will give you the current location
-    //     (position) => {
-    //       //getting the Longitude from the location json
-    //       const currentLongitude =
-    //         JSON.stringify(position.coords.longitude);
-      
-    //       //getting the Latitude from the location json
-    //       const currentLatitude =
-    //         JSON.stringify(position.coords.latitude);
-            
-    //      }, (error) => alert(error.message), { 
-    //        enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 
-    //      }
-    //   );
-      
     return (
 
         <View>
@@ -58,7 +53,8 @@ export default function Home(props) {
             <Button onPress={ () => navigation.navigate( "SignUp" ) }>Navigate</Button>
             <Icon name="rocket" size={30} color="#900" />
             <Button onPress={handleLogOut}>Log out</Button>
-            <Button onPress={ () => navigation.navigate('Emergency', {screen: "ChooseVictim"})} >Help</Button>
+            <Button onPress={ () => navigation.navigate('Emergency', {screen: "ChooseLocation", params:{location: location}})} >Help</Button>
+            <Text>Location: {`${location?.longitude} ${location?.latitude}`}</Text>
 
         </View>
     );

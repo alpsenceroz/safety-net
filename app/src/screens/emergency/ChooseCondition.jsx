@@ -5,14 +5,14 @@ import {
     StatusBar,
     StyleSheet,
     Text,
-    TextInput,
     useColorScheme,
     View,
 } from 'react-native';
 
 import {
     Button,
-    Checkbox
+    Checkbox,
+    TextInput
 } from 'react-native-paper';
 
 
@@ -51,6 +51,11 @@ const ChooseCondition = ({route, navigation}) => {
                     setInjured(!emergency['isInjured'] )
                     emergency['isInjured']= !emergency['isInjured']
                     }}/>
+                    <TextInput 
+
+                    placeholder="Notes" 
+                    onChangeText={(text)=>emergency.otherNotes = text}
+                    ></TextInput>
                 <Button onPress= {() => {
                     navigation.navigate("EmergencyReported", {emergency: emergency})
 

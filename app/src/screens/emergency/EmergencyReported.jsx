@@ -37,19 +37,21 @@ const EmergencyReported = ({route, navigation}) => {
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
                 console.log(emergency)
-                Geolocation.getCurrentPosition(info => {
-                    console.log(info.coords)
-                    setLocation(info.coords)
-                    emergency.latitude = info.coords.latitude
-                    emergency.longitude = info.coords.longitude
-                    console.log(emergency)
-                    saveToFirestore()
-                },
-                error => {
-                    // See error code charts below.
-                    console.log(error.code, error.message);},
-                {enableHighAccuracy: true, timeout: 15000, maximumAge: 0}
-                );
+                saveToFirestore()
+
+                // Geolocation.getCurrentPosition(info => {
+                //     console.log(info.coords)
+                //     setLocation(info.coords)
+                //     emergency.latitude = info.coords.latitude
+                //     emergency.longitude = info.coords.longitude
+                //     console.log(emergency)
+                //     saveToFirestore()
+                // },
+                // error => {
+                //     // See error code charts below.
+                //     console.log(error.code, error.message);},
+                // {enableHighAccuracy: true, timeout: 15000, maximumAge: 0}
+                // );
     
           });
           return unsubscribe;
@@ -70,8 +72,8 @@ const EmergencyReported = ({route, navigation}) => {
             <Text>Your situation is reported. Stay calm.</Text>
             <Text>Your location is: </Text>
 
-            <Text>Latitude: {location ? JSON.stringify(location.latitude) : null}</Text>
-            <Text>Longitude: {location ? JSON.stringify(location.longitude)  : null}</Text>
+            <Text>Latitude: {JSON.stringify(emergency.latitude)}</Text>
+            <Text>Longitude: {JSON.stringify(emergency.longitude)}</Text>
             <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button>
 
         </View>

@@ -15,12 +15,14 @@ import {
 import {
     Button,
     List,
-    SegmentedButtons
+    SegmentedButtons,
+    Portal
 } from 'react-native-paper';
 
 import firestore from '@react-native-firebase/firestore';
 import MapView, { Callout, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+import AddNewMarker from '../components/AddNewMarker';
 
 
 
@@ -31,9 +33,11 @@ const EmergencyList = ({navigation}) => {
     const [emergencies, setEmergencies] = useState([])
     const [helpCenters, setHelpCenters] = useState([])
     const [loading, setLoading] = useState(true); // Set loading to true on component mount
-    const [modalVisible, setModalVisible] = useState(false);
     const [viewType, setViewType] = useState(0)
-    const [coordinates, setCoordinates] = useState({latitude: 38, longitude: 40})
+    const [coordinates, setCoordinates] = useState({latitude: 32, longitude: 40})
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [modalSelection, setModalSelection] = useState(false)
+
 
     useEffect(  () => {
       console.log('AAAAAAAAAAAAAAAAAAAA')
@@ -76,9 +80,17 @@ const EmergencyList = ({navigation}) => {
   if(!loading){
  
     if (viewType === 1){
-      console.log(helpCenters)
       return(
         <View>
+          <Portal>
+          <AddNewMarker
+          navigation = {navigation}
+          isModalVisible={isModalVisible}
+          hideModal={()=>setIsModalVisible(false)}
+          //onConfirm={handleModalConfirm}
+          modalSelection={modalSelection}
+          />  
+            </Portal>
           <SegmentedButtons
           value={viewType}
           onValueChange={setViewType}
@@ -96,15 +108,22 @@ const EmergencyList = ({navigation}) => {
 
           }
           ]}/>
+          
           <Text>map view</Text>
 
           <MapView
             provider={ PROVIDER_GOOGLE }
             showsUserLocation={ true }
-            followsUserLocation = { true }
+            showsMyLocationButton={ true }
+            onLongPress = {(e)=>{
+              setModalSelection(e.nativeEvent.coordinate)
+
+              console.log(e.nativeEvent.coordinate)
+              setIsModalVisible(true)
+            }}
             style={{
-              width : 500 ,
-              height : 800 
+              width : 400 ,
+              height : 700 
             }}
             initialRegion={{
                latitude: coordinates.latitude ,
@@ -115,14 +134,17 @@ const EmergencyList = ({navigation}) => {
           >
           {emergencies[0] != null && emergencies.map(marker => (
             <Marker
-            key = {marker.ID}
+            // key = {marker.ID}
+            key={`${marker.ID}-${(Date())}`}
+
+            pinColor= {marker.rescued ? 'purple': 'red'}
             coordinate = {{
                     latitude: marker.latitude,
                     longitude: marker.longitude,
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01,
                 }}
-                title = { marker.ID}
+                title = {marker.ID}
             >
               <Callout onPress={() => {
                   navigation.navigate('MapNav', {screen: 'EditEmergency', params:{emergencyID: marker.ID}})
@@ -139,7 +161,7 @@ const EmergencyList = ({navigation}) => {
             <Marker
                 key = {marker.ID}
 
-                pinColor = 'green'
+                pinColor = {'green'}
                 coordinate = {{
                     latitude: marker.location.latitude,
                     longitude: marker.location.longitude,

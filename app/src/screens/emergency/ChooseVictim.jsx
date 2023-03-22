@@ -17,7 +17,7 @@ import auth from '@react-native-firebase/auth';
 
 
 
-const ChooseVictim = ({navigation}) => {
+const ChooseVictim = ({navigation, route}) => {
     
     // const [emergency, setEmergency] = useState({
     //     doesUserNeed: true,
@@ -39,11 +39,6 @@ const ChooseVictim = ({navigation}) => {
     // const handleVictimSelect = (value) =>{
     //     setEmergency((prevEmergency) => ({...prevEmergency, "doesUserNeed": value}))
     // }
-    useEffect( ()=>{
-        const id = auth().currentUser.uid
-        emergency.userID = id
-
-    },[])
     emergency = {
         userID: null,
         doesUserNeed: true,
@@ -51,9 +46,17 @@ const ChooseVictim = ({navigation}) => {
         isInjured: false,
         needEvacuation: false,
         otherNotes: null,
-        latitude: null,
-        longitude: null,
+        latitude: route.params.location.latitude,
+        longitude: route.params.location.longitude,
+        timestamp: `${(new Date())}`,
+        rescued: false
     }
+
+    useEffect( ()=>{
+        const id = auth().currentUser.uid
+        emergency.userID = id
+
+    },[])
 
     return(
         <View>
