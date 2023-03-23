@@ -22,6 +22,8 @@ export default function EditNeeds({route, navigation}) {
         const newSub = firestore().collection('otherNeeds').doc(needsId).onSnapshot(
             (snapshot) => {
                 const data = snapshot.data()
+                console.log(needsId)
+                console.log(data)
                 setName(data.name);
                 setCitySelection(data.city);
                 setAddress(data.address);

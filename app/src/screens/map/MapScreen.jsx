@@ -140,7 +140,7 @@ const Map = ({navigation}) => {
               title = {marker.ID}
           >
             <Callout onPress={() => {
-                navigation.navigate('EditEmergency', {emergencyID: marker.ID})
+                navigation.push('EditEmergency', {emergencyID: marker.ID})
               }}>
               <Text>{marker.ID}</Text>
               <Text>(Click to edit)</Text>
@@ -165,7 +165,7 @@ const Map = ({navigation}) => {
 
           >
             <Callout onPress={() => {
-                navigation.navigate('EditHelpCenter', {helpCenterId: marker.ID})
+                navigation.push('EditHelpCenter', {helpCenterId: marker.ID})
               }} >
               <View>
               <Text>{marker.name}</Text>
@@ -191,7 +191,7 @@ const Map = ({navigation}) => {
 
           >
             <Callout onPress={() => {
-                navigation.navigate('EditHelpCenter', {helpCenterId: marker.ID})
+                navigation.push('EditNeeds', {needsId: marker.ID})
               }} >
               <View>
               <Text>{marker.name}</Text>
@@ -208,11 +208,11 @@ const Map = ({navigation}) => {
               
                 flexDirection: "row",
                 backgroundColor: "rgba(255, 255, 255, 0.9)",
-                borderRadius: 10,
+                borderRadius: 20,
                 width: "80%",
                 marginLeft: "10%",
                 marginRight: "10%",
-                marginTop: 20
+                marginTop: 20,
               
             }}>
             <Button onPress={()=>setEmergencyVisibility((emergencyVisibility + 1) % 4)}>Emergencies</Button>

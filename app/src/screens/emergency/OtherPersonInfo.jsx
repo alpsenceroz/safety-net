@@ -36,7 +36,7 @@ const OtherPersonInfo = ({route, navigation}) => {
                 >
                 </TextInput>
                 <Button onPress={ () => {
-                    navigation.navigate("ChooseCondition",{emergency: emergency 
+                    navigation.replace("ChooseCondition",{emergency: emergency 
                     })
                     }   
                     }>Continue</Button>

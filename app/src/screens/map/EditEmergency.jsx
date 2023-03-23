@@ -77,7 +77,7 @@ const EditEmergency = ({route, navigation}) => {
                 modalSelection={modalSelection}
                 />  
             </Portal>
-            <Text>Name: {emergency.doesUserNeed ? "": emergency.otherName}</Text>
+            <Text>Name: {emergency?.doesUserNeed ? "": emergency.otherName}</Text>
             <TextInput
             mode="outlined"
             label="Notes"

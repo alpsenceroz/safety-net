@@ -28,8 +28,12 @@ export default function AddNewMarker(props) {
             }}>Add New Emergency</Button>
         <Button onPress={() => {
             hideModal(true)
-            navigation.navigate('Help Centers', {screen: 'AddHelpCenter', params: {location: modalSelection}})
+            navigation.push('AddHelpCenter',{location: modalSelection})
         }}>Add New Help Center</Button>
+          <Button onPress={() => {
+            hideModal(true)
+            navigation.push('AddNeeds', {location: modalSelection})
+        }}>Add Other Need</Button>
 
 
       </View>
@@ -49,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   buttonView: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignSelf: 'center',
   },
   confirmButton: {
