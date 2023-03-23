@@ -9,7 +9,7 @@ import FaIcon from 'react-native-vector-icons/FontAwesome';
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MiIcon from 'react-native-vector-icons/MaterialIcons';
 import TestScreen from './screens/TestScreen';
-import MapScreen from './screens/MapScreen';
+import MapScreen from './screens/map/MapScreen';
 
 import auth from '@react-native-firebase/auth';
 import { useEffect } from 'react';

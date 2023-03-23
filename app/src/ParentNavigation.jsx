@@ -22,8 +22,6 @@ export default function ParentNavigation() {
                 <Stack.Screen name='Authentication' component={AuthenticationNavigation}/>
                 <Stack.Screen name='Main' component={MainNavigation}/>
                 <Stack.Screen name='Emergency' component={EmergencyNavigation}/>
-                <Stack.Screen name='MapNav' component={MapNavigation}/>
-
 
             </Stack.Navigator>
 

@@ -16,7 +16,6 @@ import {
 import SignUp from './SignUp';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Geolocation from '@react-native-community/geolocation';
 
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
@@ -27,18 +26,18 @@ import EmergencyNavigation from '../EmergencyNavigation';
 export default function Home(props) {
 
     const { text, navigation } = props;
-    const [location, setLocation] = useState(null)    
+    // const [location, setLocation] = useState(null)    
 
-    useEffect(() => {
-        Geolocation.getCurrentPosition(info => {
-            console.log(info.coords)
-            setLocation(info.coords)
-          },
-          error => {
-            console.log(error.code, error.message);},
-          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}
-          )
-    }, [])
+    // useEffect(() => {
+    //     Geolocation.getCurrentPosition(info => {
+    //         console.log(info.coords)
+    //         setLocation(info.coords)
+    //       },
+    //       error => {
+    //         console.log(error.code, error.message);},
+    //       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}
+    //       )
+    // }, [])
 
 
     async function handleLogOut() {
@@ -53,8 +52,7 @@ export default function Home(props) {
             <Button onPress={ () => navigation.navigate( "SignUp" ) }>Navigate</Button>
             <Icon name="rocket" size={30} color="#900" />
             <Button onPress={handleLogOut}>Log out</Button>
-            <Button onPress={ () => navigation.navigate('Emergency', {screen: "ChooseLocation", params:{location: location}})} >Help</Button>
-            <Text>Location: {`${location?.longitude} ${location?.latitude}`}</Text>
+            <Button onPress={ () => navigation.navigate('Emergency', {screen: "ChooseLocation"})} >Help</Button>
 
         </View>
     );

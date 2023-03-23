@@ -6,10 +6,12 @@ import Fa5Icon from 'react-native-vector-icons/FontAwesome5';
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MiIcon from 'react-native-vector-icons/MaterialIcons';
 import TestScreen from './screens/TestScreen';
-import MapScreen from './screens/MapScreen';
+import MapScreen from './screens/map/MapScreen';
 import Home from './screens/Home';
 import HelpCenterNavigation from './HelpCenterNavigation';
 import EmergencyList from './screens/EmergencyList';
+import EmergencyNavigation from './EmergencyNavigation';
+import MapNavigation from './MapNavigation';
 
 
 
@@ -39,7 +41,7 @@ export default function MainNavigation() {
                     tabBarIcon: () => <MciIcon name="test-tube" size={30} color="#900" />
                 }}
             />
-            <Tab.Screen name="Map" component={MapScreen}
+            <Tab.Screen name="MapNav" component={MapNavigation}
                 options={{
                     tabBarIcon: () => <FaIcon name="map" size={30} color="#900" />
                 }}
@@ -49,11 +51,13 @@ export default function MainNavigation() {
                     tabBarIcon: () => <Fa5Icon name="hands-helping" size={30} color="#900" />
                 }}
             />
-                <Tab.Screen name="EmergencyList" component={EmergencyList}
-                    options={{
-                        tabBarIcon: () => <FaIcon name="hourglass" size={30} color="#900" />
-                    }}
-                />
+            <Tab.Screen name="EmergencyList" component={EmergencyList}
+                options={{
+                    tabBarIcon: () => <FaIcon name="hourglass" size={30} color="#900" />
+                }}
+            />
+ 
+
         </Tab.Navigator>
     )
 

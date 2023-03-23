@@ -74,7 +74,8 @@ const EmergencyReported = ({route, navigation}) => {
 
             <Text>Latitude: {JSON.stringify(emergency.latitude)}</Text>
             <Text>Longitude: {JSON.stringify(emergency.longitude)}</Text>
-            <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button>
+            {/* <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button> */}
+            <Button onPress={ () => navigation.pop()}>Return back</Button>
 
         </View>
     )

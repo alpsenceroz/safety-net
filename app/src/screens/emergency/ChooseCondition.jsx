@@ -57,7 +57,8 @@ const ChooseCondition = ({route, navigation}) => {
                     onChangeText={(text)=>emergency.otherNotes = text}
                     ></TextInput>
                 <Button onPress= {() => {
-                    navigation.navigate("EmergencyReported", {emergency: emergency})
+                    navigation.replace("EmergencyReported", {emergency: emergency})
+                   //navigation.reset()
 
                 
             }}>Continue</Button>

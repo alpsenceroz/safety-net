@@ -19,26 +19,6 @@ import auth from '@react-native-firebase/auth';
 
 const ChooseVictim = ({navigation, route}) => {
     
-    // const [emergency, setEmergency] = useState({
-    //     doesUserNeed: true,
-    //     other_name: null,
-    //     isInjured: false,
-    //     needEvacuation: false,
-    //     other_notes: null
-    // })
-    // useEffect(() => {
-    //     console.log('VICTIM:', emergency);
-    //     if (emergency.doesUserNeed){
-    //         navigation.navigate("ChooseCondition", {emergency: emergency})
-    //     }
-    //     else{
-    //         navigation.navigate("OtherPersonInfo", {emergency: emergency})
-    //     }
-    //   }, [emergency]
-    // )
-    // const handleVictimSelect = (value) =>{
-    //     setEmergency((prevEmergency) => ({...prevEmergency, "doesUserNeed": value}))
-    // }
     emergency = {
         userID: null,
         doesUserNeed: true,
@@ -50,7 +30,7 @@ const ChooseVictim = ({navigation, route}) => {
         longitude: route.params.location.longitude,
         timestamp: `${(new Date())}`,
         rescued: false
-    }
+        }
 
     useEffect( ()=>{
         const id = auth().currentUser.uid
@@ -65,7 +45,7 @@ const ChooseVictim = ({navigation, route}) => {
                 // handleVictimSelect(true)
                 emergency.doesUserNeed = true
                 console.log(emergency)
-                navigation.navigate("ChooseCondition", {emergency: emergency})
+                navigation.replace("ChooseCondition", {emergency: emergency})
 
                 }
                 }>For myself</Button>
@@ -74,7 +54,7 @@ const ChooseVictim = ({navigation, route}) => {
                 // handleVictimSelect(false)
                 emergency.doesUserNeed = false
                 console.log(emergency)
-                navigation.navigate("OtherPersonInfo", {emergency: emergency})
+                navigation.replace("OtherPersonInfo", {emergency: emergency})
                 }   
                 }>For someone else</Button>
         </View>
