@@ -176,6 +176,7 @@ export default function EditHelpCenter({route, navigation}) {
                 :
                 <Text style={styles.locationText}>Location: Not Selected</Text>
             }
+            <Text style={styles.providedText}>Provided</Text>
             {chips}
             <Button onPress={editHelpCenter}>Edit Help Center</Button>
         </View>
@@ -195,6 +196,8 @@ const styles = StyleSheet.create({
         margin: 20,
         flex: 1,
     },
+    providedText:{
 
+    },
 })
 

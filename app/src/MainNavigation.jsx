@@ -1,15 +1,14 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import SignUp from './screens/SignUp';
 
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import Fa5Icon from 'react-native-vector-icons/FontAwesome5';
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MiIcon from 'react-native-vector-icons/MaterialIcons';
-import TestScreen from './screens/TestScreen';
 import MapScreen from './screens/map/MapScreen';
 import Home from './screens/Home';
 import HelpCenterNavigation from './HelpCenterNavigation';
 import EmergencyList from './screens/EmergencyList';
+import OtherNeedsNavigation from './OtherNeedsNavigation';
 import EmergencyNavigation from './EmergencyNavigation';
 import MapNavigation from './MapNavigation';
 
@@ -31,22 +30,17 @@ export default function MainNavigation() {
                     tabBarIcon: () => <FaIcon name="home" size={30} color="#900" />
                 }}
             />
-            <Tab.Screen name="SignUp" component={SignUp}
+            <Tab.Screen name="Help Centers" component={HelpCenterNavigation}
                 options={{
-                    tabBarIcon: () => <MiIcon name="fiber-new" size={30} color="#900" />
+                    tabBarIcon: () => <Fa5Icon name="hands-helping" size={30} color="#900" />
                 }}
             />
-            <Tab.Screen name="TestScreen" component={TestScreen}
-                options={{
-                    tabBarIcon: () => <MciIcon name="test-tube" size={30} color="#900" />
-                }}
-            />
-            <Tab.Screen name="MapNav" component={MapNavigation}
+            <Tab.Screen name="MapNav" component={MapNavigation}                
                 options={{
                     tabBarIcon: () => <FaIcon name="map" size={30} color="#900" />
                 }}
             />
-            <Tab.Screen name="Help Centers" component={HelpCenterNavigation}
+            <Tab.Screen name="Other Needs" component={OtherNeedsNavigation}
                 options={{
                     tabBarIcon: () => <Fa5Icon name="hands-helping" size={30} color="#900" />
                 }}
@@ -56,8 +50,6 @@ export default function MainNavigation() {
                     tabBarIcon: () => <FaIcon name="hourglass" size={30} color="#900" />
                 }}
             />
- 
-
         </Tab.Navigator>
     )
 

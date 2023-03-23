@@ -152,6 +152,7 @@ export default function DisplayHelpCenter({ route, navigation }) {
                 :
                 <Text style={styles.locationText}>Location: Not Selected</Text>
             }
+            <Text style={styles.providedText}>Provided</Text>
             {chips}
 
             <Checkbox.Item 
@@ -198,6 +199,8 @@ const styles = StyleSheet.create({
         margin: 20,
         flex: 1,
     },
+    providedText:{
 
+    },
 })
 

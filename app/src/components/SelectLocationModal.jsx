@@ -1,4 +1,5 @@
 
+import Geolocation from '@react-native-community/geolocation';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -12,14 +13,28 @@ export default function SelectLocation(props) {
 
   const { isModalVisible, hideModal, onConfirm, modalSelection } = props;
 
-  useEffect( () => {
+  const [userLocation, setUserLocation] = useState();
+
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => {
+      if (info?.coords) {
+        setUserLocation(info.coords);
+      }
+    }, (err) => {
+
+    });
+  }, [])
+
+  useEffect(() => {
     setSelection(modalSelection);
-  },[modalSelection] )
+  }, [modalSelection])
 
   const [selection, setSelection] = useState(modalSelection);
   function handleMapClick(coordinate) {
     setSelection(coordinate);
   }
+
+
 
   return (
     <Modal visible={isModalVisible} onDismiss={hideModal} contentContainerStyle={styles.modalContainerStyle}>
@@ -30,10 +45,11 @@ export default function SelectLocation(props) {
         showsUserLocation={true}
         onLongPress={(e) => handleMapClick(e.nativeEvent.coordinate)}
       >
-        { selection && <Marker coordinate={selection}/>}
+        {selection && <Marker coordinate={selection} />}
       </MapView>
       <View style={styles.buttonView}>
         <Button mode='contained' style={styles.cancelButton} onPress={hideModal}>Cancel</Button>
+        {userLocation && <Button mode='contained' style={styles.userLocationButton} onPress={() => onConfirm(userLocation)}>Use User Location</Button>}
         <Button mode='contained' style={styles.confirmButton} disabled={selection ? false : true} onPress={() => onConfirm(selection)}>Confirm</Button>
 
       </View>
@@ -58,11 +74,18 @@ const styles = StyleSheet.create({
   },
   confirmButton: {
     backgroundColor: 'green',
-    margin: 20
+    marginRight: 7,
+    marginLeft: 7,
+  },
+  userLocationButton: {
+    backgroundColor: 'blue',
+    marginRight: 7,
+    marginLeft: 7,
   },
   cancelButton: {
     backgroundColor: 'red',
-    margin: 20
+    marginRight: 7,
+    marginLeft: 7,
   },
   modalContainerStyle: {
     backgroundColor: 'white',

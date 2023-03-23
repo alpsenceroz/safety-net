@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
-import helpCenterNeeds from '../../utils/helpCenterNeeds.json'
+import needsNeeds from '../../utils/userNeeds.json'
 import { useState } from "react";
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
@@ -10,9 +10,9 @@ import SelectLocationModal from "../../components/SelectLocationModal";
 
 import auth from '@react-native-firebase/auth';
 
-export default function AddHelpCenter({ navigation }) {
+export default function AddNeeds({ navigation }) {
 
-    const [chipsData, setChipsData] = useState(helpCenterNeeds.data);
+    const [chipsData, setChipsData] = useState(needsNeeds.data);
     const [name, setName] = useState('');
     const [nameError, setNameError] = useState(false);
 
@@ -44,7 +44,7 @@ export default function AddHelpCenter({ navigation }) {
 
 
 
-    async function addHelpCenter() {
+    async function addNeeds() {
 
         filteredNeeds = chipsData.filter((value) => {
             return value.selected ? value.selected : false;
@@ -52,7 +52,7 @@ export default function AddHelpCenter({ navigation }) {
 
         const userId = auth().currentUser.uid;
 
-        const newHelpCenter = {
+        const newNeeds = {
             name: name,
             city: citySelection,
             address: address,
@@ -62,7 +62,7 @@ export default function AddHelpCenter({ navigation }) {
             timestamp: (new Date()),
         }
 
-        await firestore().collection('helpCenters').add(newHelpCenter);
+        await firestore().collection('otherNeeds').add(newNeeds);
 
         navigation.pop();
     }
@@ -130,9 +130,9 @@ export default function AddHelpCenter({ navigation }) {
                 :
                 <Text style={styles.locationText}>Location: Not Selected</Text>
             }
-            <Text style={styles.providedText}>Provided</Text>
+            <Text style={styles.providedText}>Needs</Text>
             {chips}
-            <Button onPress={addHelpCenter}>Add Help Center</Button>
+            <Button onPress={addNeeds}>Add Needs</Button>
         </View>
     )
 }
