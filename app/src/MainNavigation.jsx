@@ -5,10 +5,10 @@ import Fa5Icon from 'react-native-vector-icons/FontAwesome5';
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MiIcon from 'react-native-vector-icons/MaterialIcons';
 import MapScreen from './screens/MapScreen';
-import Home from './screens/Home';
 import HelpCenterNavigation from './HelpCenterNavigation';
 import EmergencyList from './screens/EmergencyList';
 import OtherNeedsNavigation from './OtherNeedsNavigation';
+import HomeNavigation from './HomeNavigation';
 
 
 
@@ -23,7 +23,8 @@ export default function MainNavigation() {
                 headerShown: true
             }
         }>
-            <Tab.Screen name="Home" component={Home}
+            <Tab.Screen name="HomeNavigation" component={HomeNavigation}
+            
                 options={{
                     tabBarIcon: () => <FaIcon name="home" size={30} color="#900" />
                 }}
