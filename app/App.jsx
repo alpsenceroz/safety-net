@@ -16,7 +16,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Login from './src/screens/Home';
+import Login from './src/screens/HomeScreen/Home';
 import MainNavigation from './src/MainNavigation';
 
 import { Provider as PaperProvider } from 'react-native-paper';

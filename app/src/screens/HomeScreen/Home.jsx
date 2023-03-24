@@ -19,14 +19,14 @@ import Geolocation from '@react-native-community/geolocation';
 
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import EmergencyNavigation from '../EmergencyNavigation';
+import EmergencyNavigation from '../../EmergencyNavigation';
 
 
 
-export default function Home(props) {
+export default function Home({navigation}) {
 
-    const { text, navigation } = props;
 
+    const user = auth().currentUser;
 
     async function handleLogOut() {
         await auth().signOut();
@@ -49,12 +49,34 @@ export default function Home(props) {
     //        enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 
     //      }
     //   );
+
+    async function navigateProfile() {
+        navigation.navigate('UserProfile', {
+            userId: user.uid,
+            shouldContinueEmergency: false,
+        });
+    }
+
+    async function handleEmergencyButton() {
+
+        const userData = await firestore().collection('users').doc(user.uid).get();
+        if(userData.exists) {
+            navigation.navigate('Emergency', {screen: "ChooseVictim"})
+        } else  {
+            navigation.push('UserProfile', {
+                userId: user.uid,
+                shouldContinueEmergency: true,
+            })
+        }
+
+    }
       
     return (
 
         <View>
             <Button onPress={handleLogOut}>Log out</Button>
-            <Button onPress={ () => navigation.navigate('Emergency', {screen: "ChooseVictim"})} >Help</Button>
+            <Button onPress={handleEmergencyButton}>Help</Button>
+            <Button onPress={ navigateProfile }>Edit Profile</Button>
 
         </View>
     );
