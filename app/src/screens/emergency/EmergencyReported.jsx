@@ -66,14 +66,14 @@ const EmergencyReported = ({route, navigation}) => {
 
     return(
         <View>
-            <Text>Victim:{route.params.emergency.doesUserNeed ? "Myself" : route.params.emergency.otherName}</Text>
-            <Text>Need evacuation: {route.params.emergency.needEvacuation? "yes":"no"}</Text>
-            <Text>Injured: {route.params.emergency.isInjured ? 'yes' : 'no' }</Text>
+            <Text>Victim:{route.params.emergency.other ? route.params.emergency.otherName: "Myself" }</Text>
+            <Text>Need evacuation: {route.params.emergency.conditions.evacuation? "yes":"no"}</Text>
+            <Text>Injured: {route.params.emergency.conditions.injured ? 'yes' : 'no' }</Text>
             <Text>Your situation is reported. Stay calm.</Text>
             <Text>Your location is: </Text>
 
-            <Text>Latitude: {JSON.stringify(emergency.latitude)}</Text>
-            <Text>Longitude: {JSON.stringify(emergency.longitude)}</Text>
+            <Text>Latitude: {JSON.stringify(emergency.coordinates.latitude)}</Text>
+            <Text>Longitude: {JSON.stringify(emergency.coordinates.longitude)}</Text>
             {/* <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button> */}
             <Button onPress={ () => navigation.pop()}>Return back</Button>
 

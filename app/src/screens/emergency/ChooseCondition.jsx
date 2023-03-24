@@ -20,6 +20,7 @@ const ChooseCondition = ({route, navigation}) => {
     // const [emergency, setEmergency] = useState(route.params.emergency);
     const [evacuation, setEvacuation] = useState(emergency.needEvacuation)
     const [injured, setInjured] = useState(emergency.isInjured)
+    const [conditions, setConditions] = useState([])
     
     // useEffect(() => {
     //     console.log('CONDITION:', emergency);
@@ -39,8 +40,8 @@ const ChooseCondition = ({route, navigation}) => {
                 status={evacuation ? 'checked' : 'unchecked'}
                 onPress={() => { 
                     // handleCheckBox("needEvacuation")
-                    setEvacuation(!emergency['needEvacuation'] )
-                    emergency.needEvacuation = !emergency['needEvacuation'] 
+                    setEvacuation(!emergency.conditions['evacuation'] )
+                    emergency.conditions['evacuation'] = !emergency.conditions['evacuation']
 
                     }}/>
                 <Checkbox.Item
@@ -48,13 +49,13 @@ const ChooseCondition = ({route, navigation}) => {
                 status={injured ? 'checked' : 'unchecked'}
                 onPress={() => { 
                     // handleCheckBox("isInjured")
-                    setInjured(!emergency['isInjured'] )
-                    emergency['isInjured']= !emergency['isInjured']
+                    setInjured(!emergency.conditions['injured'] )
+                    emergency.conditions['injured']= !emergency.conditions['injured']
                     }}/>
                     <TextInput 
 
                     placeholder="Notes" 
-                    onChangeText={(text)=>emergency.otherNotes = text}
+                    onChangeText={(text)=>emergency.notes = text}
                     ></TextInput>
                 <Button onPress= {() => {
                     navigation.replace("EmergencyReported", {emergency: emergency})

@@ -7,10 +7,11 @@ import MiIcon from 'react-native-vector-icons/MaterialIcons';
 import MapScreen from './screens/map/MapScreen';
 import Home from './screens/Home';
 import HelpCenterNavigation from './HelpCenterNavigation';
-import EmergencyList from './screens/EmergencyList';
+import EmergencyList from './screens/emergencyList/EmergencyList';
 import OtherNeedsNavigation from './OtherNeedsNavigation';
 import EmergencyNavigation from './EmergencyNavigation';
 import MapNavigation from './MapNavigation';
+import EmergencyListNavigation from './EmergencyListNavigation';
 
 
 
@@ -45,7 +46,7 @@ export default function MainNavigation() {
                     tabBarIcon: () => <Fa5Icon name="hands-helping" size={30} color="#900" />
                 }}
             />
-            <Tab.Screen name="EmergencyList" component={EmergencyList}
+            <Tab.Screen name="EmergencyList" component={EmergencyListNavigation}
                 options={{
                     tabBarIcon: () => <FaIcon name="hourglass" size={30} color="#900" />
                 }}

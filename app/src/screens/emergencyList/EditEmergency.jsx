@@ -29,13 +29,11 @@ import SelectLocationModal from "../../components/SelectLocationModal";
 
 const EditEmergency = ({route, navigation}) => {
     const emergencyID = route.params.emergencyID;
-    const [emergency, setEmergency] = useState({"doesUserNeed": true, 
-    "isInjured": true, "latitude": 36, "longitude": 42, 
-    "needEvacuation": true, "otherName": '', "otherNotes": '', 
-    "userID": ''})
+    const [emergency, setEmergency] = useState(false)
     const [isModalVisible, setModalVisible] = useState(false);
     const [modalSelection, setModalSelection] = useState(false);
     const [user, setUser] = useState(false)
+    const [conditions, setConditions] = useState(false)
 
     
     function handleSelectLocation() {
@@ -49,7 +47,7 @@ const EditEmergency = ({route, navigation}) => {
 
     function handleModalConfirm(coordinates) {
         setModalSelection(coordinates);
-        setEmergency((prevEmergency) => ({...prevEmergency, latitude: coordinates.latitude, longitude:coordinates.longitude}))
+        setEmergency((prevEmergency) => ({...prevEmergency, coordinates: coordinates}))
         setModalVisible(false);
     }
 
@@ -59,10 +57,18 @@ const EditEmergency = ({route, navigation}) => {
             (snapshot) => {
                 setEmergency(snapshot.data())
                 console.log(snapshot.data())
-                setModalSelection({latitude: snapshot.data().latitude, longitude: snapshot.data().longitude})
+                setModalSelection(snapshot.data().coordinates)
+                setConditions(snapshot.data().conditions)
+            })
+        const subscription2 = firestore().collection('users').doc(emergency.userID).onSnapshot(
+            (snapshot) => {
+                setUser(snapshot.data())
+                console.log(snapshot.data())
             })
         return ()=>{
             subscription()
+            subscription2()
+
             }
     }
 ,[])
@@ -77,24 +83,24 @@ const EditEmergency = ({route, navigation}) => {
                 modalSelection={modalSelection}
                 />  
             </Portal>
-            <Text>Name: {emergency?.doesUserNeed ? "": emergency.otherName}</Text>
+            <Text>Name: {emergency?.other ? emergency.otherName : user?.name }</Text>
             <TextInput
             mode="outlined"
             label="Notes"
-            value={emergency.otherNotes}
+            value={emergency.notes}
             // error={nameError}
-            onChangeText={(text) => setEmergency((prevEmergency) => ({...prevEmergency, otherNotes: text}))} />
+            onChangeText={(text) => setEmergency((prevEmergency) => ({...prevEmergency, notes: text}))} />
             <Checkbox.Item
             key={'Injured'}
             label={'Injured'}
-            status={emergency?.isInjured ? 'checked' : 'unchecked'}
-            onPress={ () =>  setEmergency((prevEmergency) => ({...prevEmergency, isInjured: !emergency.isInjured}))}
+            status={conditions?.injured ? 'checked' : 'unchecked'}
+            onPress={ () => setConditions((prevConditions) => ({...prevConditions, injured: !conditions.injured }))}
             />
             <Checkbox.Item
             key={'Need Evacuation'}
             label={'Need Evacuation'}
-            status={emergency?.needEvacuation ? 'checked' : 'unchecked'}
-            onPress={ () =>  setEmergency((prevEmergency) => ({...prevEmergency, needEvacuation: !emergency.needEvacuation}))}
+            status={conditions?.evacuation ? 'checked' : 'unchecked'}
+            onPress={ () => setConditions((prevConditions) => ({...prevConditions, evacuation: !conditions.evacuation }))}
             />
             <Checkbox.Item
             key={'Rescued'}
@@ -104,6 +110,7 @@ const EditEmergency = ({route, navigation}) => {
             />
             <Button onPress={handleSelectLocation}>Edit Location</Button>
             <Button onPress={ async()=> {
+                emergency.conditions = conditions
                 await firestore().collection('emergencies').doc(emergencyID).set(emergency)
                 navigation.pop()
 

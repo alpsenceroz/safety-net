@@ -23,8 +23,8 @@ import Geolocation from '@react-native-community/geolocation';
 const ChooseLocation = ({navigation, route}) => {
     
 
-    const [location, setLocation] = useState({latitude: 32, longitude: 40})  
-    const [myLocation, setMyLocation] = useState({latitude: 32, longitude: 40})  
+    const [location, setLocation] = useState(false)  
+    const [myLocation, setMyLocation] = useState(false)  
 
     useEffect(() => {
         Geolocation.getCurrentPosition(info => {
@@ -38,6 +38,7 @@ const ChooseLocation = ({navigation, route}) => {
           {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}
           )
     }, [])
+    if(location){
     return(
         <View>
     <Text>Select Location</Text>
@@ -48,8 +49,8 @@ const ChooseLocation = ({navigation, route}) => {
             height : 700 
           }}
           initialRegion={{
-             latitude: (location ? location.latitude : 0),
-             longitude: (location ? location.longitude : 0),
+             latitude: (location ? location.latitude : 36),
+             longitude: (location ? location.longitude : 30),
              latitudeDelta: 0.1,
              longitudeDelta: 0.1,
            }}
@@ -67,5 +68,6 @@ const ChooseLocation = ({navigation, route}) => {
       </View>
         </View>
     )
+            }
 }
 export default ChooseLocation

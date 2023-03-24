@@ -21,13 +21,19 @@ const ChooseVictim = ({navigation, route}) => {
     
     emergency = {
         userID: null,
-        doesUserNeed: true,
+        other: false,
         otherName: null,
-        isInjured: false,
-        needEvacuation: false,
-        otherNotes: null,
-        latitude: route.params.location.latitude,
-        longitude: route.params.location.longitude,
+        conditions: {
+            evacuation: false,
+            injured: false,
+        },
+        // isInjured: false,
+        // needEvacuation: false,
+        notes: null,
+        coordinates:{
+            latitude: route.params.location.latitude,
+            longitude: route.params.location.longitude,
+        },
         timestamp: `${(new Date())}`,
         rescued: false
         }
@@ -36,6 +42,7 @@ const ChooseVictim = ({navigation, route}) => {
         const id = auth().currentUser.uid
         emergency.userID = id
 
+
     },[])
 
     return(
@@ -43,7 +50,6 @@ const ChooseVictim = ({navigation, route}) => {
             <Button 
             onPress={() => {
                 // handleVictimSelect(true)
-                emergency.doesUserNeed = true
                 console.log(emergency)
                 navigation.replace("ChooseCondition", {emergency: emergency})
 
@@ -52,7 +58,7 @@ const ChooseVictim = ({navigation, route}) => {
             <Button 
             onPress={() => {
                 // handleVictimSelect(false)
-                emergency.doesUserNeed = false
+                emergency.other = true
                 console.log(emergency)
                 navigation.replace("OtherPersonInfo", {emergency: emergency})
                 }   

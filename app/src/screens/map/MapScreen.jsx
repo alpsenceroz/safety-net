@@ -34,7 +34,7 @@ const Map = ({navigation}) => {
     const [otherNeeds, setOtherNeeds] = useState([])
 
     const [loading, setLoading] = useState(true); // Set loading to true on component mount
-    const [coordinates, setCoordinates] = useState({latitude: 32, longitude: 40})
+    const [coordinates, setCoordinates] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
     const [modalSelection, setModalSelection] = useState(false)
     const [emergencyVisibility, setEmergencyVisibility] = useState(0)
@@ -89,7 +89,7 @@ const Map = ({navigation}) => {
       }, [])
 
 
-  if(!loading && coordinates !== {latitude: 32, longitude: 40}){
+  if(!loading && coordinates ){
     return(
       <View style={{flex: 1}}>
         <Portal>
@@ -132,8 +132,8 @@ const Map = ({navigation}) => {
 
           pinColor= {marker.rescued ? 'purple': 'red'}
           coordinate = {{
-                  latitude: marker.latitude,
-                  longitude: marker.longitude,
+                  latitude: marker.coordinates.latitude,
+                  longitude: marker.coordinates.longitude,
                   latitudeDelta: 0.01,
                   longitudeDelta: 0.01,
               }}
@@ -228,5 +228,6 @@ const Map = ({navigation}) => {
 
   }
 }
+
 
 export default Map

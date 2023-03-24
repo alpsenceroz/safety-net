@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AddHelpCenter from './screens/HelpCenters/AddHelpCenter';
 import EditHelpCenter from './screens/HelpCenters/EditHelpCenter';
-import EditEmergency from './screens/map/EditEmergency';
+import EditEmergency from './screens/emergencyList/EditEmergency';
 import Map from './screens/map/MapScreen';
 import AddNeeds from './screens/Other Needs/AddNeeds';
 import EditNeeds from './screens/Other Needs/EditNeeds';

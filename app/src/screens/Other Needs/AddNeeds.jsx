@@ -20,7 +20,7 @@ export default function AddNeeds({ navigation, route }) {
     const [citySelection, setCitySelection] = useState(null);
 
     const [isModalVisible, setModalVisible] = useState(false);
-    const [modalSelection, setModalSelection] = useState(route.params.location);
+    const [modalSelection, setModalSelection] = useState((route.params ? route.params.location : false));
 
     const [address, setAddress] = useState();
 
