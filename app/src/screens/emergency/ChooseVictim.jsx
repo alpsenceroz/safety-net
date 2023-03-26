@@ -17,61 +17,50 @@ import auth from '@react-native-firebase/auth';
 
 
 
-const ChooseVictim = ({navigation}) => {
+const ChooseVictim = ({navigation, route}) => {
     
-    // const [emergency, setEmergency] = useState({
-    //     doesUserNeed: true,
-    //     other_name: null,
-    //     isInjured: false,
-    //     needEvacuation: false,
-    //     other_notes: null
-    // })
-    // useEffect(() => {
-    //     console.log('VICTIM:', emergency);
-    //     if (emergency.doesUserNeed){
-    //         navigation.navigate("ChooseCondition", {emergency: emergency})
-    //     }
-    //     else{
-    //         navigation.navigate("OtherPersonInfo", {emergency: emergency})
-    //     }
-    //   }, [emergency]
-    // )
-    // const handleVictimSelect = (value) =>{
-    //     setEmergency((prevEmergency) => ({...prevEmergency, "doesUserNeed": value}))
-    // }
+    emergency = {
+        userID: null,
+        other: false,
+        otherName: null,
+        conditions: {
+            evacuation: false,
+            injured: false,
+        },
+        // isInjured: false,
+        // needEvacuation: false,
+        notes: null,
+        coordinates:{
+            latitude: route.params.location.latitude,
+            longitude: route.params.location.longitude,
+        },
+        timestamp: `${(new Date())}`,
+        rescued: false
+        }
+
     useEffect( ()=>{
         const id = auth().currentUser.uid
         emergency.userID = id
 
+
     },[])
-    emergency = {
-        userID: null,
-        doesUserNeed: true,
-        otherName: null,
-        isInjured: false,
-        needEvacuation: false,
-        otherNotes: null,
-        latitude: null,
-        longitude: null,
-    }
 
     return(
         <View>
             <Button 
             onPress={() => {
                 // handleVictimSelect(true)
-                emergency.doesUserNeed = true
                 console.log(emergency)
-                navigation.navigate("ChooseCondition", {emergency: emergency})
+                navigation.replace("ChooseCondition", {emergency: emergency})
 
                 }
                 }>For myself</Button>
             <Button 
             onPress={() => {
                 // handleVictimSelect(false)
-                emergency.doesUserNeed = false
+                emergency.other = true
                 console.log(emergency)
-                navigation.navigate("OtherPersonInfo", {emergency: emergency})
+                navigation.replace("OtherPersonInfo", {emergency: emergency})
                 }   
                 }>For someone else</Button>
         </View>

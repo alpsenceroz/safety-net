@@ -37,19 +37,21 @@ const EmergencyReported = ({route, navigation}) => {
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
                 console.log(emergency)
-                Geolocation.getCurrentPosition(info => {
-                    console.log(info.coords)
-                    setLocation(info.coords)
-                    emergency.latitude = info.coords.latitude
-                    emergency.longitude = info.coords.longitude
-                    console.log(emergency)
-                    saveToFirestore()
-                },
-                error => {
-                    // See error code charts below.
-                    console.log(error.code, error.message);},
-                {enableHighAccuracy: true, timeout: 15000, maximumAge: 0}
-                );
+                saveToFirestore()
+
+                // Geolocation.getCurrentPosition(info => {
+                //     console.log(info.coords)
+                //     setLocation(info.coords)
+                //     emergency.latitude = info.coords.latitude
+                //     emergency.longitude = info.coords.longitude
+                //     console.log(emergency)
+                //     saveToFirestore()
+                // },
+                // error => {
+                //     // See error code charts below.
+                //     console.log(error.code, error.message);},
+                // {enableHighAccuracy: true, timeout: 15000, maximumAge: 0}
+                // );
     
           });
           return unsubscribe;
@@ -64,15 +66,16 @@ const EmergencyReported = ({route, navigation}) => {
 
     return(
         <View>
-            <Text>Victim:{route.params.emergency.doesUserNeed ? "Myself" : route.params.emergency.otherName}</Text>
-            <Text>Need evacuation: {route.params.emergency.needEvacuation? "yes":"no"}</Text>
-            <Text>Injured: {route.params.emergency.isInjured ? 'yes' : 'no' }</Text>
+            <Text>Victim:{route.params.emergency.other ? route.params.emergency.otherName: "Myself" }</Text>
+            <Text>Need evacuation: {route.params.emergency.conditions.evacuation? "yes":"no"}</Text>
+            <Text>Injured: {route.params.emergency.conditions.injured ? 'yes' : 'no' }</Text>
             <Text>Your situation is reported. Stay calm.</Text>
             <Text>Your location is: </Text>
 
-            <Text>Latitude: {location ? JSON.stringify(location.latitude) : null}</Text>
-            <Text>Longitude: {location ? JSON.stringify(location.longitude)  : null}</Text>
-            <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button>
+            <Text>Latitude: {JSON.stringify(emergency.coordinates.latitude)}</Text>
+            <Text>Longitude: {JSON.stringify(emergency.coordinates.longitude)}</Text>
+            {/* <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button> */}
+            <Button onPress={ () => navigation.pop()}>Return back</Button>
 
         </View>
     )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -15,7 +15,6 @@ import {
 
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Geolocation from '@react-native-community/geolocation';
 
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
@@ -27,6 +26,7 @@ export default function Home({navigation}) {
 
 
     const user = auth().currentUser;
+
 
     async function handleLogOut() {
         await auth().signOut();

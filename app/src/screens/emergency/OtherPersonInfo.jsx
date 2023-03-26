@@ -35,13 +35,8 @@ const OtherPersonInfo = ({route, navigation}) => {
                 onChangeText={(text)=>emergency.otherName = text}
                 >
                 </TextInput>
-                <TextInput 
-
-                placeholder="Other Notes" 
-                onChangeText={(text)=>emergency.otherNotes = text}
-                ></TextInput>
                 <Button onPress={ () => {
-                    navigation.navigate("ChooseCondition",{emergency: emergency 
+                    navigation.replace("ChooseCondition",{emergency: emergency 
                     })
                     }   
                     }>Continue</Button>

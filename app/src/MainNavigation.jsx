@@ -4,10 +4,14 @@ import FaIcon from 'react-native-vector-icons/FontAwesome';
 import Fa5Icon from 'react-native-vector-icons/FontAwesome5';
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MiIcon from 'react-native-vector-icons/MaterialIcons';
-import MapScreen from './screens/MapScreen';
+import MapScreen from './screens/map/MapScreen';
+import Home from './screens/Home';
 import HelpCenterNavigation from './HelpCenterNavigation';
-import EmergencyList from './screens/EmergencyList';
+import EmergencyList from './screens/emergencyList/EmergencyList';
 import OtherNeedsNavigation from './OtherNeedsNavigation';
+import EmergencyNavigation from './EmergencyNavigation';
+import MapNavigation from './MapNavigation';
+import EmergencyListNavigation from './EmergencyListNavigation';
 import HomeNavigation from './HomeNavigation';
 
 
@@ -29,14 +33,14 @@ export default function MainNavigation() {
                     tabBarIcon: () => <FaIcon name="home" size={30} color="#900" />
                 }}
             />
-            <Tab.Screen name="Map" component={MapScreen}
-                options={{
-                    tabBarIcon: () => <FaIcon name="map" size={30} color="#900" />
-                }}
-            />
             <Tab.Screen name="Help Centers" component={HelpCenterNavigation}
                 options={{
                     tabBarIcon: () => <Fa5Icon name="hands-helping" size={30} color="#900" />
+                }}
+            />
+            <Tab.Screen name="MapNav" component={MapNavigation}                
+                options={{
+                    tabBarIcon: () => <FaIcon name="map" size={30} color="#900" />
                 }}
             />
             <Tab.Screen name="Other Needs" component={OtherNeedsNavigation}
@@ -44,7 +48,7 @@ export default function MainNavigation() {
                     tabBarIcon: () => <Fa5Icon name="hands-helping" size={30} color="#900" />
                 }}
             />
-            <Tab.Screen name="EmergencyList" component={EmergencyList}
+            <Tab.Screen name="EmergencyList" component={EmergencyListNavigation}
                 options={{
                     tabBarIcon: () => <FaIcon name="hourglass" size={30} color="#900" />
                 }}

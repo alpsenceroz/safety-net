@@ -10,7 +10,7 @@ import SelectLocationModal from "../../components/SelectLocationModal";
 
 import auth from '@react-native-firebase/auth';
 
-export default function AddHelpCenter({ navigation }) {
+export default function AddHelpCenter({ navigation, route }) {
 
     const [chipsData, setChipsData] = useState(helpCenterNeeds.data);
     const [name, setName] = useState('');
@@ -20,7 +20,7 @@ export default function AddHelpCenter({ navigation }) {
     const [citySelection, setCitySelection] = useState(null);
 
     const [isModalVisible, setModalVisible] = useState(false);
-    const [modalSelection, setModalSelection] = useState(false);
+    const [modalSelection, setModalSelection] = useState((route.params ? route.params.location : false));
 
     const [address, setAddress] = useState();
 

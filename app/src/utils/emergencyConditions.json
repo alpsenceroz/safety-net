@@ -1,0 +1,13 @@
+{
+    "data": [
+        {
+            "name": "evacuation",
+            "icon": "food"
+
+        },
+        {
+            "name": "injured",
+            "icon": "water"
+        }
+    ]
+}
