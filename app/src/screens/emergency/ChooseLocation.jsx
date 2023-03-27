@@ -40,13 +40,12 @@ const ChooseLocation = ({navigation, route}) => {
     }, [])
     if(location){
     return(
-        <View>
+        <View style={{flex: 1}}>
     <Text>Select Location</Text>
       <MapView
         provider={PROVIDER_GOOGLE}
         style={{
-            width : 400 ,
-            height : 700 
+            flex: 1
           }}
           initialRegion={{
              latitude: (location ? location.latitude : 36),
