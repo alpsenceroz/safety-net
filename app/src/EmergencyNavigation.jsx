@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 const EmergencyNavigation = () => {
     return(
 
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName="ChooseLocation">
                 <Stack.Screen name="ChooseLocation" component={ChooseLocation}/>
                 <Stack.Screen name="ChooseVictim" component={ChooseVictim}/>
                 <Stack.Screen name="ChooseCondition" component={ChooseCondition}/>

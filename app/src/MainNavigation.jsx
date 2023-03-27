@@ -2,14 +2,14 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import Fa5Icon from 'react-native-vector-icons/FontAwesome5';
-import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import MiIcon from 'react-native-vector-icons/MaterialIcons';
-import MapScreen from './screens/map/MapScreen';
-import Home from './screens/Home';
+
+
+
+
 import HelpCenterNavigation from './HelpCenterNavigation';
-import EmergencyList from './screens/emergencyList/EmergencyList';
+
 import OtherNeedsNavigation from './OtherNeedsNavigation';
-import EmergencyNavigation from './EmergencyNavigation';
+
 import MapNavigation from './MapNavigation';
 import EmergencyListNavigation from './EmergencyListNavigation';
 import HomeNavigation from './HomeNavigation';

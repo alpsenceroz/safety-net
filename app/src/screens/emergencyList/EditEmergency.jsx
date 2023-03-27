@@ -60,18 +60,22 @@ const EditEmergency = ({route, navigation}) => {
                 setModalSelection(snapshot.data().coordinates)
                 setConditions(snapshot.data().conditions)
             })
-        const subscription2 = firestore().collection('users').doc(emergency.userID).onSnapshot(
-            (snapshot) => {
-                setUser(snapshot.data())
-                console.log(snapshot.data())
-            })
+
         return ()=>{
             subscription()
-            subscription2()
-
             }
     }
 ,[])
+useEffect(() => {
+    const subscription2 = firestore().collection('users').doc(emergency.userID).onSnapshot(
+        (snapshot) => {
+            setUser(snapshot.data())
+            console.log(snapshot.data())
+        })
+        return ()=>{
+            subscription2()
+            }
+}, [emergency])
 
     return(
         <View>

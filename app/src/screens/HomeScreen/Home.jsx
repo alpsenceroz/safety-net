@@ -61,7 +61,7 @@ export default function Home({navigation}) {
 
         const userData = await firestore().collection('users').doc(user.uid).get();
         if(userData.exists) {
-            navigation.navigate('Emergency', {screen: "ChooseVictim"})
+            navigation.push('Emergency', {screen: "ChooseLocation"})
         } else  {
             navigation.push('UserProfile', {
                 userId: user.uid,
