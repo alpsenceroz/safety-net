@@ -8,7 +8,8 @@ import {
     useColorScheme,
     View,
     FlatList,
-    Pressable
+    Pressable,
+    Vibration,
 
     // Modal,
     // Pressable
@@ -25,10 +26,15 @@ import firestore from '@react-native-firebase/firestore';
 import MapView, { Callout, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import AddNewMarker from '../../components/AddNewMarker';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import auth from '@react-native-firebase/auth';
+
+
 
 
 
 const Map = ({navigation}) => {
+    const user = auth().currentUser;
     const [emergencies, setEmergencies] = useState([])
     const [helpCenters, setHelpCenters] = useState([])
     const [otherNeeds, setOtherNeeds] = useState([])
@@ -87,35 +93,211 @@ const Map = ({navigation}) => {
           t3()
         }
       }, [])
-
+      var mapStyle = [
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#e9e9e9"
+                },
+                {
+                    "lightness": 17
+                }
+            ]
+        },
+        {
+            "featureType": "landscape",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#f5f5f5"
+                },
+                {
+                    "lightness": 20
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 17
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 29
+                },
+                {
+                    "weight": 0.2
+                }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 18
+                }
+            ]
+        },
+        {
+            "featureType": "road.local",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 16
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#f5f5f5"
+                },
+                {
+                    "lightness": 21
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#dedede"
+                },
+                {
+                    "lightness": 21
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+                {
+                    "visibility": "on"
+                },
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 16
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "saturation": 36
+                },
+                {
+                    "color": "#fc2e63"
+                },
+                {
+                    "lightness": 40
+                }
+            ]
+        },
+        {
+            "elementType": "labels.icon",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#f2f2f2"
+                },
+                {
+                    "lightness": 19
+                }
+            ]
+        },
+        {
+            "featureType": "administrative",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "color": "#fefefe"
+                },
+                {
+                    "lightness": 20
+                }
+            ]
+        },
+        {
+            "featureType": "administrative",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "color": "#fefefe"
+                },
+                {
+                    "lightness": 17
+                },
+                {
+                    "weight": 1.2
+                }
+            ]
+        }
+    ]
 
   if(!loading && coordinates ){
+    
     return(
       <View style={{flex: 1}}>
         <Portal>
-        <AddNewMarker
-        navigation = {navigation}
-        isModalVisible={isModalVisible}
-        hideModal={()=>setIsModalVisible(false)}
-        //onConfirm={handleModalConfirm}
-        modalSelection={modalSelection}
-        />  
-          </Portal>
+          <AddNewMarker
+          navigation = {navigation}
+          isModalVisible={isModalVisible}
+          hideModal={()=>setIsModalVisible(false)}
+          //onConfirm={handleModalConfirm}
+          modalSelection={modalSelection}
+          />  
+        </Portal>
         <MapView
           provider={ PROVIDER_GOOGLE }
           showsUserLocation={ true }
           showsMyLocationButton={ true }
           onLongPress = {(e)=>{
-            setModalSelection(e.nativeEvent.coordinate)
-
-            console.log(e.nativeEvent.coordinate)
-            setIsModalVisible(true)
+          setModalSelection(e.nativeEvent.coordinate)
+          console.log(e.nativeEvent.coordinate)
+          setIsModalVisible(true)
           }}
           // style={{
           //   width : 400 ,
           //   height : 700 
           // }}
           style={{flex: 1}}
+          customMapStyle={mapStyle}
           initialRegion={{
               latitude: coordinates.latitude ,
               longitude: coordinates.longitude,
@@ -129,8 +311,7 @@ const Map = ({navigation}) => {
           <Marker
           // key = {marker.ID}
           key={`${marker.ID}-${(Date())}`}
-
-          pinColor= {marker.rescued ? 'purple': 'red'}
+          //pinColor= {marker.rescued ? 'purple': 'red'}
           coordinate = {{
                   latitude: marker.coordinates.latitude,
                   longitude: marker.coordinates.longitude,
@@ -139,11 +320,69 @@ const Map = ({navigation}) => {
               }}
               title = {marker.ID}
           >
-            <Callout onPress={() => {
-                navigation.push('EditEmergency', {emergencyID: marker.ID})
+            {marker.rescued ?
+            // <Icon
+            // reverse
+            // solid
+            // size={20}
+            // name='check'
+            // type="font-awesome-solid"
+            // color='#30c8a9'
+            // /> 
+            <View>
+            <Icon name="map-marker" size={45} color='#30c8a9' />
+            <View style={{
+              width: 30,
+              height: 30,
+              borderRadius: 40,
+              backgroundColor: '#ECF0F1',
+              position: 'absolute',
+              left: 2,
+              top: 3,
+            }}>
+              <Icon style={{
+                textAlign: 'center',
+                top: 5,
+              }} name="check" size={15} color='#30c8a9' />
+            </View>
+          </View>
+              :
+            // <Icon
+            // reverse
+            // size={20}
+            // name='exclamation'
+            // type="font-awesome"
+            // // color='#fc2e63'
+            // color='#e90064'
+            // /> 
+            <View>
+            <Icon name="map-marker" size={45} color='#e90064' />
+            <View style={{
+              width: 30,
+              height: 30,
+              borderRadius: 40,
+              backgroundColor: '#ECF0F1',
+              position: 'absolute',
+              left: 2,
+              top: 3,
+            }}>
+              <Icon style={{
+                textAlign: 'center',
+                top: 5,
+              }} name="exclamation" size={15} color='#e90064' />
+            </View>
+          </View>
+
+            }
+            <Callout tooltip onPress={() => {
+                (marker.userID === user.uid ? navigation.push('EditEmergency', {emergencyID: marker.ID}): 
+                navigation.push('DisplayEmergency', {emergencyID: marker.ID}))
               }}>
-              <Text>{marker.ID}</Text>
+              <View style={styles.bubble}>
+              <Text style={styles.name}>{marker.ID}</Text>
               <Text>(Click to edit)</Text>
+              </View>
+   
 
             </Callout>
           </Marker>
@@ -152,22 +391,49 @@ const Map = ({navigation}) => {
       {helpCenterVisibility && helpCenters[0] != null && helpCenters.map(marker => (
 
           <Marker
-              key = {marker.ID}
+            key = {marker.ID}
 
-              pinColor = {'green'}
-              coordinate = {{
-                  latitude: marker.location.latitude,
-                  longitude: marker.location.longitude,
-                  latitudeDelta: 0.01,
-                  longitudeDelta: 0.01,
-              }}
-              title = { marker.name }
+            pinColor = {'green'}
+            coordinate = {{
+                latitude: marker.location.latitude,
+                longitude: marker.location.longitude,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+            }}
+            title = { marker.name }
 
           >
-            <Callout onPress={() => {
-                navigation.push('EditHelpCenter', {helpCenterId: marker.ID})
+            {/* <Icon
+            reverse
+            size={20}
+            name='hands-helping'
+            type="font-awesome"
+            //color='#30b8a9'
+            color='#0e4ff1'
+            /> */}
+        <View>
+        <Icon name="map-marker" size={45} color='#0e4ff1' />
+        <View style={{
+          width: 30,
+          height: 30,
+          borderRadius: 40,
+          backgroundColor: '#ECF0F1',
+          position: 'absolute',
+          left: 2,
+          top: 3,
+        }}>
+          <Icon style={{
+            textAlign: 'center',
+            top: 5,
+          }} name="hands-helping" size={15} color='#0e4ff1' />
+        </View>
+      </View>
+
+            <Callout tooltip onPress={() => {
+              (marker.user === user.uid ? navigation.push('EditHelpCenter', {helpCenterId: marker.ID}) :
+               navigation.push('DisplayHelpCenter', {helpCenterId: marker.ID}))
               }} >
-              <View>
+              <View style={styles.bubble}>
               <Text>{marker.name}</Text>
               <Text>(Click to edit)</Text>
               </View>
@@ -176,48 +442,70 @@ const Map = ({navigation}) => {
         ))
       }
       {otherNeedsVisibility && otherNeeds[0] != null && otherNeeds.map(marker => (
+        <Marker
+            key = {marker.ID}
 
-          <Marker
-              key = {marker.ID}
+            pinColor = {'yellow'}
+            coordinate = {{
+              latitude: marker.location.latitude,
+              longitude: marker.location.longitude,
+              latitudeDelta: 0.01,
+              longitudeDelta: 0.01,
+            }}
+            title = { marker.name }
+        >
+          {/* <Icon
+            reverse
+            size={20}
+            name='bread-slice'
+            type="font-awesome"
+            color='#ff8d29'/> */}
+        <View>
+        <Icon name="map-marker" size={45} color='#ff8d29' />
+        <View style={{
+          width: 30,
+          height: 30,
+          borderRadius: 40,
+          backgroundColor: '#ECF0F1',
+          position: 'absolute',
+          left: 2,
+          top: 3,
+        }}>
+          <Icon style={{
+            textAlign: 'center',
+            top: 5,
+          }} name="bread-slice" size={15} color='#ff8d29' />
+        </View>
+      </View>
 
-              pinColor = {'yellow'}
-              coordinate = {{
-                  latitude: marker.location.latitude,
-                  longitude: marker.location.longitude,
-                  latitudeDelta: 0.01,
-                  longitudeDelta: 0.01,
-              }}
-              title = { marker.name }
-
-          >
-            <Callout onPress={() => {
-                navigation.push('EditNeeds', {needsId: marker.ID})
-              }} >
-              <View>
-              <Text>{marker.name}</Text>
-              <Text>(Click to edit)</Text>
-              </View>
-            </Callout>
-          </Marker>
+          <Callout tooltip onPress={() => {
+            (marker.user === user.uid ? navigation.push('EditNeeds', {needsId: marker.ID}):
+            navigation.push('DisplayNeeds', {needsId: marker.ID}))
+            }} >
+            <View style={styles.bubble}>
+            <Text style={styles.name}>{marker.name}</Text>
+            <Text>(Click to edit)</Text>
+            </View>
+          </Callout>
+        </Marker>
         ))
       }
           </MapView>
           <Callout>
           <View
             style={{
-              
-                flexDirection: "row",
-                backgroundColor: "rgba(255, 255, 255, 0.9)",
-                borderRadius: 20,
-                width: "80%",
-                marginLeft: "10%",
-                marginRight: "10%",
-                marginTop: 20,
-              
+              flexDirection: "row",
+              //backgroundColor: "rgba(255, 255, 255, 0.9)",
+              borderRadius: 20,
+              width: "70%",
+              marginLeft: "10%",
+              // marginRight: "1%",
+              marginTop: 20,
             }}>
-            <Button onPress={()=>setEmergencyVisibility((emergencyVisibility + 1) % 4)}>Emergencies</Button>
-            <Button onPress={()=>setHelpCenterVisibility(!helpCenterVisibility)}>Help Centers</Button>
-            <Button onPress={()=>setOtherNeedsVisibility(!otherNeedsVisibility)}>Other Needs</Button>
+            {/* icon={() => <Icon name="exclamation" size={10} color='white' />} */}
+            <Button  buttonColor='#e90064' textColor='white' onPress={()=>setEmergencyVisibility((emergencyVisibility + 1) % 4)}>Emergencies</Button>
+            <Button  buttonColor='#0e4ff1' textColor='white' onPress={()=>setHelpCenterVisibility(!helpCenterVisibility)}>Help Centers</Button>
+            <Button  buttonColor='#ff8d29' textColor='white' onPress={()=>setOtherNeedsVisibility(!otherNeedsVisibility)}>Other Needs</Button>
           </View>
           </Callout>
           
@@ -227,7 +515,52 @@ const Map = ({navigation}) => {
 
 
   }
+
 }
+const styles = StyleSheet.create({
+  map: {
+    height: '100%'
+  },
+  // Callout bubble
+  bubble: {
+    flexDirection: 'column',
+    alignSelf: 'flex-start',
+    backgroundColor: '#fff',
+    borderRadius: 6,
+    borderColor: '#ccc',
+    borderWidth: 0.5,
+    padding: 15,
+    width: 150,
+  },
+  // Arrow below the bubble
+  arrow: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderTopColor: '#fff',
+    borderWidth: 16,
+    alignSelf: 'center',
+    marginTop: -32,
+  },
+  arrowBorder: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderTopColor: '#007a87',
+    borderWidth: 16,
+    alignSelf: 'center',
+    marginTop: -0.5,
+    // marginBottom: -15
+  },
+  // Character name
+  name: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  // Character image
+  image: {
+    width: "100%",
+    height: 80,
+  },
+});
 
 
 export default Map

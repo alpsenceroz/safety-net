@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     providedChip: {
-        backgroundColor: 'lightblue',
+        backgroundColor: 'white',
         marginRight: 10,
     },
 

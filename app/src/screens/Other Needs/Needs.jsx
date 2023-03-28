@@ -28,7 +28,7 @@ function NeedsItem(props) {
             return (<Chip 
                 key={item} 
                 style={styles.providedChip} 
-                icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#0e4ff1" />}
+                icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#ff8d29" />}
                 >{item}</Chip>)
         })
     }
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     providedChip: {
-        backgroundColor: 'lightblue',
+        backgroundColor: 'white',
         marginRight: 10,
 
     },
