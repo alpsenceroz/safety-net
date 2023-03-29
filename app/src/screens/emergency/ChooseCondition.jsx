@@ -7,6 +7,7 @@ import {
     Text,
     useColorScheme,
     View,
+    Image
 } from 'react-native';
 
 import {
@@ -14,6 +15,8 @@ import {
     Checkbox,
     TextInput
 } from 'react-native-paper';
+
+import globalStyles from '../../utils/Styles';
 
 
 
@@ -35,9 +38,17 @@ const ChooseCondition = ({route, navigation}) => {
     emergency = route.params.emergency
 
         return(
-            <View>
+
+            <View style={{flex: 1}}backgroundColor = '#FAE3D9'>
+                <Image
+        style={{width: 350, height:300, alignSelf:'center', marginTop:80, marginBottom:80}}
+        source={require('../../assets/condition.png')}
+      />
+                <View style={{backgroundColor:'#ffffff'}}>
                 <Checkbox.Item
                 label="Need Evacuation"
+                color='#e90064'
+                style={{marginTop: 0, backgroundColor:'#ffffff'}}
                 status={evacuation ? 'checked' : 'unchecked'}
                 onPress={() => { 
                     // handleCheckBox("needEvacuation")
@@ -47,6 +58,7 @@ const ChooseCondition = ({route, navigation}) => {
                     }}/>
                 <Checkbox.Item
                 label="Injured"
+                color='#e90064'
                 status={injured ? 'checked' : 'unchecked'}
                 onPress={() => { 
                     // handleCheckBox("isInjured")
@@ -55,11 +67,14 @@ const ChooseCondition = ({route, navigation}) => {
                     }}/>
                 <TextInput 
                     multiline={true}
+                    mode="outlined"
+                    outlineColor='#e90064'
 
                     placeholder="Notes" 
                     onChangeText={(text)=>emergency.notes = text}
                     />
-                <Button onPress= {() => {
+                    </View>
+                <Button buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 20, alignSelf: 'center', width: 100, justifyContent:'center'} }onPress= {() => {
                     navigation.replace("EmergencyReported", {emergency: emergency})
                    //navigation.reset()
 

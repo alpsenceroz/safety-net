@@ -24,8 +24,8 @@ import globalStyles from '../../utils/Styles';
 const ChooseLocation = ({navigation, route}) => {
     
     const mapRef = useRef(null)
-    const [location, setLocation] = useState(false)  
-    const [myLocation, setMyLocation] = useState(false)  
+    const [location, setLocation] = useState({latitude: 40, longitude: 40})  
+    const [myLocation, setMyLocation] = useState({latitude: 40, longitude: 40})  
 
     useEffect(() => {
         Geolocation.getCurrentPosition(info => {
@@ -73,8 +73,12 @@ const ChooseLocation = ({navigation, route}) => {
         { location && <Marker coordinate={location}/>}
       </MapView>
       <View>
-        <Button onPress={()=>navigation.replace('ChooseVictim', {location: location})}>Continue</Button>
-        <Button onPress={()=>navigation.replace('ChooseVictim', {location: location})}>Use My Current Location</Button>
+        <Button 
+        buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 20, alignSelf: 'center', width: 200, justifyContent:'center'}}
+        onPress={()=>navigation.replace('ChooseVictim', {location: location})}>Continue</Button>
+        <Button 
+        buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 10, alignSelf: 'center', width: 200, justifyContent:'center'}}
+        onPress={()=>navigation.replace('ChooseVictim', {location: location})}>Use My Current Location</Button>
       </View>
         </View>
     )

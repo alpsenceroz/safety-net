@@ -12,6 +12,7 @@ import {
 import {
     Button, TextInput
 } from 'react-native-paper';
+import globalStyles from '../../utils/Styles';
 
 
 
@@ -27,15 +28,21 @@ const OtherPersonInfo = ({route, navigation}) => {
     emergency = route.params.emergency
 
         return(
-            <View>
+            <View style={{flex: 1}}backgroundColor = '#FAE3D9'>
                 <TextInput 
-
+                   mode="outlined"
+                   outlineColor='#e90064'
                 placeholder="Name"
                 // onChangeText={(text) => handleName(text)}
                 onChangeText={(text)=>emergency.otherName = text}
                 >
                 </TextInput>
-                <Button onPress={ () => {
+                
+                <Button 
+                buttonColor= {globalStyles.button1.buttonColor} 
+                textColor={globalStyles.button1.textColor} 
+                style={ {...globalStyles.button1.style, marginTop: 20, alignSelf: 'center', width: 100, justifyContent:'center'}}
+                onPress={ () => {
                     navigation.replace("ChooseCondition",{emergency: emergency 
                     })
                     }   
