@@ -48,7 +48,7 @@ export default function EmergenctList({ navigation }) {
         })[0]
         if (user){
         return (
-            <Card onPress={onPress}>
+            <Card style={styles.card} onPress={onPress}>
                 <Card.Title
                     title={user.data.name}
                     //subtitle={city}
@@ -225,5 +225,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginRight: 10,
     },
+    card:{
+        backgroundColor: '#f7c8e0'
+    }
 
 })

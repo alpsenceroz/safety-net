@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -15,6 +15,7 @@ import {
 import auth from '@react-native-firebase/auth';
 import MapView, { Callout, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+import globalStyles from '../../utils/Styles';
 
 
 
@@ -22,7 +23,7 @@ import Geolocation from '@react-native-community/geolocation';
 
 const ChooseLocation = ({navigation, route}) => {
     
-
+    const mapRef = useRef(null)
     const [location, setLocation] = useState(false)  
     const [myLocation, setMyLocation] = useState(false)  
 
@@ -38,18 +39,28 @@ const ChooseLocation = ({navigation, route}) => {
           {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}
           )
     }, [])
-    if(location){
+    useEffect(() => {
+      mapRef.current?.animateToRegion({
+        latitude: location.latitude,
+        longitude: location.longitude,
+        longitudeDelta: 0.004,
+        latitudeDelta: 0,
+        })
+    }, [location])
+
     return(
         <View style={{flex: 1}}>
     <Text>Select Location</Text>
       <MapView
+      ref={mapRef}
         provider={PROVIDER_GOOGLE}
         style={{
             flex: 1
           }}
+        customMapStyle={globalStyles.map}
           initialRegion={{
-             latitude: (location ? location.latitude : 36),
-             longitude: (location ? location.longitude : 30),
+             latitude: (location ? location.latitude : 40),
+             longitude: (location ? location.longitude : 40),
              latitudeDelta: 0.1,
              longitudeDelta: 0.1,
            }}
@@ -68,5 +79,5 @@ const ChooseLocation = ({navigation, route}) => {
         </View>
     )
             }
-}
+
 export default ChooseLocation

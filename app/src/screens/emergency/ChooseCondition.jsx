@@ -16,6 +16,7 @@ import {
 } from 'react-native-paper';
 
 
+
 const ChooseCondition = ({route, navigation}) => {
     // const [emergency, setEmergency] = useState(route.params.emergency);
     const [evacuation, setEvacuation] = useState(emergency.needEvacuation)
@@ -52,11 +53,12 @@ const ChooseCondition = ({route, navigation}) => {
                     setInjured(!emergency.conditions['injured'] )
                     emergency.conditions['injured']= !emergency.conditions['injured']
                     }}/>
-                    <TextInput 
+                <TextInput 
+                    multiline={true}
 
                     placeholder="Notes" 
                     onChangeText={(text)=>emergency.notes = text}
-                    ></TextInput>
+                    />
                 <Button onPress= {() => {
                     navigation.replace("EmergencyReported", {emergency: emergency})
                    //navigation.reset()

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -28,19 +28,21 @@ import Geolocation from '@react-native-community/geolocation';
 import AddNewMarker from '../../components/AddNewMarker';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import auth from '@react-native-firebase/auth';
+import globalStyles from '../../utils/Styles';
 
 
 
 
 
 const Map = ({navigation}) => {
+    const mapRef = useRef(null);
     const user = auth().currentUser;
     const [emergencies, setEmergencies] = useState([])
     const [helpCenters, setHelpCenters] = useState([])
     const [otherNeeds, setOtherNeeds] = useState([])
 
     const [loading, setLoading] = useState(true); // Set loading to true on component mount
-    const [coordinates, setCoordinates] = useState(false)
+    const [coordinates, setCoordinates] = useState({latitude: 40, longitude: 40})
     const [isModalVisible, setIsModalVisible] = useState(false)
     const [modalSelection, setModalSelection] = useState(false)
     const [emergencyVisibility, setEmergencyVisibility] = useState(0)
@@ -93,185 +95,17 @@ const Map = ({navigation}) => {
           t3()
         }
       }, [])
-      var mapStyle = [
-        {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#e9e9e9"
-                },
-                {
-                    "lightness": 17
-                }
-            ]
-        },
-        {
-            "featureType": "landscape",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#f5f5f5"
-                },
-                {
-                    "lightness": 20
-                }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "geometry.fill",
-            "stylers": [
-                {
-                    "color": "#ffffff"
-                },
-                {
-                    "lightness": 17
-                }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "geometry.stroke",
-            "stylers": [
-                {
-                    "color": "#ffffff"
-                },
-                {
-                    "lightness": 29
-                },
-                {
-                    "weight": 0.2
-                }
-            ]
-        },
-        {
-            "featureType": "road.arterial",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#ffffff"
-                },
-                {
-                    "lightness": 18
-                }
-            ]
-        },
-        {
-            "featureType": "road.local",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#ffffff"
-                },
-                {
-                    "lightness": 16
-                }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#f5f5f5"
-                },
-                {
-                    "lightness": 21
-                }
-            ]
-        },
-        {
-            "featureType": "poi.park",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#dedede"
-                },
-                {
-                    "lightness": 21
-                }
-            ]
-        },
-        {
-            "elementType": "labels.text.stroke",
-            "stylers": [
-                {
-                    "visibility": "on"
-                },
-                {
-                    "color": "#ffffff"
-                },
-                {
-                    "lightness": 16
-                }
-            ]
-        },
-        {
-            "elementType": "labels.text.fill",
-            "stylers": [
-                {
-                    "saturation": 36
-                },
-                {
-                    "color": "#fc2e63"
-                },
-                {
-                    "lightness": 40
-                }
-            ]
-        },
-        {
-            "elementType": "labels.icon",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "transit",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#f2f2f2"
-                },
-                {
-                    "lightness": 19
-                }
-            ]
-        },
-        {
-            "featureType": "administrative",
-            "elementType": "geometry.fill",
-            "stylers": [
-                {
-                    "color": "#fefefe"
-                },
-                {
-                    "lightness": 20
-                }
-            ]
-        },
-        {
-            "featureType": "administrative",
-            "elementType": "geometry.stroke",
-            "stylers": [
-                {
-                    "color": "#fefefe"
-                },
-                {
-                    "lightness": 17
-                },
-                {
-                    "weight": 1.2
-                }
-            ]
-        }
-    ]
+      useEffect(() => {
+        mapRef.current?.animateToRegion({
+          latitude: coordinates.latitude,
+          longitude: coordinates.longitude,
+          longitudeDelta: 0.004,
+          latitudeDelta: 0,
+          })
+      }, [coordinates])
+      
 
-  if(!loading && coordinates ){
-    
+  if(!loading){
     return(
       <View style={{flex: 1}}>
         <Portal>
@@ -284,6 +118,7 @@ const Map = ({navigation}) => {
           />  
         </Portal>
         <MapView
+          ref = { mapRef }
           provider={ PROVIDER_GOOGLE }
           showsUserLocation={ true }
           showsMyLocationButton={ true }
@@ -297,7 +132,7 @@ const Map = ({navigation}) => {
           //   height : 700 
           // }}
           style={{flex: 1}}
-          customMapStyle={mapStyle}
+          customMapStyle={globalStyles.map}
           initialRegion={{
               latitude: coordinates.latitude ,
               longitude: coordinates.longitude,

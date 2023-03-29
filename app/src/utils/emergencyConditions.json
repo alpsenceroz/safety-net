@@ -2,12 +2,12 @@
     "data": [
         {
             "name": "evacuation",
-            "icon": "food"
+            "icon": "helicopter"
 
         },
         {
             "name": "injured",
-            "icon": "water"
+            "icon": "ambulance"
         }
     ]
 }

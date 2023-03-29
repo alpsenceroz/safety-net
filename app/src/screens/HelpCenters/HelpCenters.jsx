@@ -36,7 +36,7 @@ function HelpCenterItem(props) {
 
 
     return (
-        <Card onPress={onPress}>
+        <Card style={styles.card} onPress={onPress}>
             <Card.Title
                 title={name}
                 subtitle={city}
@@ -193,5 +193,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginRight: 10,
     },
+    card:{
+        backgroundColor: '#c1efff'
+    }
 
 })

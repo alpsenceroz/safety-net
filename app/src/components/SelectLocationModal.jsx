@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button, Modal, Text } from 'react-native-paper';
+import globalStyles from '../utils/Styles';
 
 
 
@@ -42,6 +43,7 @@ export default function SelectLocation(props) {
       <MapView
         provider={PROVIDER_GOOGLE}
         style={{ flex: 1 }}
+        customMapStyle={globalStyles.map}
         showsUserLocation={true}
         onLongPress={(e) => handleMapClick(e.nativeEvent.coordinate)}
       >

@@ -43,12 +43,12 @@ export default function MainNavigation() {
             />
             <Tab.Screen name="Other Needs" component={OtherNeedsNavigation}
                 options={{
-                    tabBarIcon: () => <Fa5Icon name="hands-helping" size={30} color="#900" />
+                    tabBarIcon: () => <Fa5Icon name="bread-slice" size={30} color="#900" />
                 }}
             />
             <Tab.Screen name="EmergencyList" component={EmergencyListNavigation}
                 options={{
-                    tabBarIcon: () => <FaIcon name="hourglass" size={30} color="#900" />
+                    tabBarIcon: () => <FaIcon name="exclamation" size={30} color="#900" />
                 }}
             />
         </Tab.Navigator>
