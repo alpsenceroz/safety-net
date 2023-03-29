@@ -7,12 +7,14 @@ import {
     StyleSheet,
     Image,
     PermissionsAndroid,
-    Platform
+    Platform,
+
   } from 'react-native';
   import {
     Button
 } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
+import globalStyles from '../../utils/Styles';
 
   
 //   //import all the components we are going to use.
@@ -65,17 +67,22 @@ const EmergencyReported = ({route, navigation}) => {
   
 
     return(
-        <View>
-            <Text>Victim:{route.params.emergency.other ? route.params.emergency.otherName: "Myself" }</Text>
-            <Text>Need evacuation: {route.params.emergency.conditions.evacuation? "yes":"no"}</Text>
-            <Text>Injured: {route.params.emergency.conditions.injured ? 'yes' : 'no' }</Text>
-            <Text>Your situation is reported. Stay calm.</Text>
-            <Text>Your location is: </Text>
+        <View style={{flex: 1, justifyContent: 'space-between'}} backgroundColor = '#FAE3D9'>
+            {/* <Text>Victim:{route.params.emergency.other ? route.params.emergency.otherName: "Myself" }</Text> */}
+            {/* <Text>Need evacuation: {route.params.emergency.conditions.evacuation? "yes":"no"}</Text>
+            <Text>Injured: {route.params.emergency.conditions.injured ? 'yes' : 'no' }</Text> */}
+            <Text style={{alignSelf:'center', fontSize:20, color: 'black', marginTop: 100}} >Your situation is reported. Stay calm.</Text>
+            <Image
+        style={{width: 300, height:300, alignSelf:'center', marginTop:-180}}
+        source={require('../../assets/Ambulance-pana.png')}
+      />
+            {/* <Text>Your location is: </Text> */}
 
-            <Text>Latitude: {JSON.stringify(emergency.coordinates.latitude)}</Text>
-            <Text>Longitude: {JSON.stringify(emergency.coordinates.longitude)}</Text>
+            {/* <Text>Latitude: {JSON.stringify(emergency.coordinates.latitude)}</Text>
+            <Text>Longitude: {JSON.stringify(emergency.coordinates.longitude)}</Text> */}
             {/* <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button> */}
-            <Button onPress={ () => navigation.pop()}>Return back</Button>
+            {/* <Button buttonColor='#e90064' textColor='#ffffff' style={{ justifyContent: 'center', alignContent: 'flex-end', alignSelf: 'center', marginBottom: 70, width: 150, height: 40}} onPress={ () => navigation.pop()}>Return back</Button> */}
+            <Button  globalStyles.button1 onPress={ () => navigation.pop()}>Return back</Button>
 
         </View>
     )
