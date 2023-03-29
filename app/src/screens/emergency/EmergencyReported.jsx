@@ -39,6 +39,8 @@ const EmergencyReported = ({route, navigation}) => {
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
                 console.log(emergency)
+                console.log('cccccccccccccccc')
+
                 saveToFirestore()
 
                 // Geolocation.getCurrentPosition(info => {
@@ -82,7 +84,7 @@ const EmergencyReported = ({route, navigation}) => {
             <Text>Longitude: {JSON.stringify(emergency.coordinates.longitude)}</Text> */}
             {/* <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button> */}
             {/* <Button buttonColor='#e90064' textColor='#ffffff' style={{ justifyContent: 'center', alignContent: 'flex-end', alignSelf: 'center', marginBottom: 70, width: 150, height: 40}} onPress={ () => navigation.pop()}>Return back</Button> */}
-            <Button onPress={ () => navigation.pop()}>Return back</Button>
+            <Button buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginBottom: 40} } onPress={ () => navigation.pop()}>Return back</Button>
 
         </View>
     )

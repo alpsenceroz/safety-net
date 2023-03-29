@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {
+    Pressable,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -7,12 +8,14 @@ import {
     Text,
     useColorScheme,
     View,
+    Image
 } from 'react-native';
 
 import {
     Button
 } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
+import globalStyles from '../../utils/Styles';
 
 
 
@@ -46,23 +49,46 @@ const ChooseVictim = ({navigation, route}) => {
     },[])
 
     return(
-        <View>
-            <Button 
-            onPress={() => {
-                // handleVictimSelect(true)
-                console.log(emergency)
-                navigation.replace("ChooseCondition", {emergency: emergency})
-
-                }
-                }>For myself</Button>
-            <Button 
+        <View  style={{flex: 1}}backgroundColor = '#FAE3D9'>
+             <Image
+        style={{width: 400, height:300, alignSelf:'center', marginTop:-20}}
+        source={require('../../assets/victim.png')}
+      />
+            <Pressable
+             style={{ flexDirection: 'column',...globalStyles.button1.style, width: 300, height:150, alignItems: 'center',
+                backgroundColor: globalStyles.button1.buttonColor, textColor:globalStyles.button1.textColor,
+                borderRadius: 20, marginTop: 50
+            }}
             onPress={() => {
                 // handleVictimSelect(false)
                 emergency.other = true
                 console.log(emergency)
                 navigation.replace("OtherPersonInfo", {emergency: emergency})
                 }   
-                }>For someone else</Button>
+                }>
+                    <Text style={{color: 'white'}}>
+                    For Someone else
+                    </Text>
+                    </Pressable>
+                
+                <Pressable
+             style={{ flexDirection: 'column',...globalStyles.button1.style, width: 300, height:150, alignItems: 'center',
+                backgroundColor: globalStyles.button1.buttonColor, textColor:globalStyles.button1.textColor,
+                borderRadius: 20, marginTop: 20
+            }}
+            onPress={() => {
+                // handleVictimSelect(false)
+                emergency.other = true
+                console.log(emergency)
+                navigation.replace("ChooseCondition", {emergency: emergency})
+                }   
+                }>
+                    <Text style={{color: 'white'}}>
+                    For Myself
+                    </Text>
+                    </Pressable>
+            
+
         </View>
     )
 }
