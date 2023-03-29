@@ -26,11 +26,16 @@ function NeedsItem(props) {
     let chips;
     if (provided) {
         chips = provided.map((item) => {
-            return (<Chip 
-                key={item} 
-                style={styles.providedChip} 
-                icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#ff8d29" />}
-                >{item}</Chip>)
+            return (
+                <Chip 
+                    key={item} 
+                    style={styles.providedChip} 
+                    icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#27515E" />}
+                    textStyle={{marginRight: 5}}
+                >
+                    {item.substring(0, 5) + "."} {/* Use substring() to extract first 5 characters */}
+                </Chip>
+            )
         })
     }
 
@@ -141,38 +146,40 @@ export default function Needs({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF', marginHorizontal: 20}}>
-            <Text style={styles.sectionTitle}>Needs</Text>
+        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF'}}>
+            <View style={{ flex: 1 , marginHorizontal: 20}}>
+                <Text style={globalStyles.screenTitle.style}>Needs</Text>
 
-            <Button 
-            buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 10, alignSelf: 'center', width: 200, justifyContent:'center'}}
+                <Button 
+                buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.screenAddButton.style, alignSelf: 'center', width: 200, justifyContent:'center'}}
 
-            onPress={addHelpCenter}>Add Need</Button>
-            <DropDown
-                label="City"
-                mode='outlined'
-                visible={isShowDropdown}
-                showDropDown={() => setIsShowDropdown(true)}
-                onDismiss={() => setIsShowDropdown(false)}
-                value={citySelection}
-                setValue={handleCitySelection}
-                list={allCities}
-            ></DropDown>
-            <Checkbox.Item label="Only Your Needs" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
+                onPress={addHelpCenter}>Add Need</Button>
+                <DropDown
+                    label="City"
+                    mode='outlined'
+                    visible={isShowDropdown}
+                    showDropDown={() => setIsShowDropdown(true)}
+                    onDismiss={() => setIsShowDropdown(false)}
+                    value={citySelection}
+                    setValue={handleCitySelection}
+                    list={allCities}
+                ></DropDown>
+                <Checkbox.Item label="Only Your Needs" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
-            <View style={{ flex: 1 }}>
-                <FlatList
-                    data={onlyUser ? yourHelpCenters : needs}
-                    renderItem={({ item }) => <NeedsItem 
-                    name={item.data.name} 
-                    provided={item.data.needs} 
-                    city={item.data.city} 
-                    onPress={ item.data.user === user.uid ? () => handleCardPressEdit(item.id) : () => handleCardPressDisplay(item.id)} 
+                <View style={{ flex: 1 }}>
+                    <FlatList
+                        data={onlyUser ? yourHelpCenters : needs}
+                        renderItem={({ item }) => <NeedsItem 
+                        name={item.data.name} 
+                        provided={item.data.needs} 
+                        city={item.data.city} 
+                        onPress={ item.data.user === user.uid ? () => handleCardPressEdit(item.id) : () => handleCardPressDisplay(item.id)} 
+                        />
+                    }
+                        keyExtractor={item => item.id}
                     />
-                }
-                    keyExtractor={item => item.id}
-                />
 
+                </View>
             </View>
         </SafeAreaView>
     )
@@ -189,17 +196,18 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 22,
         textAlign: 'center',
+        marginTop: 30,
+        marginVertical: 10
     },
     cardContent: {
         flexDirection: 'row',
     },
     providedChip: {
         backgroundColor: 'white',
-        marginRight: 10,
-
+        marginRight: 5,
     },
     card: {
-        backgroundColor: '#FFDEB4',
+        backgroundColor: '#A4CDDA',
         borderRadius: 20,
         marginTop: 5,     
     }

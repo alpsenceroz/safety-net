@@ -182,7 +182,25 @@ const globalStyles={
         buttonColor:'#e90064',
         textColor:'#ffffff',
         style:{ 
-        }}
+    }},
+    screenAddButton: {
+        textColor:'#ffffff',
+        style:{
+            marginVertical: 30,
+            borderRadius: 10,
+            backgroundColor: 'black'
+    }},
+    screenTitle: {
+        style:{
+            fontSize: 30,
+            textAlign: 'center',
+            marginTop: 50,
+            marginBottom: 20
+    }},
+    navigationButtonIcon: {
+        style:{
+            color: 'black'
+    }},
 }
 
 

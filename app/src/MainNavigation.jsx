@@ -11,7 +11,7 @@ import EmergencyNavigation from './EmergencyNavigation';
 import MapNavigation from './MapNavigation';
 import EmergencyListNavigation from './EmergencyListNavigation';
 import HomeNavigation from './HomeNavigation';
-
+import globalStyles from "./utils/Styles";
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -24,31 +24,32 @@ export default function MainNavigation() {
             {
                 headerShown: true,
             }
-        }>
+        }
+        >
             <Tab.Screen name=" Home " component={HomeNavigation}
             
                 options={{
-                    tabBarIcon: () => <FaIcon name="home" size={25} color="#EB455F" />
+                    tabBarIcon: () => <FaIcon name="home" size={25} style={{...globalStyles.navigationButtonIcon.style}} />
                 }}
             />
             <Tab.Screen name="Help Centers" component={HelpCenterNavigation}
                 options={{
-                    tabBarIcon: () => <Fa5Icon name="hands-helping" size={25} color="#EB455F" />
+                    tabBarIcon: () => <Fa5Icon name="hands-helping" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
                 }}
             />
             <Tab.Screen name=" Map " component={MapNavigation}                
                 options={{
-                    tabBarIcon: () => <FaIcon name="map" size={25} color="#EB455F" />
+                    tabBarIcon: () => <FaIcon name="map" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
                 }}
             />
             <Tab.Screen name="Other Needs" component={OtherNeedsNavigation}
                 options={{
-                    tabBarIcon: () => <Fa5Icon name="bread-slice" size={25} color="#EB455F" />
+                    tabBarIcon: () => <Fa5Icon name="bread-slice" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
                 }}
             />
             <Tab.Screen name="Emergency List" component={EmergencyListNavigation}
                 options={{
-                    tabBarIcon: () => <FaIcon name="exclamation" size={25} color="#EB455F" />
+                    tabBarIcon: () => <FaIcon name="exclamation" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
                 }}
             />
         </Tab.Navigator>

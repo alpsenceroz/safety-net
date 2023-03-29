@@ -174,12 +174,12 @@ export default function EmergenctList({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF'}}>
-                            <Text style={styles.sectionTitle}>Emergencies</Text>
+                <Text style={globalStyles.screenTitle.style}>Emergencies</Text>
 
 
 
             <Button 
-            buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 10, alignSelf: 'center', width: 200, justifyContent:'center'}}
+            buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.screenAddButton.style, alignSelf: 'center', width: 200, justifyContent:'center'}}
             onPress={addEmergency}>Add Emergency</Button>
             <View style={{ flex: 1, marginHorizontal: 20}}>
                 <DropDown
@@ -225,6 +225,8 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 22,
         textAlign: 'center',
+        marginTop: 30,
+        marginVertical: 10
     },
     cardContent: {
         flexDirection: 'row',
@@ -234,7 +236,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     card:{
-        backgroundColor: '#f7c8e0',
+        backgroundColor: '#E8C591',
         borderRadius: 20,
         marginTop: 5,       
     }

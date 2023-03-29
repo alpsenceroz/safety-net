@@ -30,7 +30,7 @@ function HelpCenterItem(props) {
             return (<Chip 
                 key={item} 
                 style={styles.providedChip} 
-                icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#0e4ff1" />}
+                icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#375B24" />}
                 >{item}</Chip>)
         })
     }
@@ -142,37 +142,39 @@ export default function HelpCenters({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF', marginHorizontal: 20 }}>
-            <Text style={styles.sectionTitle}>Help Centers</Text>
+        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF' }}>
+            <View style={{ flex: 1 , marginHorizontal: 20}}>
+                <Text style={globalStyles.screenTitle.style}>Help Centers</Text>
 
-            <Button 
-            buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 10, alignSelf: 'center', width: 200, justifyContent:'center'}}
-            onPress={addHelpCenter}>Add Help Center</Button>
-            <DropDown
-                label="City"
-                mode='outlined'
-                visible={isShowDropdown}
-                showDropDown={() => setIsShowDropdown(true)}
-                onDismiss={() => setIsShowDropdown(false)}
-                value={citySelection}
-                setValue={handleCitySelection}
-                list={allCities}
-            ></DropDown>
-            <Checkbox.Item label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
+                <Button 
+                buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.screenAddButton.style,  alignSelf: 'center', width: 200, justifyContent:'center'}}
+                onPress={addHelpCenter}>Add Help Center</Button>
+                <DropDown
+                    label="City"
+                    mode='outlined'
+                    visible={isShowDropdown}
+                    showDropDown={() => setIsShowDropdown(true)}
+                    onDismiss={() => setIsShowDropdown(false)}
+                    value={citySelection}
+                    setValue={handleCitySelection}
+                    list={allCities}
+                ></DropDown>
+                <Checkbox.Item label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
-            <View style={{ flex: 1 }}>
-                <FlatList
-                    data={onlyUser ? yourHelpCenters : helpCenters}
-                    renderItem={({ item }) => <HelpCenterItem 
-                    name={item.data.name} 
-                    provided={item.data.needs} 
-                    city={item.data.city} 
-                    onPress={ item.data.user === user.uid ? () => handleCardPressEdit(item.id) : () => handleCardPressDisplay(item.id)} 
+                <View style={{ flex: 1 }}>
+                    <FlatList
+                        data={onlyUser ? yourHelpCenters : helpCenters}
+                        renderItem={({ item }) => <HelpCenterItem 
+                        name={item.data.name} 
+                        provided={item.data.needs} 
+                        city={item.data.city} 
+                        onPress={ item.data.user === user.uid ? () => handleCardPressEdit(item.id) : () => handleCardPressDisplay(item.id)} 
+                        />
+                    }
+                        keyExtractor={item => item.id}
                     />
-                }
-                    keyExtractor={item => item.id}
-                />
 
+                </View>
             </View>
         </SafeAreaView>
     )
@@ -189,6 +191,7 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 22,
         textAlign: 'center',
+        marginTop: 30,
     },
     cardContent: {
         flexDirection: 'row',
@@ -198,7 +201,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     card:{
-        backgroundColor: '#c1efff',
+        backgroundColor: '#95CA7A',
         borderRadius: 20,
         marginTop: 5,    
     }
