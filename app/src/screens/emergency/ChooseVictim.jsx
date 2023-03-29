@@ -57,7 +57,7 @@ const ChooseVictim = ({navigation, route}) => {
             <Pressable
              style={{ flexDirection: 'column',...globalStyles.button1.style, width: 300, height:150, alignItems: 'center',
                 backgroundColor: globalStyles.button1.buttonColor, textColor:globalStyles.button1.textColor,
-                borderRadius: 20, marginTop: 50
+                borderRadius: 20, marginTop: 50, justifyContent:'center', alignSelf: 'center'
             }}
             onPress={() => {
                 // handleVictimSelect(false)
@@ -74,7 +74,7 @@ const ChooseVictim = ({navigation, route}) => {
                 <Pressable
              style={{ flexDirection: 'column',...globalStyles.button1.style, width: 300, height:150, alignItems: 'center',
                 backgroundColor: globalStyles.button1.buttonColor, textColor:globalStyles.button1.textColor,
-                borderRadius: 20, marginTop: 20
+                borderRadius: 20, marginTop: 20, justifyContent:'center', alignSelf: 'center'
             }}
             onPress={() => {
                 // handleVictimSelect(false)
