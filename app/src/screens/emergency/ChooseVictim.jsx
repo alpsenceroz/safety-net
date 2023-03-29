@@ -49,7 +49,7 @@ const ChooseVictim = ({navigation, route}) => {
     },[])
 
     return(
-        <View  style={{flex: 1}}backgroundColor = '#FAE3D9'>
+        <View  style={{flex: 1}} backgroundColor = '#FAE3D9'>
              <Image
         style={{width: 400, height:300, alignSelf:'center', marginTop:-20}}
         source={require('../../assets/victim.png')}
