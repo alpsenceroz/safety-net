@@ -182,10 +182,7 @@ const globalStyles={
         buttonColor:'#e90064',
         textColor:'#ffffff',
         style:{ 
-        justifyContent: 'center', 
-        alignSelf: 'center', 
-        width: 150, 
-        height: 40}}
+        }}
 }
 
 
