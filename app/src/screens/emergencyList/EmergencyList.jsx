@@ -181,7 +181,7 @@ export default function EmergenctList({ navigation }) {
             <Button 
             buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 10, alignSelf: 'center', width: 200, justifyContent:'center'}}
             onPress={addEmergency}>Add Emergency</Button>
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, marginHorizontal: 20}}>
                 <DropDown
                 
                 label="Condition"
@@ -236,8 +236,7 @@ const styles = StyleSheet.create({
     card:{
         backgroundColor: '#f7c8e0',
         borderRadius: 20,
-        marginTop: 5,
-        marginHorizontal: 10,        
+        marginTop: 5,       
     }
 
 })
