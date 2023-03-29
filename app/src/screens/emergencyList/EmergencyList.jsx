@@ -11,6 +11,7 @@ import { Button, Card, Checkbox, Chip, Text } from "react-native-paper";
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import auth from '@react-native-firebase/auth';
+import globalStyles from "../../utils/Styles";
 
 const ALL_CONDITIONS_LABEL = "All Conditions";
 
@@ -172,11 +173,20 @@ export default function EmergenctList({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <Button onPress={addEmergency}>Add Emergency</Button>
-            <DropDown
+        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF'}}>
+                            <Text style={styles.sectionTitle}>Emergencies</Text>
+
+
+
+            <Button 
+            buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 10, alignSelf: 'center', width: 200, justifyContent:'center'}}
+            onPress={addEmergency}>Add Emergency</Button>
+            <View style={{ flex: 1 }}>
+                <DropDown
+                
                 label="Condition"
                 mode='outlined'
+                activeColor="#e90064"
                 visible={isShowDropdown}
                 showDropDown={() => setIsShowDropdown(true)}
                 onDismiss={() => setIsShowDropdown(false)}
@@ -184,10 +194,8 @@ export default function EmergenctList({ navigation }) {
                 setValue={handleConditionSelection}
                 list={allConditions}
             ></DropDown>
-            <Checkbox.Item label="Only Your Emergencies" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
+                        <Checkbox.Item color="#e90064" label="Only Your Emergencies" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
-            <View style={{ flex: 1 }}>
-                <Text style={styles.sectionTitle}>Emergencies</Text>
                 <FlatList
                     data={onlyUser ? yourEmergencies : emergencies}
                     //onlyUser ? yourEmergencies : 
@@ -226,7 +234,10 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     card:{
-        backgroundColor: '#f7c8e0'
+        backgroundColor: '#f7c8e0',
+        borderRadius: 20,
+        marginTop: 5,
+        marginHorizontal: 10,        
     }
 
 })

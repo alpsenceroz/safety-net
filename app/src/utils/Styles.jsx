@@ -130,14 +130,14 @@ const globalStyles={
                 }
             ]
         },
-        {
-            "elementType": "labels.icon",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
+        // {
+        //     "elementType": "labels.icon",
+        //     "stylers": [
+        //         {
+        //             "visibility": "off"
+        //         }
+        //     ]
+        // },
         {
             "featureType": "transit",
             "elementType": "geometry",

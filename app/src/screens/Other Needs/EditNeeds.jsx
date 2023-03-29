@@ -135,7 +135,7 @@ export default function EditNeeds({route, navigation}) {
 
     return (
 
-        <View>
+        <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
             <Portal>
     
                 <SelectLocationModal

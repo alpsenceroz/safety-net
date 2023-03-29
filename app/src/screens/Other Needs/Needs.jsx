@@ -11,6 +11,7 @@ import { Button, Card, Checkbox, Chip, Text } from "react-native-paper";
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import auth from '@react-native-firebase/auth';
+import globalStyles from "../../utils/Styles";
 
 const ALL_CITIES_LABEL = "All Cities";
 
@@ -35,7 +36,7 @@ function NeedsItem(props) {
 
 
     return (
-        <Card onPress={onPress}>
+        <Card  style={styles.card} onPress={onPress}>
             <Card.Title
                 title={name}
                 subtitle={city}
@@ -140,8 +141,13 @@ export default function Needs({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <Button onPress={addHelpCenter}>Add Needs</Button>
+        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF'}}>
+            <Text style={styles.sectionTitle}>Needs</Text>
+
+            <Button 
+            buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 10, alignSelf: 'center', width: 200, justifyContent:'center'}}
+
+            onPress={addHelpCenter}>Add Need</Button>
             <DropDown
                 label="City"
                 mode='outlined'
@@ -155,7 +161,6 @@ export default function Needs({ navigation }) {
             <Checkbox.Item label="Only Your Needs" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
             <View style={{ flex: 1 }}>
-                <Text style={styles.sectionTitle}>Needs</Text>
                 <FlatList
                     data={onlyUser ? yourHelpCenters : needs}
                     renderItem={({ item }) => <NeedsItem 
@@ -193,5 +198,11 @@ const styles = StyleSheet.create({
         marginRight: 10,
 
     },
+    card: {
+        backgroundColor: '#FFDEB4',
+        borderRadius: 20,
+        marginTop: 5,
+        marginHorizontal: 10,      
+    }
 
 })

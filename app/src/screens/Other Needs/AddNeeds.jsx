@@ -91,7 +91,7 @@ export default function AddNeeds({ navigation, route }) {
 
     return (
 
-        <View>
+        <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
             <Portal>
                 <SelectLocationModal
                     isModalVisible={isModalVisible}

@@ -11,6 +11,7 @@ import { Button, Card, Checkbox, Chip, Text } from "react-native-paper";
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import auth from '@react-native-firebase/auth';
+import globalStyles from "../../utils/Styles";
 
 const ALL_CITIES_LABEL = "All Cities";
 
@@ -141,8 +142,12 @@ export default function HelpCenters({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <Button onPress={addHelpCenter}>Add Help Center</Button>
+        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF' }}>
+            <Text style={styles.sectionTitle}>Help Centers</Text>
+
+            <Button 
+            buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 10, alignSelf: 'center', width: 200, justifyContent:'center'}}
+            onPress={addHelpCenter}>Add Help Center</Button>
             <DropDown
                 label="City"
                 mode='outlined'
@@ -156,7 +161,6 @@ export default function HelpCenters({ navigation }) {
             <Checkbox.Item label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
             <View style={{ flex: 1 }}>
-                <Text style={styles.sectionTitle}>Help Centers</Text>
                 <FlatList
                     data={onlyUser ? yourHelpCenters : helpCenters}
                     renderItem={({ item }) => <HelpCenterItem 
@@ -194,7 +198,10 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     card:{
-        backgroundColor: '#c1efff'
+        backgroundColor: '#c1efff',
+        borderRadius: 20,
+        marginTop: 5,
+        marginHorizontal: 10,        
     }
 
 })
