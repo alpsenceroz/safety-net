@@ -141,7 +141,7 @@ export default function Needs({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF'}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF', marginHorizontal: 20}}>
             <Text style={styles.sectionTitle}>Needs</Text>
 
             <Button 
@@ -201,8 +201,7 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: '#FFDEB4',
         borderRadius: 20,
-        marginTop: 5,
-        marginHorizontal: 10,      
+        marginTop: 5,     
     }
 
 })
