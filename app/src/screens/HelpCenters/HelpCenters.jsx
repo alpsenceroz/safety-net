@@ -142,7 +142,7 @@ export default function HelpCenters({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF', marginHorizontal: 20 }}>
             <Text style={styles.sectionTitle}>Help Centers</Text>
 
             <Button 
