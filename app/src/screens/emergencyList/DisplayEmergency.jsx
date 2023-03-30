@@ -11,6 +11,7 @@ import {
     useColorScheme,
     View,
     FlatList,
+    Image,
 } from 'react-native';
 
 import {
@@ -23,11 +24,15 @@ import {
 } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 import SelectLocationModal from "../../components/SelectLocationModal";
+import globalStyles from '../../utils/Styles';
 
 
 
 
 const DisplayEmergency = ({route, navigation}) => {
+    useEffect(() => {
+        navigation.setOptions({ title: 'Emergency Information' });
+      }, []);
     const emergencyID = route.params.emergencyID;
     const [emergency, setEmergency] = useState(false)
     const [isModalVisible, setModalVisible] = useState(false);
@@ -78,7 +83,12 @@ useEffect(() => {
 }, [emergency])
 
     return(
-        <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
+        <View style={globalStyles.ma}>
+            <View style={globalStyles.editView}>
+            <Image
+            style={{width: 400, height:300, alignSelf:'center', justifyContent:'center'}}
+            source={require('../../assets/checklist.png')}
+            />
             <Portal>
                 <SelectLocationModal
                 isModalVisible={isModalVisible}
@@ -123,6 +133,8 @@ useEffect(() => {
                 await firestore().collection('emergencies').doc(emergencyID).set({...emergency, rescued: true})
                 navigation.pop()
                 }}>Mark as rescued</Button> */}
+            </View>
+           
         </View>
     )
 
