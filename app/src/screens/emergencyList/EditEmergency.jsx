@@ -141,7 +141,7 @@ useEffect(() => {
                 await firestore().collection('emergencies').doc(emergencyID).set({...emergency, rescued: true})
                 navigation.pop()
                 }}>Mark as rescued</Button> */}
-            <Button style={globalStyles.addButtonHorizontalHalfScreen} buttonColor='black' icon={() => <MciIcon name="save_as" size={24} color="white" />}   textColor='white' onPress={handleSelectLocation}>Edit Location</Button>
+            <Button style={globalStyles.addButtonHorizontalHalfScreen} buttonColor='black' icon={() => <MciIcon name="map-marker" size={24} color="white" />}   textColor='white' onPress={handleSelectLocation}>Edit Location</Button>
 
             </View>
             
