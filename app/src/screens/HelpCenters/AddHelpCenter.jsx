@@ -7,6 +7,7 @@ import { useState } from "react";
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
 import SelectLocationModal from "../../components/SelectLocationModal";
+import globalStyles from "../../utils/Styles";
 
 import auth from '@react-native-firebase/auth';
 
@@ -91,7 +92,8 @@ export default function AddHelpCenter({ navigation, route }) {
 
     return (
 
-        <View>
+        <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
+            <View style={{flex: 1, backgroundColor:'#FFFFFF', marginHorizontal:20}}>
             <Portal>
                 <SelectLocationModal
                     isModalVisible={isModalVisible}
@@ -107,7 +109,7 @@ export default function AddHelpCenter({ navigation, route }) {
                 error={nameError}
                 onChangeText={(text) =>
                     handleNameChange(text)} />
-            <TextInput
+            <TextInput style={ {height: 80}} 
                 mode="outlined"
                 label="Address"
                 //placeholder="E-mail"
@@ -124,7 +126,7 @@ export default function AddHelpCenter({ navigation, route }) {
                 setValue={setCitySelection}
                 list={getCities()}
             ></DropDown>
-            <Button onPress={handleSelectLocation}>Select Location</Button>
+            <Button style={ {...globalStyles.smallAddButton.style}} textColor='white' onPress={handleSelectLocation}>Select Location</Button>
             {modalSelection ?
                 <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
                 :
@@ -132,7 +134,9 @@ export default function AddHelpCenter({ navigation, route }) {
             }
             <Text style={styles.providedText}>Provided</Text>
             {chips}
-            <Button onPress={addHelpCenter}>Add Help Center</Button>
+            <Button style={ {...globalStyles.smallAddButton.style}} textColor='white' onPress={addHelpCenter}>Add Help Center</Button>
+            </View>
+            
         </View>
     )
 }
@@ -143,6 +147,7 @@ const styles = StyleSheet.create({
     },
     locationText: {
         textAlign: 'center',
+        fontWeight: 'bold'
     },
     modalContainerStyle: {
         backgroundColor: 'white',
@@ -151,6 +156,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     providedText:{
-
+        fontWeight: 'bold'
     },
 })
