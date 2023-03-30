@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+    Pressable,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -10,7 +11,8 @@ import {
 } from 'react-native';
 
 import {
-    Button
+    Button,
+    Avatar
 } from 'react-native-paper';
 
 
@@ -19,10 +21,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import EmergencyNavigation from '../../EmergencyNavigation';
+import SelfProfile from '../Profiles/SelfProfile';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
 
 
 
 export default function Home({navigation}) {
+
 
 
     const user = auth().currentUser;
@@ -74,9 +81,19 @@ export default function Home({navigation}) {
     return (
 
         <View>
+            <Pressable
+            onPress={() =>{
+                navigateProfile()
+                }
+            }>
+            <Avatar.Image 
+            style={{alignSelf: 'flex-start', marginStart: 20, marginTop: 20}} 
+            size={44} source={require('../../assets/user.png')} 
+
+            />
+            </Pressable>
             <Button onPress={handleLogOut}>Log out</Button>
             <Button onPress={handleEmergencyButton}>Help</Button>
-            <Button onPress={ navigateProfile }>Edit Profile</Button>
 
         </View>
     );

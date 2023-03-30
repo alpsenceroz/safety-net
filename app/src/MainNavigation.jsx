@@ -12,9 +12,8 @@ import MapNavigation from './MapNavigation';
 import EmergencyListNavigation from './EmergencyListNavigation';
 import HomeNavigation from './HomeNavigation';
 
-
-
 const Tab = createMaterialBottomTabNavigator();
+
 
 export default function MainNavigation() {
 

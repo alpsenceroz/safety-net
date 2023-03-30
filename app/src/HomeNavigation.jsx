@@ -18,7 +18,8 @@ export default function HomeNavigation({navigation}) {
                 }
             }>
                 <Stack.Screen name="HomeScreen" component={Home} options={{
-                    title: "Home"
+                    title: "Home",
+                    headerShown: false
                 }}
                 />
                 <Stack.Screen name="UserProfile" component={SelfProfile} options={{
