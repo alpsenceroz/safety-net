@@ -70,7 +70,7 @@ const ChooseCondition = ({route, navigation}) => {
         backgroundColor: '#FAE3D9',
       }}
     >
-            <View style={{flex: 1}}backgroundColor = '#FAE3D9'>
+            <View style={{flex: 1,  backgroundColor: '#FAE3D9'}}>
                  
                 <Image
         style={{width: 300, height:300, alignSelf:'center', marginTop:40, marginBottom:40}}
@@ -83,7 +83,7 @@ const ChooseCondition = ({route, navigation}) => {
                 <Checkbox.Item
                 label="Need Evacuation"
                 color='#e90064'
-                style={{marginTop: 0, backgroundColor:'#ffffff', marginVertical:10}}
+                style={{backgroundColor:'#ffffff'}}
                 status={evacuation ? 'checked' : 'unchecked'}
                 onPress={() => { 
                     // handleCheckBox("needEvacuation")
@@ -94,7 +94,7 @@ const ChooseCondition = ({route, navigation}) => {
                 <Checkbox.Item
                 label="Injured"
                 color='#e90064'
-                style={{marginTop: 0, backgroundColor:'#ffffff', marginVertical:10}}
+                style={{ backgroundColor:'#ffffff'}}
                 status={injured ? 'checked' : 'unchecked'}
                 onPress={() => { 
                     // handleCheckBox("isInjured")
@@ -105,12 +105,11 @@ const ChooseCondition = ({route, navigation}) => {
                     multiline={true}
                     mode="outlined"
                     outlineColor='#e90064'
-
                     placeholder="Notes" 
                     onChangeText={(text)=>emergency.notes = text}
                     />
                     </View>
-                <Button buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.smallAddButton.style, marginTop: 20, alignSelf: 'center', width: 100, justifyContent:'center'} }onPress= {() => {
+                <Button buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.smallAddButtonBlack.style, marginTop: 20, alignSelf: 'center', width: 100, justifyContent:'center'} }onPress= {() => {
                     navigation.replace("EmergencyReported", {emergency: emergency})
                    //navigation.reset()
 
