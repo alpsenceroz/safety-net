@@ -14,46 +14,61 @@ import HomeNavigation from './HomeNavigation';
 import globalStyles from "./utils/Styles";
 
 
+
+
 const Tab = createMaterialBottomTabNavigator();
 
 export default function MainNavigation() {
 
     return (
-
-        <Tab.Navigator screenOptions={
-            {
-                headerShown: true,
-            }
-        }
-        >
-            <Tab.Screen name=" Home " component={HomeNavigation}
+        
+        <Tab.Navigator
+            secondaryContainer = 'transparent'
+            initialRouteName="Home"
+            activeColor="black"
             
+            inactiveColor='grey'
+            theme={{colors: {secondaryContainer: 'yellow'}}}
+            barStyle={{ backgroundColor: '#FFFF' }}
+            
+            tabBarOptions={{
+            }}
+        >
+
+            
+            <Tab.Screen name=" Home " component={HomeNavigation}
                 options={{
-                    tabBarIcon: () => <FaIcon name="home" size={25} style={{...globalStyles.navigationButtonIcon.style}} />
+                    tabBarIcon: ({ color }) => (<FaIcon name="home" color={color} size={25} style={{...globalStyles.navigationButtonIcon.style}} />
+                    ),
                 }}
             />
             <Tab.Screen name=" Map " component={MapNavigation}                
                 options={{
-                    tabBarIcon: () => <FaIcon name="map" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
-                }}
-            />
+          tabBarLabel: 'Map',
+          tabBarIcon: ({ color }) => (<FaIcon name="map" color={color} size={25} style={{...globalStyles.navigationButtonIcon.style}} />
+
+          ),
+        }}
+      />
             <Tab.Screen name="Help Centers" component={HelpCenterNavigation}
                 options={{
-                    tabBarIcon: () => <Fa5Icon name="hands-helping" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
+                    tabBarIcon: ({ color }) => (<Fa5Icon name="hands-helping" size={25} color={color}  style={{...globalStyles.navigationButtonIcon.style}} />
+                    ),
                 }}
             />
             
-            <Tab.Screen name="Other Needs" component={OtherNeedsNavigation}
+            <Tab.Screen name="Needs" component={OtherNeedsNavigation}
                 options={{
-                    tabBarIcon: () => <Fa5Icon name="bread-slice" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
+                    tabBarIcon:({ color }) =>  <Fa5Icon name="box" size={25}  color={color} style={{...globalStyles.navigationButtonIcon.style}}  />
                 }}
             />
             <Tab.Screen name="Emergency List" component={EmergencyListNavigation}
                 options={{
-                    tabBarIcon: () => <FaIcon name="exclamation" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
+                    tabBarIcon: ({ color })  => <FaIcon name="exclamation-circle" size={25}   color={color} style={{...globalStyles.navigationButtonIcon.style}}  />
                 }}
             />
         </Tab.Navigator>
     )
 
 }
+
