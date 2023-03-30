@@ -10,6 +10,7 @@ import ChooseLocation from "./screens/emergency/ChooseLocation";
 import OtherPersonInfo from './screens/emergency/OtherPersonInfo';
 import DisplayEmergency from "./screens/emergencyList/DisplayEmergency";
 import ChooseCondition from './screens/emergency/ChooseCondition';
+import EmergencyReported from './screens/emergency/EmergencyReported';
 
 
 
@@ -27,6 +28,7 @@ export default function EmergencyListNavigation() {
             <Stack.Screen name="DisplayEmergency" component={DisplayEmergency} />
             <Stack.Screen name="OtherPersonInfo" component={OtherPersonInfo}/>
             <Stack.Screen name="ChooseCondition" component={ChooseCondition}/>
+            <Stack.Screen name="EmergencyReported" component={EmergencyReported}/>
         </Stack.Navigator>
     )
 }
