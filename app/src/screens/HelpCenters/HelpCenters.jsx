@@ -25,25 +25,45 @@ function HelpCenterItem(props) {
     const { name, provided, city, onPress } = props;
 
     let chips;
+    
     if (provided) {
         chips = provided.map((item) => {
-            return (<Chip 
-                key={item} 
-                style={styles.providedChip} 
-                icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#375B24" />}
-                >{item}</Chip>)
+            let displayText  = item;
+            if (item.length > 5){
+                displayText = item.substring(0, 5) + ".";
+            }
+            return (
+                <Chip 
+                    key={item} 
+                    style={styles.providedChip} 
+                    icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#27515E" />}
+                    textStyle={styles.chipText}
+                >
+                    { displayText} {/* Use substring() to extract first 5 characters */}
+                </Chip>
+            )
         })
+        
     }
 
 
     return (
-        <Card style={styles.card} onPress={onPress}>
+        <Card  style={styles.card} onPress={onPress}>
             <Card.Title
                 title={name}
                 subtitle={city}
             />
             <Card.Content style={styles.cardContent}>
-                {chips}
+                {Object.values(chips).slice(0, 3).map((chip, index) => (
+        <Text style={{marginRight:5}} key={index}> {chip} </Text>
+        ))}
+        {Object.values(chips).length > 3 && (
+                <IconButton
+                    icon="plus"
+                    size={16}
+                    style={{marginLeft:-10, color: 'black'}}
+                />
+        )}
             </Card.Content>
         </Card>
 
@@ -201,9 +221,13 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     card:{
-        backgroundColor: '#95CA7A',
+        backgroundColor: '#A4D28D',
         borderRadius: 20,
         marginTop: 5,    
+    },
+    chipText: {
+        marginRight:5,
+        color: 'black'
     }
 
 })
