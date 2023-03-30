@@ -40,31 +40,35 @@ export default function MainNavigation() {
                 options={{
                     tabBarIcon: ({ color }) => (<FaIcon name="home" color={color} size={25} style={{...globalStyles.navigationButtonIcon.style}} />
                     ),
+                    headerShown: false,
                 }}
             />
             <Tab.Screen name=" Map " component={MapNavigation}                
                 options={{
           tabBarLabel: 'Map',
           tabBarIcon: ({ color }) => (<FaIcon name="map" color={color} size={25} style={{...globalStyles.navigationButtonIcon.style}} />
-
           ),
+          headerShown: false,
         }}
       />
             <Tab.Screen name="Help Centers" component={HelpCenterNavigation}
                 options={{
                     tabBarIcon: ({ color }) => (<Fa5Icon name="hands-helping" size={25} color={color}  style={{...globalStyles.navigationButtonIcon.style}} />
                     ),
+                    headerShown: false,
                 }}
             />
             
             <Tab.Screen name="Needs" component={OtherNeedsNavigation}
                 options={{
-                    tabBarIcon:({ color }) =>  <Fa5Icon name="box" size={25}  color={color} style={{...globalStyles.navigationButtonIcon.style}}  />
+                    tabBarIcon:({ color }) =>  <Fa5Icon name="box" size={25}  color={color} style={{...globalStyles.navigationButtonIcon.style}}  />,
+                    headerShown: false,
                 }}
             />
             <Tab.Screen name="Emergency List" component={EmergencyListNavigation}
                 options={{
-                    tabBarIcon: ({ color })  => <FaIcon name="exclamation-circle" size={25}   color={color} style={{...globalStyles.navigationButtonIcon.style}}  />
+                    tabBarIcon: ({ color })  => <FaIcon name="exclamation-circle" size={25}   color={color} style={{...globalStyles.navigationButtonIcon.style}}  />,
+                    headerShown: false,
                 }}
             />
         </Tab.Navigator>

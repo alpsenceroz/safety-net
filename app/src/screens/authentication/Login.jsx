@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { StyleSheet, ToastAndroid, View, useColorScheme } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 
-
 import auth from '@react-native-firebase/auth';
 
 export default function Login({ navigation }) {
@@ -84,6 +83,7 @@ export default function Login({ navigation }) {
 
     return (
         <View>
+            <Text>For data accuracy users need to login</Text>
             <TextInput
                 style={styles.textInput}
                 mode="outlined"
@@ -106,6 +106,7 @@ export default function Login({ navigation }) {
 
             <Button onPress={handleForgotPassword}>Forgot Your Password</Button>
             <Button onPress={handleLogin} style={styles.loginButton} mode='contained'>Login</Button>
+            <Text>Don't have an account?</Text>
             <Button onPress={handleSignUp}>Sign Up</Button>
         </View>
     )

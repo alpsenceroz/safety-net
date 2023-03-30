@@ -21,7 +21,9 @@ export default function EmergencyListNavigation() {
 
     return (
         <Stack.Navigator initialRouteName="List">
-            <Stack.Screen name="List" component={EmergenctList} />
+            <Stack.Screen name="List" component={EmergenctList} options={{
+                headerShown: false,
+            }}/>
             <Stack.Screen name="EditEmergency" component={EditEmergency} />
             <Stack.Screen name="ChooseVictim" component={ChooseVictim} />
             <Stack.Screen name="ChooseLocation" component={ChooseLocation} />

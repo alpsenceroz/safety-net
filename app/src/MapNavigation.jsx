@@ -17,7 +17,9 @@ export default function MapNavigation() {
 
     return (
         <Stack.Navigator initialRouteName="Map">
-            <Stack.Screen name="Map" component={Map} />
+            <Stack.Screen name="Map" component={Map} options={{
+                headerShown: false,
+            }}/>
             <Stack.Screen name="EditHelpCenter" component={EditHelpCenter} />
             <Stack.Screen name="DisplayHelpCenter" component={DisplayHelpCenter} />
             <Stack.Screen name="AddHelpCenter" component={AddHelpCenter} />

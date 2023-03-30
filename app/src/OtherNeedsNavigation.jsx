@@ -13,7 +13,9 @@ export default function OtherNeedsNavigation() {
 
     return (
         <Stack.Navigator initialRouteName="List">
-            <Stack.Screen name="List" component={Needs} />
+            <Stack.Screen name="List" component={Needs} options={{
+                headerShown: false,
+            }}/>
             <Stack.Screen name="AddNeeds" component={AddNeeds}    />
             <Stack.Screen name="EditNeeds" component={EditNeeds} />
             <Stack.Screen name="DisplayNeeds" component={DisplayNeeds} />

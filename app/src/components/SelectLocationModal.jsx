@@ -46,6 +46,12 @@ export default function SelectLocation(props) {
         customMapStyle={globalStyles.map}
         showsUserLocation={true}
         onLongPress={(e) => handleMapClick(e.nativeEvent.coordinate)}
+        initialRegion={{
+          latitude: 39,
+          longitude: 33.5,
+          latitudeDelta: 10,
+          longitudeDelta: 12,
+        }}
       >
         {selection && <Marker coordinate={selection} />}
       </MapView>
