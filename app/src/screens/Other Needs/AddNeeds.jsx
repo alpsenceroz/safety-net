@@ -9,6 +9,8 @@ import getCities from "../../utils/getCities";
 import SelectLocationModal from "../../components/SelectLocationModal";
 
 import auth from '@react-native-firebase/auth';
+import globalStyles from "../../utils/Styles";
+
 
 export default function AddNeeds({ navigation, route }) {
 
@@ -92,6 +94,7 @@ export default function AddNeeds({ navigation, route }) {
     return (
 
         <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
+            <View style={{flex: 1, backgroundColor:'#FFFFFF', marginHorizontal:20}}>
             <Portal>
                 <SelectLocationModal
                     isModalVisible={isModalVisible}
@@ -124,7 +127,7 @@ export default function AddNeeds({ navigation, route }) {
                 setValue={setCitySelection}
                 list={getCities()}
             ></DropDown>
-            <Button onPress={handleSelectLocation}>Select Location</Button>
+            <Button style={ {...globalStyles.smallAddButton.style}} textColor='white' onPress={handleSelectLocation}>Select Location</Button>
             {modalSelection ?
                 <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
                 :
@@ -132,7 +135,8 @@ export default function AddNeeds({ navigation, route }) {
             }
             <Text style={styles.providedText}>Needs</Text>
             {chips}
-            <Button onPress={addNeeds}>Add Needs</Button>
+            <Button style={ {...globalStyles.smallAddButton.style}} textColor='white' onPress={addNeeds}>Add Needs</Button>
+            </View>
         </View>
     )
 }
@@ -145,6 +149,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     modalContainerStyle: {
+        
         backgroundColor: 'white',
         padding: 40,
         margin: 20,
