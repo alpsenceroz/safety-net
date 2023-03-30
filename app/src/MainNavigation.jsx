@@ -32,16 +32,17 @@ export default function MainNavigation() {
                     tabBarIcon: () => <FaIcon name="home" size={25} style={{...globalStyles.navigationButtonIcon.style}} />
                 }}
             />
-            <Tab.Screen name="Help Centers" component={HelpCenterNavigation}
-                options={{
-                    tabBarIcon: () => <Fa5Icon name="hands-helping" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
-                }}
-            />
             <Tab.Screen name=" Map " component={MapNavigation}                
                 options={{
                     tabBarIcon: () => <FaIcon name="map" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
                 }}
             />
+            <Tab.Screen name="Help Centers" component={HelpCenterNavigation}
+                options={{
+                    tabBarIcon: () => <Fa5Icon name="hands-helping" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
+                }}
+            />
+            
             <Tab.Screen name="Other Needs" component={OtherNeedsNavigation}
                 options={{
                     tabBarIcon: () => <Fa5Icon name="bread-slice" size={25} style={{...globalStyles.navigationButtonIcon.style}}  />
