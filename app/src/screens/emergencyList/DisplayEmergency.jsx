@@ -89,7 +89,6 @@ useEffect(() => {
             </Portal>
             <Text>Name: {emergency?.other ? emergency.otherName : user?.name }</Text>
 
-            {emergency?.other && {infos}}
            
             <TextInput
             mode="outlined"
@@ -119,18 +118,7 @@ useEffect(() => {
             status={emergency?.rescued ? 'checked' : 'unchecked'}
             onPress={ () =>  setEmergency((prevEmergency) => ({...prevEmergency, rescued: !emergency.rescued}))}
             />
-            <Button onPress={handleSelectLocation} disabled={true}>Edit Location</Button>
-            <Button onPress={ async()=> {
-                emergency.conditions = conditions
-                await firestore().collection('emergencies').doc(emergencyID).set(emergency)
-                navigation.pop()
-
-            }}>Save Changes</Button>
-            <Button onPress={ async()=> {
-                await firestore().collection('emergencies').doc(emergencyID).delete()
-                navigation.pop()
-
-            }} disabled={true}>Delete Emergency</Button>
+        
             {/* <Button onPress={ async () =>  {
                 await firestore().collection('emergencies').doc(emergencyID).set({...emergency, rescued: true})
                 navigation.pop()
