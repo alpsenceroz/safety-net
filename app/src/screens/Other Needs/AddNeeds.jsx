@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react';
 import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
@@ -13,7 +14,9 @@ import globalStyles from "../../utils/Styles";
 
 
 export default function AddNeeds({ navigation, route }) {
-
+    useEffect(() => {
+        navigation.setOptions({ title: 'Add Needs' });
+      }, []);
     const [chipsData, setChipsData] = useState(needsNeeds.data);
     const [name, setName] = useState('');
     const [nameError, setNameError] = useState(false);

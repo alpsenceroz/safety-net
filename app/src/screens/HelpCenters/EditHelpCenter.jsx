@@ -12,6 +12,9 @@ import globalStyles from '../../utils/Styles';
 import auth from '@react-native-firebase/auth';
 
 export default function EditHelpCenter({route, navigation}) {
+    useEffect(() => {
+        navigation.setOptions({ title: 'Help Center Information' });
+      }, []);
 
     const {helpCenterId} = route.params;
 
@@ -172,7 +175,7 @@ export default function EditHelpCenter({route, navigation}) {
                     setValue={setCitySelection}
                     list={getCities()}
                 ></DropDown>
-                <Button style={globalStyles.smallAddButton} buttonColor='#D0342C' textColor='red' onPress={handleSelectLocation}>Select Location</Button>
+                <Button style={globalStyles.smallAddButton} buttonColor='#D0342C' textColor='white' onPress={handleSelectLocation}>Select Location</Button>
                 {modalSelection ?
                     <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
                     :

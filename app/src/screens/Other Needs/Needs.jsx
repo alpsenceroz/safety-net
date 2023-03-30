@@ -21,6 +21,7 @@ needsNeeds.data.forEach( (value) => {
 } )
 
 function NeedsItem(props) {
+   
     const { name, provided, city, onPress } = props;
 
     let chips;

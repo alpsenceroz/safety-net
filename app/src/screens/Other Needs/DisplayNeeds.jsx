@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
+import { Button, Checkbox, Chip, Image, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
 import needsNeeds from '../../utils/userNeeds.json'
@@ -10,9 +10,12 @@ import SelectLocationModal from "../../components/SelectLocationModal";
 
 import auth from '@react-native-firebase/auth';
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import globalStyles from '../../utils/Styles';
 
 export default function DisplayNeeds({ route, navigation }) {
-
+    useEffect(() => {
+        navigation.setOptions({ title: 'Needs Information' });
+      }, []);
     const { needsId } = route.params;
 
 
@@ -114,6 +117,7 @@ export default function DisplayNeeds({ route, navigation }) {
     return (
 
         <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
+            <View style={globalStyles.editView}>
             <Portal>
                 <SelectLocationModal
                     isModalVisible={isModalVisible}
@@ -180,6 +184,8 @@ export default function DisplayNeeds({ route, navigation }) {
 
 
 
+            </View>
+            
 
 
         </View>

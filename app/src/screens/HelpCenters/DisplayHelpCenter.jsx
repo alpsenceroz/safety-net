@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
+import { Button, Checkbox, Image, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
 import helpCenterNeeds from '../../utils/helpCenterNeeds.json'
@@ -10,8 +10,13 @@ import SelectLocationModal from "../../components/SelectLocationModal";
 
 import auth from '@react-native-firebase/auth';
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import globalStyles from '../../utils/Styles';
 
 export default function DisplayHelpCenter({ route, navigation }) {
+
+    useEffect(() => {
+        navigation.setOptions({ title: 'Help Center Information' });
+      }, []);
 
     const { helpCenterId } = route.params;
 
@@ -113,7 +118,10 @@ export default function DisplayHelpCenter({ route, navigation }) {
 
     return (
 
-        <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
+        <View style={globalStyles.mainView}>
+            
+            <View style={globalStyles.editView}>
+            
             <Portal>
                 <SelectLocationModal
                     isModalVisible={isModalVisible}
@@ -177,11 +185,7 @@ export default function DisplayHelpCenter({ route, navigation }) {
                     {modalSelection && <Marker coordinate={modalSelection} />}
                 </MapView>
             }
-
-
-
-
-
+            </View>
         </View>
     )
 }
