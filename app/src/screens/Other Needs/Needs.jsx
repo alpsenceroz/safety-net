@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import needsNeeds from '../../utils/userNeeds.json'
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
-import { Button, Card, Checkbox, Chip, Text } from "react-native-paper";
+import { Button, Card, Checkbox, Chip, Text, IconButton} from "react-native-paper";
 
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -24,19 +24,25 @@ function NeedsItem(props) {
     const { name, provided, city, onPress } = props;
 
     let chips;
+    
     if (provided) {
         chips = provided.map((item) => {
+            let displayText  = item;
+            if (item.length > 5){
+                displayText = item.substring(0, 5) + ".";
+            }
             return (
                 <Chip 
                     key={item} 
                     style={styles.providedChip} 
                     icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#27515E" />}
-                    textStyle={{marginRight: 5}}
+                    textStyle={styles.chipText}
                 >
-                    {item.substring(0, 5) + "."} {/* Use substring() to extract first 5 characters */}
+                    { displayText} {/* Use substring() to extract first 5 characters */}
                 </Chip>
             )
         })
+        
     }
 
 
@@ -47,7 +53,16 @@ function NeedsItem(props) {
                 subtitle={city}
             />
             <Card.Content style={styles.cardContent}>
-                {chips}
+                {Object.values(chips).slice(0, 3).map((chip, index) => (
+        <Text style={{marginRight:5}} key={index}> {chip} </Text>
+        ))}
+        {Object.values(chips).length > 3 && (
+                <IconButton
+                    icon="plus"
+                    size={16}
+                    style={{marginLeft:-10, color: 'black'}}
+                />
+        )}
             </Card.Content>
         </Card>
 
@@ -204,12 +219,16 @@ const styles = StyleSheet.create({
     },
     providedChip: {
         backgroundColor: 'white',
-        marginRight: 5,
+        marginRight: 2,
     },
     card: {
         backgroundColor: '#A4CDDA',
         borderRadius: 20,
         marginTop: 5,     
+    },
+    chipText: {
+        marginRight:5,
+        color: 'black'
     }
 
 })
