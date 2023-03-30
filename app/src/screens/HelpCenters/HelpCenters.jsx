@@ -23,7 +23,6 @@ helpCenterNeeds.data.forEach( (value) => {
 
 function HelpCenterItem(props) {
     const { name, provided, city, onPress } = props;
-
     let chips;
     
     if (provided) {

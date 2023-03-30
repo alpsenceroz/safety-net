@@ -62,6 +62,7 @@ const globalStyles={
         marginVertical: 10,
         borderRadius: 10,
         backgroundColor: 'black',
+        textColor: 'white',
         alignSelf: 'center', 
         width: 200, 
         justifyContent:'center',
@@ -81,9 +82,10 @@ const globalStyles={
             marginBottom: 20
     }},
     navigationButtonIcon: {
-        style:{
-            color: 'black'
-    }},
+        style: {
+        }
+    }
+    
 }
 
 
