@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import EmergenctList from "./screens/emergencyList/EmergencyList";
 import EditEmergency from "./screens/emergencyList/EditEmergency";
-
+import ChooseVictim from "./screens/emergency/ChooseVictim";
 import ChooseLocation from "./screens/emergency/ChooseLocation";
 import DisplayEmergency from "./screens/emergencyList/DisplayEmergency";
 
@@ -19,6 +19,7 @@ export default function EmergencyListNavigation() {
         <Stack.Navigator initialRouteName="List">
             <Stack.Screen name="List" component={EmergenctList} />
             <Stack.Screen name="EditEmergency" component={EditEmergency} />
+            <Stack.Screen name="ChooseVictim" component={ChooseVictim} />
             <Stack.Screen name="ChooseLocation" component={ChooseLocation} />
             <Stack.Screen name="DisplayEmergency" component={DisplayEmergency} />
         </Stack.Navigator>
