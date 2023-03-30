@@ -338,9 +338,9 @@ const Map = ({navigation}) => {
               marginTop: 20,
             }}>
             {/* icon={() => <Icon name="exclamation" size={10} color='white' />} */}
-            <Button  buttonColor='#e90064' textColor='white' onPress={()=>setEmergencyVisibility((emergencyVisibility + 1) % 4)}>Emergencies</Button>
-            <Button  buttonColor='#0e4ff1' textColor='white' onPress={()=>setHelpCenterVisibility(!helpCenterVisibility)}>Help Centers</Button>
-            <Button  buttonColor='#ff8d29' textColor='white' onPress={()=>setOtherNeedsVisibility(!otherNeedsVisibility)}>Other Needs</Button>
+            <Button  style={{borderTopLeftRadius:10,borderBottomLeftRadius:10,borderTopRightRadius:0,borderBottomRightRadius:0}} buttonColor='#E8C591' textColor='white' onPress={()=>setEmergencyVisibility((emergencyVisibility + 1) % 4)}>Emergencies</Button>
+            <Button  style={{justifyContent: 'center', marginHorizontal: 1, borderRadius:0}}  buttonColor='#A4D28D' textColor='white' onPress={()=>setHelpCenterVisibility(!helpCenterVisibility)}>Help Centers</Button>
+            <Button  style={{borderTopRightRadius:10,borderBottomRightRadius:10,borderTopLeftRadius:0,borderBottomLeftRadius:0}}  buttonColor='#A4CDDA' textColor='white' onPress={()=>setOtherNeedsVisibility(!otherNeedsVisibility)}>Other Needs</Button>
           </View>
           </Callout>
           
