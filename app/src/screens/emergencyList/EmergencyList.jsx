@@ -239,6 +239,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#E8C591',
         borderRadius: 20,
         marginTop: 5,       
+    },
+    chipText: {
+        marginRight:5,
+        color: 'black'
     }
 
 })
