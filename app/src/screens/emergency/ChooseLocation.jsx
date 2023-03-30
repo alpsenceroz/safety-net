@@ -22,7 +22,9 @@ import globalStyles from '../../utils/Styles';
 
 
 const ChooseLocation = ({navigation, route}) => {
-    
+    useEffect(() => {
+      navigation.setOptions({ title: 'Choose Location' });
+    }, []);
     const mapRef = useRef(null)
     const [location, setLocation] = useState({latitude: 40, longitude: 40})  
     const [myLocation, setMyLocation] = useState({latitude: 40, longitude: 40})  
