@@ -190,6 +190,16 @@ const globalStyles={
             borderRadius: 10,
             backgroundColor: 'black'
     }},
+    smallAddButton: {
+        textColor:'#ffffff',
+        style:{
+            marginVertical: 30,
+            borderRadius: 10,
+            backgroundColor: 'black',
+            alignSelf: 'center', 
+            width: 200, 
+            justifyContent:'center'
+    }},
     screenTitle: {
         style:{
             fontSize: 30,
