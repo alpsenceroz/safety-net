@@ -49,7 +49,31 @@ const Map = ({navigation}) => {
     const [helpCenterVisibility, setHelpCenterVisibility] = useState(true)
     const [otherNeedsVisibility, setOtherNeedsVisibility] = useState(true)
 
+    const [isPressedHelpCenter, setIsPressedHelpCenter] = useState(false);
+    const [isPressedOtherNeeds, setIsPressedOtherNeeds] = useState(false);
+    const [isPressedEmergency, setIsPressedEmergency] = useState(false);
 
+  
+    const handlePressHelpCenter = () => {
+      setIsPressedHelpCenter(!isPressedHelpCenter);
+      console.log("Help center button is pressed");
+      console.log(isPressedHelpCenter);
+      setHelpCenterVisibility(!helpCenterVisibility)
+    };
+
+    const handlePressOtherNeeds = () => {
+      setIsPressedOtherNeeds(!isPressedOtherNeeds);
+      console.log("Other needs button is pressed");
+      console.log(isPressedOtherNeeds);
+      setOtherNeedsVisibility(!otherNeedsVisibility)
+    };
+   
+    const handlePressEmergency = () => {
+      setIsPressedEmergency(!isPressedEmergency);
+      console.log("Emergency button is pressed");
+      console.log(isPressedEmergency);
+      setEmergencyVisibility((emergencyVisibility + 1) % 4)
+    };
 
     useEffect(  () => {
       console.log('AAAAAAAAAAAAAAAAAAAA')
@@ -165,7 +189,7 @@ const Map = ({navigation}) => {
             // color='#30c8a9'
             // /> 
             <View>
-            <Icon name="map-marker" size={45} color='#30c8a9' />
+            <Icon name="map-marker" size={45} color='#DB231A' />
             <View style={{
               width: 30,
               height: 30,
@@ -178,7 +202,7 @@ const Map = ({navigation}) => {
               <Icon style={{
                 textAlign: 'center',
                 top: 5,
-              }} name="check" size={15} color='#30c8a9' />
+              }} name="check" size={15} color='#DB231A' />
             </View>
           </View>
               :
@@ -191,7 +215,7 @@ const Map = ({navigation}) => {
             // color='#e90064'
             // /> 
             <View>
-            <Icon name="map-marker" size={45} color='#e90064' />
+            <Icon name="map-marker" size={45} color='#DB231A' />
             <View style={{
               width: 30,
               height: 30,
@@ -204,7 +228,7 @@ const Map = ({navigation}) => {
               <Icon style={{
                 textAlign: 'center',
                 top: 5,
-              }} name="exclamation" size={15} color='#e90064' />
+              }} name="exclamation" size={15} color='#DB231A' />
             </View>
           </View>
 
@@ -247,7 +271,7 @@ const Map = ({navigation}) => {
             color='#0e4ff1'
             /> */}
         <View>
-        <Icon name="map-marker" size={45} color='#0e4ff1' />
+        <Icon name="map-marker" size={45} color='#438CA3' />
         <View style={{
           width: 30,
           height: 30,
@@ -260,7 +284,7 @@ const Map = ({navigation}) => {
           <Icon style={{
             textAlign: 'center',
             top: 5,
-          }} name="hands-helping" size={15} color='#0e4ff1' />
+          }} name="hands-helping" size={15} color='#438CA3' />
         </View>
       </View>
 
@@ -296,7 +320,7 @@ const Map = ({navigation}) => {
             type="font-awesome"
             color='#ff8d29'/> */}
         <View>
-        <Icon name="map-marker" size={45} color='#ff8d29' />
+        <Icon name="map-marker" size={45} color='#598344' />
         <View style={{
           width: 30,
           height: 30,
@@ -309,7 +333,7 @@ const Map = ({navigation}) => {
           <Icon style={{
             textAlign: 'center',
             top: 5,
-          }} name="bread-slice" size={15} color='#ff8d29' />
+          }} name="bread-slice" size={15} color='#598344' />
         </View>
       </View>
 
@@ -335,12 +359,46 @@ const Map = ({navigation}) => {
               width: "70%",
               marginLeft: "10%",
               // marginRight: "1%",
-              marginTop: 20,
+              marginTop: "10%",
             }}>
             {/* icon={() => <Icon name="exclamation" size={10} color='white' />} */}
-            <Button  style={{borderTopLeftRadius:10,borderBottomLeftRadius:10,borderTopRightRadius:0,borderBottomRightRadius:0}} buttonColor='#E8C591' textColor='white' onPress={()=>setEmergencyVisibility((emergencyVisibility + 1) % 4)}>Emergencies</Button>
-            <Button  style={{justifyContent: 'center', marginHorizontal: 1, borderRadius:0}}  buttonColor='#A4D28D' textColor='white' onPress={()=>setHelpCenterVisibility(!helpCenterVisibility)}>Help Centers</Button>
-            <Button  style={{borderTopRightRadius:10,borderBottomRightRadius:10,borderTopLeftRadius:0,borderBottomLeftRadius:0}}  buttonColor='#A4CDDA' textColor='white' onPress={()=>setOtherNeedsVisibility(!otherNeedsVisibility)}>Other Needs</Button>
+
+            <Button  
+              style={{
+                borderTopLeftRadius:10,
+                borderBottomLeftRadius:10,
+                borderTopRightRadius:0,
+                borderBottomRightRadius:0, 
+                backgroundColor: isPressedHelpCenter ? '#A4CDDA' : '#4694AC',
+                textColor: isPressedHelpCenter ? 'white' : 'black'
+              }} 
+              textColor = 'black'
+              onPress={handlePressHelpCenter}>
+                Help Centers
+            </Button>
+            <Button  
+              style={{justifyContent: 'center',
+               marginHorizontal: 1, 
+               borderRadius:0, 
+               backgroundColor: isPressedOtherNeeds ? '#A4D28D' : '#64A843',
+               textColor: isPressedOtherNeeds ? 'white' : 'black'
+              }}  
+              textColor = 'black'
+              onPress={handlePressOtherNeeds}>
+                Other Needs
+                </Button>
+            <Button  
+              style={{borderTopRightRadius:10,
+                borderBottomRightRadius:10,
+                borderTopLeftRadius:0,
+                borderBottomLeftRadius:0, 
+                backgroundColor: isPressedEmergency ? '#E8C591' : '#DB231A',
+                textColor: isPressedOtherNeeds ? 'white' : 'black'
+              }}  
+              textColor = 'black'
+              onPress={handlePressEmergency}>
+                Emergencies
+                </Button>
           </View>
           </Callout>
           
@@ -395,6 +453,22 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 80,
   },
+  buttonPressed:{
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    backgroundColor: 'black',
+  },
+
+  buttonNormal: {
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    backgroundColor: '#A4D28D',
+  }
+
 });
 
 

@@ -127,7 +127,7 @@ export default function AddNeeds({ navigation, route }) {
                 setValue={setCitySelection}
                 list={getCities()}
             ></DropDown>
-            <Button style={ {...globalStyles.smallAddButton.style}} textColor='white' onPress={handleSelectLocation}>Select Location</Button>
+            <Button style={ {...globalStyles.smallAddButtonBlack.style}} textColor='white' onPress={handleSelectLocation}>Select Location</Button>
             {modalSelection ?
                 <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
                 :
@@ -135,7 +135,7 @@ export default function AddNeeds({ navigation, route }) {
             }
             <Text style={styles.providedText}>Needs</Text>
             {chips}
-            <Button style={ {...globalStyles.smallAddButton.style}} textColor='white' onPress={addNeeds}>Add Needs</Button>
+            <Button style={ {...globalStyles.smallAddButtonBlack.style}} textColor='white' onPress={addNeeds}>Add Needs</Button>
             </View>
         </View>
     )

@@ -85,7 +85,7 @@ const EmergencyReported = ({route, navigation}) => {
             <Text>Longitude: {JSON.stringify(emergency.coordinates.longitude)}</Text> */}
             {/* <Button onPress={ () => navigation.navigate("Main", {screen: 'Home'})}>Return to home screen</Button> */}
             {/* <Button buttonColor='#e90064' textColor='#ffffff' style={{ justifyContent: 'center', alignContent: 'flex-end', alignSelf: 'center', marginBottom: 70, width: 150, height: 40}} onPress={ () => navigation.pop()}>Return back</Button> */}
-            <Button buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style,  width: 150, marginBottom: 40, alignSelf: 'center'} } onPress={ () => navigation.pop()}>Return back</Button>
+            <Button buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.smallAddButtonBlack.style,  width: 150, marginBottom: 80, alignSelf: 'center'} } onPress={ () => navigation.pop()}>Return back</Button>
 
         </View>
     )

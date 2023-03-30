@@ -11,6 +11,7 @@ import {
     useColorScheme,
     View,
     FlatList,
+    Image
 } from 'react-native';
 
 import {
@@ -23,11 +24,16 @@ import {
 } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 import SelectLocationModal from "../../components/SelectLocationModal";
-
+import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import globalStyles from '../../utils/Styles';
 
 
 
 const EditEmergency = ({route, navigation}) => {
+    useEffect(() => {
+        navigation.setOptions({ title: 'For whom ?' });
+      }, []);
+
     const emergencyID = route.params.emergencyID;
     const [emergency, setEmergency] = useState(false)
     const [isModalVisible, setModalVisible] = useState(false);
@@ -78,7 +84,13 @@ useEffect(() => {
 }, [emergency])
 
     return(
-        <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
+        <View style={globalStyles.mainView}>
+
+            <View style={globalStyles.editView}>
+            <Image
+            style={{width: 400, height:300, alignSelf:'center'}}
+            source={require('../../assets/victim.png')}
+            />
             <Portal>
                 <SelectLocationModal
                 isModalVisible={isModalVisible}
@@ -112,22 +124,29 @@ useEffect(() => {
             status={emergency?.rescued ? 'checked' : 'unchecked'}
             onPress={ () =>  setEmergency((prevEmergency) => ({...prevEmergency, rescued: !emergency.rescued}))}
             />
-            <Button onPress={handleSelectLocation}>Edit Location</Button>
-            <Button onPress={ async()=> {
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Button style={globalStyles.addButtonHorizontalQuarterScreen} buttonColor='#D0342C' textColor='white' onPress={ async()=> {
+                await firestore().collection('emergencies').doc(emergencyID).delete()
+                navigation.pop()
+
+            }}>Delete</Button>
+            <Button style={globalStyles.addButtonHorizontalQuarterScreen} buttonColor='#3A6351'  textColor='white' onPress={ async()=> {
                 emergency.conditions = conditions
                 await firestore().collection('emergencies').doc(emergencyID).set(emergency)
                 navigation.pop()
 
-            }}>Save Changes</Button>
-            <Button onPress={ async()=> {
-                await firestore().collection('emergencies').doc(emergencyID).delete()
-                navigation.pop()
-
-            }}>Delete Emergency</Button>
+            }}>Save</Button>
+            
             {/* <Button onPress={ async () =>  {
                 await firestore().collection('emergencies').doc(emergencyID).set({...emergency, rescued: true})
                 navigation.pop()
                 }}>Mark as rescued</Button> */}
+            <Button style={globalStyles.addButtonHorizontalHalfScreen} buttonColor='black' icon={() => <MciIcon name="save_as" size={24} color="white" />}   textColor='white' onPress={handleSelectLocation}>Edit Location</Button>
+
+            </View>
+            
+            </View>
+            
         </View>
     )
     

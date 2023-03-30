@@ -7,8 +7,10 @@ import { useState, useEffect } from "react";
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
 import SelectLocationModal from "../../components/SelectLocationModal";
+import globalStyles from '../../utils/Styles';
 
 import auth from '@react-native-firebase/auth';
+import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function EditNeeds({route, navigation}) {
 
@@ -135,52 +137,52 @@ export default function EditNeeds({route, navigation}) {
 
     return (
 
-        <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
-            <Portal>
-    
+        <View style={globalStyles.mainView}>
+            <View style={globalStyles.editView}>
+             <Portal>
                 <SelectLocationModal
                 isModalVisible={isModalVisible}
                 hideModal={hideModal}
                 onConfirm={handleModalConfirm}
                 modalSelection={modalSelection}
-            />
-                
-            </Portal>
-            <TextInput
-                mode="outlined"
-                label="Name"
-                value={name}
-                //placeholder="E-mail"
-                error={nameError}
-                onChangeText={(text) =>
-                    handleNameChange(text)} />
-            <TextInput
-                mode="outlined"
-                label="Address"
-                value={address}
-                //placeholder="E-mail"
-                //error={addressError}
-                onChangeText={(text) =>
-                    handleAddressChange(text)} />
-            <DropDown
-                label="City"
-                mode='outlined'
-                visible={isShowDropdown}
-                showDropDown={() => setIsShowDropdown(true)}
-                onDismiss={() => setIsShowDropdown(false)}
-                value={citySelection}
-                setValue={setCitySelection}
-                list={getCities()}
-            ></DropDown>
-            <Button onPress={handleSelectLocation}>Select Location</Button>
-            {modalSelection ?
-                <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
-                :
-                <Text style={styles.locationText}>Location: Not Selected</Text>
-            }
-            <Text style={styles.providedText}>Needs</Text>
-            {chips}
-            <Button onPress={editHelpCenter}>Edit Needs</Button>
+                />
+                </Portal>
+                <TextInput
+                    mode="outlined"
+                    label="Name"
+                    value={name}
+                    //placeholder="E-mail"
+                    error={nameError}
+                    onChangeText={(text) =>
+                        handleNameChange(text)} />
+                <TextInput
+                    mode="outlined"
+                    label="Address"
+                    value={address}
+                    //placeholder="E-mail"
+                    //error={addressError}
+                    onChangeText={(text) =>
+                        handleAddressChange(text)} />
+                <DropDown
+                    label="City"
+                    mode='outlined'
+                    visible={isShowDropdown}
+                    showDropDown={() => setIsShowDropdown(true)}
+                    onDismiss={() => setIsShowDropdown(false)}
+                    value={citySelection}
+                    setValue={setCitySelection}
+                    list={getCities()}
+                ></DropDown>
+                <Button  style={globalStyles.smallAddButtonBlack} icon={() => <MciIcon name="map-marker" size={24} color="white" />} textColor= 'white' onPress={handleSelectLocation}>Select Location</Button>
+                {modalSelection ?
+                    <Text  style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
+                    :
+                    <Text style={styles.locationText}>Location: Not Selected</Text>
+                }
+                <Text style={styles.providedText}>Needs</Text>
+                {chips}
+                <Button style={globalStyles.smallAddButtonBlack}  textColor= 'white' onPress={editHelpCenter}>Edit Needs</Button>
+            </View>
         </View>
     )
 }

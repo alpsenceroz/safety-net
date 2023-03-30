@@ -126,7 +126,7 @@ export default function AddHelpCenter({ navigation, route }) {
                 setValue={setCitySelection}
                 list={getCities()}
             ></DropDown>
-            <Button style={ {...globalStyles.smallAddButton.style}} textColor='white' onPress={handleSelectLocation}>Select Location</Button>
+            <Button style={ {...globalStyles.smallAddButtonBlack.style}} textColor='white' onPress={handleSelectLocation}>Select Location</Button>
             {modalSelection ?
                 <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
                 :
@@ -134,7 +134,7 @@ export default function AddHelpCenter({ navigation, route }) {
             }
             <Text style={styles.providedText}>Provided</Text>
             {chips}
-            <Button style={ {...globalStyles.smallAddButton.style}} textColor='white' onPress={addHelpCenter}>Add Help Center</Button>
+            <Button style={ {...globalStyles.smallAddButtonBlack.style}} textColor='white' onPress={addHelpCenter}>Add Help Center</Button>
             </View>
             
         </View>
