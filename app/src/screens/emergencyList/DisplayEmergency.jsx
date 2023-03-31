@@ -83,7 +83,7 @@ useEffect(() => {
 }, [emergency])
 
     return(
-        <View style={globalStyles.ma}>
+        <View style={globalStyles.mainView}>
             <View style={globalStyles.editView}>
             <Image
             style={{width: 400, height:300, alignSelf:'center', justifyContent:'center'}}

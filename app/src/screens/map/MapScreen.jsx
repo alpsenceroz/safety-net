@@ -58,22 +58,22 @@ const Map = ({ navigation }) => {
 
   const handlePressHelpCenter = () => {
     setIsPressedHelpCenter(!isPressedHelpCenter);
-    console.log("Help center button is pressed");
-    console.log(isPressedHelpCenter);
+    //console.log("Help center button is pressed");
+    //console.log(isPressedHelpCenter);
     setHelpCenterVisibility(!helpCenterVisibility)
   };
 
   const handlePressOtherNeeds = () => {
     setIsPressedOtherNeeds(!isPressedOtherNeeds);
-    console.log("Other needs button is pressed");
-    console.log(isPressedOtherNeeds);
+    //console.log("Other needs button is pressed");
+    //console.log(isPressedOtherNeeds);
     setOtherNeedsVisibility(!otherNeedsVisibility)
   };
 
   const handlePressEmergency = () => {
     setIsPressedEmergency(!isPressedEmergency);
-    console.log("Emergency button is pressed");
-    console.log(isPressedEmergency);
+    //console.log("Emergency button is pressed");
+    //console.log(isPressedEmergency);
     setEmergencyVisibility((emergencyVisibility + 1) % 4)
   };
 
@@ -107,14 +107,14 @@ const Map = ({ navigation }) => {
     const t4 = firestore()
       .collection('users')
       .onSnapshot((querySnapshot) => {
-        console.log(querySnapshot.docs )
+        //console.log(querySnapshot.docs )
         setUsers(querySnapshot.docs.map((doc) => {
           return ({ 'ID': doc.id, ...doc.data() })
         }))
       })
     // get current location
     Geolocation.getCurrentPosition(info => {
-      console.log(info.coords)
+      //console.log(info.coords)
       setCoordinates({
         ...info.coords,
         latitudeDelta: 0.004,
@@ -122,7 +122,7 @@ const Map = ({ navigation }) => {
       });
     },
       error => {
-        console.log(error.code, error.message);
+        //console.log(error.code, error.message);
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     )
@@ -163,7 +163,7 @@ const Map = ({ navigation }) => {
           showsMyLocationButton={true}
           onLongPress={(e) => {
             setModalSelection(e.nativeEvent.coordinate)
-            console.log(e.nativeEvent.coordinate)
+            //console.log(e.nativeEvent.coordinate)
             setIsModalVisible(true)
           }}
           // style={{
