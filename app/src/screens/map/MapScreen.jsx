@@ -254,7 +254,7 @@ const Map = ({ navigation }) => {
                     navigation.push('DisplayEmergency', { emergencyID: marker.ID }))
                 }}>
                   <View style={styles.bubble}>
-                    <Text style={styles.name}>{user.name}</Text>
+                    <Text style={styles.name}>{users.filter( (item) => (item.ID === marker.ID))[0]?.name}</Text>
                     <Text>(Click to edit)</Text>
                   </View>
 
