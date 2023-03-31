@@ -48,7 +48,7 @@ const ChooseLocation = ({navigation, route}) => {
         longitudeDelta: 0.004,
         latitudeDelta: 0,
         })
-    }, [location])
+    }, [myLocation])
 
     return(
         <View style={{flex: 1}}>
