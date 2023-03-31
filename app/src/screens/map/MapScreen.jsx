@@ -108,6 +108,7 @@ const Map = ({ navigation }) => {
     const t4 = firestore()
       .collection('users')
       .onSnapshot((querySnapshot) => {
+        console.log(querySnapshot.data)
         setUsers(querySnapshot.docs.map((doc) => {
           return ({ 'ID': doc.id, ...doc.data() })
         }))
@@ -253,7 +254,7 @@ const Map = ({ navigation }) => {
                     navigation.push('DisplayEmergency', { emergencyID: marker.ID }))
                 }}>
                   <View style={styles.bubble}>
-                    <Text style={styles.name}>{users[`${marker.ID}`]}</Text>
+                    <Text style={styles.name}>{user.name}</Text>
                     <Text>(Click to edit)</Text>
                   </View>
 
