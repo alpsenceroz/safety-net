@@ -21,9 +21,6 @@ import globalStyles from '../../utils/Styles';
 
 
 const ChooseVictim = ({navigation, route}) => {
-    useEffect(() => {
-        navigation.setOptions({ title: 'For whom ?' });
-      }, []);
 
     emergency = {
         userID: null,

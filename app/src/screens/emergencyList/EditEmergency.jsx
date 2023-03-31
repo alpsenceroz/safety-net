@@ -30,9 +30,6 @@ import globalStyles from '../../utils/Styles';
 
 
 const EditEmergency = ({route, navigation}) => {
-    useEffect(() => {
-        navigation.setOptions({ title: 'For whom ?' });
-      }, []);
 
     const emergencyID = route.params.emergencyID;
     const [emergency, setEmergency] = useState(false)

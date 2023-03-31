@@ -18,7 +18,7 @@ const EmergencyNavigation = () => {
                     title: "Choose Location"
                 }}/>
                 <Stack.Screen name="ChooseVictim" component={ChooseVictim} options={{
-                    title: "Choose Victim"
+                    title: "For whom?"
                 }}/>
                 <Stack.Screen name="ChooseCondition" component={ChooseCondition} options={{
                     title: "Choose Condition"
