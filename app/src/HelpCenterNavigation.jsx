@@ -15,9 +15,15 @@ export default function HelpCenterNavigation() {
             <Stack.Screen name="List" component={HelpCenters} options={{
                 headerShown: false,
             }}/>
-            <Stack.Screen name="AddHelpCenter" component={AddHelpCenter} />
-            <Stack.Screen name="EditHelpCenter" component={EditHelpCenter} />
-            <Stack.Screen name="DisplayHelpCenter" component={DisplayHelpCenter} />
+            <Stack.Screen name="AddHelpCenter" component={AddHelpCenter} options={{
+                    title: "Add Help Center"
+                }}/>
+            <Stack.Screen name="EditHelpCenter" component={EditHelpCenter} options={{
+                    title: "Edit Help Center"
+                }}/>
+            <Stack.Screen name="DisplayHelpCenter" component={DisplayHelpCenter} options={{
+                    title: "Display Help Center"
+                }}/>
         </Stack.Navigator>
     )
 }

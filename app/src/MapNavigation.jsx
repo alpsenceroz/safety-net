@@ -20,14 +20,30 @@ export default function MapNavigation() {
             <Stack.Screen name="Map" component={Map} options={{
                 headerShown: false,
             }}/>
-            <Stack.Screen name="EditHelpCenter" component={EditHelpCenter} />
-            <Stack.Screen name="DisplayHelpCenter" component={DisplayHelpCenter} />
-            <Stack.Screen name="AddHelpCenter" component={AddHelpCenter} />
-            <Stack.Screen name="EditEmergency" component={EditEmergency} />
-            <Stack.Screen name="DisplayEmergency" component={DisplayEmergency} />
-            <Stack.Screen name="EditNeeds" component={EditNeeds} />
-            <Stack.Screen name="DisplayNeeds" component={DisplayNeeds} />
-            <Stack.Screen name="AddNeeds" component={AddNeeds} />
+            <Stack.Screen name="EditHelpCenter" component={EditHelpCenter}  options={{
+                title: "Edit Help Center",
+            }}/>
+            <Stack.Screen name="DisplayHelpCenter" component={DisplayHelpCenter}  options={{
+                title: "Display Help Center",
+            }}/>
+            <Stack.Screen name="AddHelpCenter" component={AddHelpCenter}  options={{
+                title: "Add Help Center",
+            }}/>
+            <Stack.Screen name="EditEmergency" component={EditEmergency}  options={{
+                title: "Edit Emergency",
+            }}/>
+            <Stack.Screen name="DisplayEmergency" component={DisplayEmergency}  options={{
+                title: "Display Emergency",
+            }}/>
+            <Stack.Screen name="EditNeeds" component={EditNeeds}  options={{
+                title: "Edit Needs",
+            }}/>
+            <Stack.Screen name="DisplayNeeds" component={DisplayNeeds}  options={{
+                title: "Display Needs",
+            }}/>
+            <Stack.Screen name="AddNeeds" component={AddNeeds}  options={{
+                title: "Add Needs",
+            }}/>
 
 
         </Stack.Navigator>

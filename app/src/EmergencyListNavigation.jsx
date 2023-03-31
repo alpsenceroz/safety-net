@@ -24,13 +24,27 @@ export default function EmergencyListNavigation() {
             <Stack.Screen name="List" component={EmergenctList} options={{
                 headerShown: false,
             }}/>
-            <Stack.Screen name="EditEmergency" component={EditEmergency} />
-            <Stack.Screen name="ChooseVictim" component={ChooseVictim} />
-            <Stack.Screen name="ChooseLocation" component={ChooseLocation} />
-            <Stack.Screen name="DisplayEmergency" component={DisplayEmergency} />
-            <Stack.Screen name="OtherPersonInfo" component={OtherPersonInfo}/>
-            <Stack.Screen name="ChooseCondition" component={ChooseCondition}/>
-            <Stack.Screen name="EmergencyReported" component={EmergencyReported}/>
+            <Stack.Screen name="EditEmergency" component={EditEmergency} options={{
+                    title: "Edit Emergency"
+                }}/>
+            <Stack.Screen name="ChooseVictim" component={ChooseVictim} options={{
+                    title: "Choose Victim"
+                }}/>
+            <Stack.Screen name="ChooseLocation" component={ChooseLocation} options={{
+                    title: "Choose Location"
+                }}/>
+            <Stack.Screen name="DisplayEmergency" component={DisplayEmergency} options={{
+                    title: "Display Emergency"
+                }}/>
+            <Stack.Screen name="OtherPersonInfo" component={OtherPersonInfo} options={{
+                    title: "Other Person Info"
+                }}/>
+            <Stack.Screen name="ChooseCondition" component={ChooseCondition} options={{
+                    title: "Choose Condition"
+                }}/>
+            <Stack.Screen name="EmergencyReported" component={EmergencyReported} options={{
+                    title: "Emergency Reported"
+                }}/>
         </Stack.Navigator>
     )
 }
