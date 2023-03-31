@@ -101,6 +101,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [mapsApiKey: "$System.env.MAPS_API_KEY"]
     }
 
     splits {
