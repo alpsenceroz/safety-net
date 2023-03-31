@@ -38,7 +38,7 @@ export default function EmergenctList({ navigation }) {
                     key={item} 
                     style={styles.providedChip} 
                     icon={() => <MciIcon name={iconMap.get(item[0])} size={30} color="#DB231A" />}
-                    >{item[0]}</Chip>)
+                    >{item[0] === 'injured'? 'Injured' : 'Evacuation'}</Chip>)
             }})
           }
         

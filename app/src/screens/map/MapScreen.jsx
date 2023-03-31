@@ -47,13 +47,18 @@ const Map = ({ navigation }) => {
   const [coordinates, setCoordinates] = useState({ latitude: 40, longitude: 40 })
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [modalSelection, setModalSelection] = useState(false)
-  const [emergencyVisibility, setEmergencyVisibility] = useState(0)
+  const [emergencyVisibility, setEmergencyVisibility] = useState(true)
   const [helpCenterVisibility, setHelpCenterVisibility] = useState(true)
   const [otherNeedsVisibility, setOtherNeedsVisibility] = useState(true)
+  const [rescuedVisibility, setRescuedVisibility] = useState(true)
+
+
 
   const [isPressedHelpCenter, setIsPressedHelpCenter] = useState(false);
   const [isPressedOtherNeeds, setIsPressedOtherNeeds] = useState(false);
   const [isPressedEmergency, setIsPressedEmergency] = useState(false);
+  const [isPressedRescued, setIsPressedRescued] = useState(false);
+
 
 
   const handlePressHelpCenter = () => {
@@ -74,7 +79,13 @@ const Map = ({ navigation }) => {
     setIsPressedEmergency(!isPressedEmergency);
     //console.log("Emergency button is pressed");
     //console.log(isPressedEmergency);
-    setEmergencyVisibility((emergencyVisibility + 1) % 4)
+    setEmergencyVisibility(!emergencyVisibility)
+  };
+  const handlePressRescued = () => {
+    setIsPressedRescued(!isPressedRescued);
+    //console.log("Emergency button is pressed");
+    //console.log(isPressedEmergency);
+    setRescuedVisibility(!rescuedVisibility)
   };
 
   useEffect(() => {
@@ -157,6 +168,7 @@ const Map = ({ navigation }) => {
           />
         </Portal>
         <MapView
+          mapPadding={{top: 50}}
           ref={mapRef}
           provider={PROVIDER_GOOGLE}
           showsUserLocation={true}
@@ -180,7 +192,7 @@ const Map = ({ navigation }) => {
           }}
         >
           {emergencies[0] != null && emergencies.filter((item) =>
-            ((emergencyVisibility === 0) || (emergencyVisibility === 1 && !item.rescued) || (emergencyVisibility === 2 && item.rescued)))
+            ((emergencyVisibility && !item.rescued) || (rescuedVisibility && item.rescued)))
             .map(marker => (
               <Marker
                 // key = {marker.ID}
@@ -204,7 +216,7 @@ const Map = ({ navigation }) => {
                   // color='#30c8a9'
                   // /> 
                   <View>
-                    <Icon name="map-marker" size={45} color='#DB231A' />
+                    <Icon name="map-marker" size={45} color='#DDBC00' />
                     <View style={{
                       width: 30,
                       height: 30,
@@ -217,7 +229,7 @@ const Map = ({ navigation }) => {
                       <Icon style={{
                         textAlign: 'center',
                         top: 5,
-                      }} name="check" size={15} color='#DB231A' />
+                      }} name="check" size={15} color='#DDBC00' />
                     </View>
                   </View>
                   :
@@ -286,7 +298,7 @@ const Map = ({ navigation }) => {
             color='#0e4ff1'
             /> */}
               <View>
-                <Icon name="map-marker" size={45} color='#438CA3' />
+                <Icon name="map-marker" size={45} color='#598344' />
                 <View style={{
                   width: 30,
                   height: 30,
@@ -299,7 +311,7 @@ const Map = ({ navigation }) => {
                   <Icon style={{
                     textAlign: 'center',
                     top: 5,
-                  }} name="hands-helping" size={15} color='#438CA3' />
+                  }} name="hands-helping" size={15} color='#598344' />
                 </View>
               </View>
 
@@ -335,7 +347,7 @@ const Map = ({ navigation }) => {
             type="font-awesome"
             color='#ff8d29'/> */}
               <View>
-                <Icon name="map-marker" size={45} color='#598344' />
+                <Icon name="map-marker" size={45} color='#438CA3' />
                 <View style={{
                   width: 30,
                   height: 30,
@@ -348,7 +360,7 @@ const Map = ({ navigation }) => {
                   <Icon style={{
                     textAlign: 'center',
                     top: 5,
-                  }} name="bread-slice" size={15} color='#598344' />
+                  }} name="bread-slice" size={15} color='#438CA3' />
                 </View>
               </View>
 
@@ -374,43 +386,68 @@ const Map = ({ navigation }) => {
               width: "70%",
               marginLeft: "10%",
               // marginRight: "1%",
-              marginTop: "10%",
+              marginTop: "5%",
             }}>
             {/* icon={() => <Icon name="exclamation" size={10} color='white' />} */}
 
             <Button
+              labelStyle = {{
+                color: !isPressedHelpCenter ? 'white' : 'black',
+                fontSize: 12
+              }}
+                        
               style={{
                 borderTopLeftRadius: 10,
                 borderBottomLeftRadius: 10,
                 borderTopRightRadius: 0,
                 borderBottomRightRadius: 0,
                 backgroundColor: isPressedHelpCenter ? '#A4CDDA' : '#4694AC',
-                textColor: isPressedHelpCenter ? 'white' : 'black'
               }}
               textColor='black'
               onPress={handlePressHelpCenter}>
               Help Centers
             </Button>
             <Button
+              labelStyle = {{
+                color: !isPressedOtherNeeds ? 'white' : 'black',
+                fontSize: 12
+              }}
+            
               style={{
                 justifyContent: 'center',
-                marginHorizontal: 1,
                 borderRadius: 0,
                 backgroundColor: isPressedOtherNeeds ? '#A4D28D' : '#64A843',
-                textColor: isPressedOtherNeeds ? 'white' : 'black'
               }}
               textColor='black'
               onPress={handlePressOtherNeeds}>
               Other Needs
             </Button>
             <Button
+              labelStyle = {{
+                color: !isPressedRescued ? 'white' : 'black',
+                fontSize: 12
+              }}
+            
+              style={{
+                justifyContent: 'center',
+                borderRadius: 0,
+                backgroundColor: isPressedRescued ? '#DDBC00' : '#FFD700',
+              }}
+              textColor='black'
+              onPress={handlePressRescued}>
+              Rescued
+            </Button>
+            <Button
+              labelStyle = {{
+                color: !isPressedEmergency? 'white' : 'black',
+                fontSize: 12
+              }}
               style={{
                 borderTopRightRadius: 10,
                 borderBottomRightRadius: 10,
                 borderTopLeftRadius: 0,
                 borderBottomLeftRadius: 0,
                 backgroundColor: isPressedEmergency ? '#E8C591' : '#DB231A',
-                textColor: isPressedOtherNeeds ? 'white' : 'black'
               }}
               textColor='black'
               onPress={handlePressEmergency}>
