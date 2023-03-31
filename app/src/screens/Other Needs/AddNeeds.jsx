@@ -129,6 +129,8 @@ export default function AddNeeds({ navigation, route }) {
                 value={citySelection}
                 setValue={setCitySelection}
                 list={getCities()}
+                dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+                dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
             ></DropDown>
             <Button style={ {...globalStyles.smallAddButtonBlack.style}} textColor='white' onPress={handleSelectLocation}>Select Location</Button>
             {modalSelection ?

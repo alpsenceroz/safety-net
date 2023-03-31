@@ -193,6 +193,8 @@ export default function EmergenctList({ navigation }) {
                 value={conditionSelection}
                 setValue={handleConditionSelection}
                 list={allConditions}
+                dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+                dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
             ></DropDown>
                         <Checkbox.Item color="#e90064" label="Only Your Emergencies" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 

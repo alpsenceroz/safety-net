@@ -174,6 +174,8 @@ export default function EditHelpCenter({route, navigation}) {
                     value={citySelection}
                     setValue={setCitySelection}
                     list={getCities()}
+                    dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+                    dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
                 ></DropDown>
                 <Button style={globalStyles.smallAddButton} buttonColor='#D0342C' textColor='white' onPress={handleSelectLocation}>Select Location</Button>
                 {modalSelection ?

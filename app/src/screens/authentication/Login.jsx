@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, ToastAndroid, View, useColorScheme } from "react-native";
+import { StyleSheet, ToastAndroid, View, useColorScheme, Image } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 
 import auth from '@react-native-firebase/auth';
+import globalStyles from "../../utils/Styles";
 
 export default function Login({ navigation }) {
 
@@ -82,8 +83,13 @@ export default function Login({ navigation }) {
     }
 
     return (
-        <View>
-            <Text>For data accuracy users need to login</Text>
+        <View style= {{flex: 1, backgroundColor:'#ffffff'}}>
+            <View style={{marginHorizontal: 20}}>
+            <Image
+                style={{width: 300, height:300, alignSelf:'center', marginTop: 80 }}
+                source={require('../../assets/sign-in.png')}
+            />
+            {/* <Text style={{marginTop: 20, textAlign: 'center', color: '#545454', marginBottom: 20 }}>For data accuracy users need to login</Text> */}
             <TextInput
                 style={styles.textInput}
                 mode="outlined"
@@ -104,10 +110,11 @@ export default function Login({ navigation }) {
                 onChangeText={(text) =>
                     handlePasswordChange(text)} />
 
-            <Button onPress={handleForgotPassword}>Forgot Your Password</Button>
-            <Button onPress={handleLogin} style={styles.loginButton} mode='contained'>Login</Button>
-            <Text>Don't have an account?</Text>
-            <Button onPress={handleSignUp}>Sign Up</Button>
+            <Button labelStyle={{color: '#EA5753'}} style={{alignSelf: 'center', flexWrap: 'wrap'}} onPress={handleForgotPassword}>Forgot Your Password?</Button>
+            <Button labelStyle={{fontSize: 20}} onPress={handleLogin} style={{...globalStyles.smallAddButtonBlack, ...styles.loginButton, backgroundColor: '#EA5753'}} mode='contained'>Login</Button>
+            <Text style={{alignSelf: 'center', marginTop: 20, color: '#545454'}}>Don't have an account?</Text>
+            <Button labelStyle={{color: '#EA5753'}} style={{alignSelf: 'center', flexWrap: 'wrap'}} onPress={handleSignUp}>Sign Up</Button>
+            </View>
         </View>
     )
 }
@@ -117,6 +124,11 @@ const styles = StyleSheet.create({
 
     },
     loginButton: {
+        alignSelf: 'center',
+        width: 150,
+
+        justifyContent: 'center',
+
 
     },
 

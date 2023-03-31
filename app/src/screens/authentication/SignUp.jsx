@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { NativeAppEventEmitter, StyleSheet, ToastAndroid, View, useColorScheme } from "react-native";
+import { NativeAppEventEmitter, StyleSheet, ToastAndroid, View, useColorScheme, Image } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 
 
 import auth from '@react-native-firebase/auth';
+import globalStyles from "../../utils/Styles";
 
 export default function SignUp({ navigation }) {
 
@@ -52,28 +53,34 @@ export default function SignUp({ navigation }) {
     }
 
     return (
-        <View>
-            <TextInput
-                style={styles.textInput}
-                mode="outlined"
-                label="E-mail"
-                textContentType='emailAddress'
-                //placeholder="E-mail"
-                error={emailError}
-                onChangeText={(text) =>
-                    handleMailChange(text)} />
-            <TextInput
-                style={styles.textInput}
-                mode="outlined"
-                label="Password"
-                textContentType='password'
-                secureTextEntry
-                //placeholder="E-mail"
-                error={passwordError}
-                onChangeText={(text) =>
-                    handlePasswordChange(text)} />
+        <View style={{...globalStyles.mainView, justifyContent: 'center'}}>
+            <View style={{marginHorizontal: 20}}>
+            <Image
+        style={{width: 300, height:300, alignSelf:'center', marginTop:-100}}
+        source={require('../../assets/sign-up.png')}
+      />
+                <TextInput
+                    style={{...styles.textInput, marginTop: 20}}
+                    mode="outlined"
+                    label="E-mail"
+                    textContentType='emailAddress'
+                    //placeholder="E-mail"
+                    error={emailError}
+                    onChangeText={(text) =>
+                        handleMailChange(text)} />
+                <TextInput
+                    style={styles.textInput}
+                    mode="outlined"
+                    label="Password"
+                    textContentType='password'
+                    secureTextEntry
+                    //placeholder="E-mail"
+                    error={passwordError}
+                    onChangeText={(text) =>
+                        handlePasswordChange(text)} />
 
-            <Button onPress={handleSignUp} style={styles.signUpButton} mode='contained'>Sign Up</Button>
+                <Button onPress={handleSignUp} style={styles.signUpButton} mode='contained'>Sign Up</Button>
+            </View>
         </View>
     )
 }
@@ -83,6 +90,9 @@ const styles = StyleSheet.create({
 
     },
     signUpButton: {
+        marginTop: 20,
+        ...globalStyles.smallAddButtonBlack,
+        backgroundColor: '#EA5753'
 
     },
 

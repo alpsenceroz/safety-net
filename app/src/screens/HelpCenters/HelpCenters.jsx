@@ -171,14 +171,17 @@ export default function HelpCenters({ navigation }) {
                 <DropDown
                     label="City"
                     mode='outlined'
+                    activeColor= "#68A34D"
                     visible={isShowDropdown}
                     showDropDown={() => setIsShowDropdown(true)}
                     onDismiss={() => setIsShowDropdown(false)}
                     value={citySelection}
                     setValue={handleCitySelection}
                     list={allCities}
+                    dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+                    dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
                 ></DropDown>
-                <Checkbox.Item label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
+                <Checkbox.Item color= "#68A34D" label="Only Your Help Centers" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
                 <View style={{ flex: 1 }}>
                     <FlatList

@@ -8,6 +8,7 @@ import DatePicker from 'react-native-date-picker'
 
 import bloodTypes from '../../utils/bloodTypes.json';
 import DropDown from 'react-native-paper-dropdown';
+import globalStyles from '../../utils/Styles';
 
 const bloodTypeList = bloodTypes.types.map( (item) => {
     return {
@@ -78,7 +79,8 @@ export default function SelfProfile({ route, navigation }) {
  
 
     return (
-        <View>
+        <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+            <View style={{marginHorizontal: 20}}>
 
             <DatePicker
                 modal
@@ -111,18 +113,21 @@ export default function SelfProfile({ route, navigation }) {
               value={bloodType}
               setValue={setBloodType}
               list={bloodTypeList}
+              dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+              dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
             />
-            <Button onPress={() => setBirthDateOpen(true)} mode='outlined'>Birth Date {birthDate ? `(${birthDate.getDate()}.${birthDate.getMonth() + 1}.${birthDate.getFullYear()})` : '(Not Selected)'}</Button>
-
             <TextInput
                 mode='outlined'
                 label={'Phone Number'}
                 value={phoneNumber}
                 onChangeText={setPhoneNumber}
             />
+            <Button labelStyle={{color: '#ffffff'}} style={globalStyles.smallAddButtonBlack} onPress={() => setBirthDateOpen(true)} mode='outlined'>Birth Date {birthDate ? `(${birthDate.getDate()}.${birthDate.getMonth() + 1}.${birthDate.getFullYear()})` : '(Not Selected)'}</Button>
 
-            <Button mode='contained' onPress={saveToFirestore}>Save</Button>
 
+
+            <Button  style={globalStyles.smallAddButtonBlack} mode='contained' onPress={saveToFirestore}>Save</Button>
+            </View>
         </View>
     )
 

@@ -172,6 +172,8 @@ export default function EditNeeds({route, navigation}) {
                     value={citySelection}
                     setValue={setCitySelection}
                     list={getCities()}
+                    dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+                    dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
                 ></DropDown>
                 <Button  style={globalStyles.smallAddButtonBlack} icon={() => <MciIcon name="map-marker" size={24} color="white" />} textColor= 'white' onPress={handleSelectLocation}>Select Location</Button>
                 {modalSelection ?

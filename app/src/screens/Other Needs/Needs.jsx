@@ -179,6 +179,8 @@ export default function Needs({ navigation }) {
                     value={citySelection}
                     setValue={handleCitySelection}
                     list={allCities}
+                    dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+                    dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
                 ></DropDown>
                 <Checkbox.Item label="Only Your Needs" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
 
