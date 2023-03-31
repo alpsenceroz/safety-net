@@ -5,6 +5,7 @@ import {
     StatusBar,
     StyleSheet,
     Text,
+    ToastAndroid,
     useColorScheme,
     View,
 } from 'react-native';
@@ -27,6 +28,15 @@ const OtherPersonInfo = ({route, navigation}) => {
     // }
     emergency = route.params.emergency
 
+    const handleContinue = () => {
+        if(emergency.otherName) {
+            navigation.replace("ChooseCondition",{emergency: emergency})
+        } else {
+            ToastAndroid.show("Missing name", ToastAndroid.LONG);
+        }
+        
+    }
+
         return(
             <View style={{flex: 1}}backgroundColor = '#FAE3D9'>
                 <TextInput 
@@ -43,8 +53,7 @@ const OtherPersonInfo = ({route, navigation}) => {
                 textColor={globalStyles.button1.textColor} 
                 style={ {...globalStyles.button1.style, marginTop: 20, alignSelf: 'center', width: 100, justifyContent:'center'}}
                 onPress={ () => {
-                    navigation.replace("ChooseCondition",{emergency: emergency 
-                    })
+                        handleContinue()
                     }   
                     }>Continue</Button>
 

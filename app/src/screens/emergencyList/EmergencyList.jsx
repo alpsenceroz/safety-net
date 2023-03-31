@@ -28,12 +28,12 @@ export default function EmergenctList({ navigation }) {
     function EmergencyItem(props) {
         // const { name, provided, city, onPress } = props;
     
-        const { name, provided, onPress } = props;
+        const { name, provided, onPress, itemData } = props;
         let chips;
         if (provided) {
             chips = Object.entries(provided).map((item, index) => {
               if (item[1]){
-                console.log(index)
+                //console.log(index)
                 return (<Chip 
                     key={item} 
                     style={styles.providedChip} 
@@ -51,7 +51,7 @@ export default function EmergenctList({ navigation }) {
         return (
             <Card style={styles.card} onPress={onPress}>
                 <Card.Title
-                    title={user.data.name}
+                    title={itemData.otherName ? itemData.otherName : user.data.name}
                     //subtitle={city}
                 />
                 <Card.Content style={styles.cardContent}>
@@ -205,6 +205,7 @@ export default function EmergenctList({ navigation }) {
                     name={item.data.userID} 
                     provided={item ? item.data.conditions: undefined} 
                     //city={item.data.city} 
+                    itemData= {item.data}
                     onPress={ item.data.userID === user.uid ? () => handleCardPressEdit(item.id) : () => handleCardPressDisplay(item.id)} 
                     />
                 }

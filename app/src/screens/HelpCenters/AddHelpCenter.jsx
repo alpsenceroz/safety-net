@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, ToastAndroid, View } from "react-native";
 import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
@@ -47,11 +47,18 @@ export default function AddHelpCenter({ navigation, route }) {
 
     async function addHelpCenter() {
 
+
+
         filteredNeeds = chipsData.filter((value) => {
             return value.selected ? value.selected : false;
         });
 
         const userId = auth().currentUser.uid;
+
+        if( !(name && citySelection && address && modalSelection && userId) ) {
+            ToastAndroid.show('Missing information!', ToastAndroid.LONG);
+            return;
+        }
 
         const newHelpCenter = {
             name: name,

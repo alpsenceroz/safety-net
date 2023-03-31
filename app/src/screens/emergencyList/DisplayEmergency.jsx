@@ -97,7 +97,7 @@ useEffect(() => {
                 modalSelection={modalSelection}
                 />  
             </Portal>
-            <Text>Name: {emergency?.other ? emergency.otherName : user?.name }</Text>
+            <Text>Name: {emergency?.otherName ? emergency.otherName : user?.name }</Text>
 
            
             <TextInput

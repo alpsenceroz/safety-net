@@ -54,6 +54,11 @@ export default function SelfProfile({ route, navigation }) {
 
     async function saveToFirestore() {
 
+        if( !(name && bloodType && birthDate && phoneNumber) ) {
+            ToastAndroid.show('Missing information!', ToastAndroid.LONG);
+            return;
+        }
+
         const newUserData = {
             name,
             bloodType,
