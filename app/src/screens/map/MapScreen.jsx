@@ -78,7 +78,6 @@ const Map = ({ navigation }) => {
   };
 
   useEffect(() => {
-    console.log('AAAAAAAAAAAAAAAAAAAA')
     setLoading(true)
 
     // get emergencies
@@ -108,7 +107,7 @@ const Map = ({ navigation }) => {
     const t4 = firestore()
       .collection('users')
       .onSnapshot((querySnapshot) => {
-        console.log(querySnapshot.data)
+        console.log(querySnapshot.docs )
         setUsers(querySnapshot.docs.map((doc) => {
           return ({ 'ID': doc.id, ...doc.data() })
         }))
@@ -254,7 +253,7 @@ const Map = ({ navigation }) => {
                     navigation.push('DisplayEmergency', { emergencyID: marker.ID }))
                 }}>
                   <View style={styles.bubble}>
-                    <Text style={styles.name}>{users.filter( (item) => (item.ID === marker.ID))[0]?.name}</Text>
+                    <Text style={styles.name}>{marker.otherName ? marker.otherName : users.filter( (item) => (item.ID === marker.userID))[0]?.name}</Text>
                     <Text>(Click to edit)</Text>
                   </View>
 

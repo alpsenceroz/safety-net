@@ -58,7 +58,6 @@ const EditEmergency = ({route, navigation}) => {
     }
 
     useEffect(() => {
-        console.log('BBBBBBBBBBBBBBB')
         const subscription = firestore().collection('emergencies').doc(emergencyID).onSnapshot(
             (snapshot) => {
                 setEmergency(snapshot.data())
