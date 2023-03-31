@@ -40,6 +40,8 @@ const Map = ({ navigation }) => {
   const [emergencies, setEmergencies] = useState([])
   const [helpCenters, setHelpCenters] = useState([])
   const [otherNeeds, setOtherNeeds] = useState([])
+  const [users, setUsers] = useState([])
+
 
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
   const [coordinates, setCoordinates] = useState({ latitude: 40, longitude: 40 })
@@ -103,6 +105,13 @@ const Map = ({ navigation }) => {
           return ({ 'ID': doc.id, ...doc.data() })
         }))
       })
+    const t4 = firestore()
+      .collection('users')
+      .onSnapshot((querySnapshot) => {
+        setUsers(querySnapshot.docs.map((doc) => {
+          return ({ 'ID': doc.id, ...doc.data() })
+        }))
+      })
     // get current location
     Geolocation.getCurrentPosition(info => {
       console.log(info.coords)
@@ -122,6 +131,7 @@ const Map = ({ navigation }) => {
       t1()
       t2()
       t3()
+      t4()
     }
   }, [])
   useEffect(() => {
@@ -243,7 +253,7 @@ const Map = ({ navigation }) => {
                     navigation.push('DisplayEmergency', { emergencyID: marker.ID }))
                 }}>
                   <View style={styles.bubble}>
-                    <Text style={styles.name}>{marker.ID}</Text>
+                    <Text style={styles.name}>{users[`${marker.ID}`]}</Text>
                     <Text>(Click to edit)</Text>
                   </View>
 

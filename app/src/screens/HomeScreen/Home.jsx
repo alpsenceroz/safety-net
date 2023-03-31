@@ -114,11 +114,42 @@ export default function Home({navigation}) {
             </Pressable>
 
             </View>
+            <View style={{...styles.circle1, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginTop: 200}}>
+                <View style={{...styles.circle2, justifyContent: 'center', alignItems: 'center'}}>
+                <Pressable style={{...styles.circle3, justifyContent: 'center', alignItems: 'center'}}
+                onPress={handleEmergencyButton}
+                >
+                <Text style={{color: '#ffffff', fontSize: 30, fontFamily: 'sans-serif-medium'}}>Help</Text>
+                </Pressable>
+
+                </View>
+            </View>
             {/* <Button onPress={handleLogOut}>Log out</Button> */}
-            <Button onPress={handleEmergencyButton}>Help</Button>
+            {/* <Button onPress={handleEmergencyButton}>Help</Button> */}
             {/* <Button onPress={ navigateProfile }>Edit Profile</Button> */}
 
         </View>
     );
 
 }
+
+const styles = StyleSheet.create({
+    circle1: {
+      width: 300,
+      height: 300,
+      borderRadius: 300 / 2,
+      backgroundColor: "#FCEDEE",
+    },
+    circle2: {
+        width: 250,
+        height: 250,
+        borderRadius: 250 / 2,
+        backgroundColor: "#F8D1D2",
+      },
+    circle3: {
+        width: 200,
+        height: 200,
+        borderRadius: 200 / 2,
+        backgroundColor: "#EA5753",
+    },
+  });
