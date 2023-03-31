@@ -81,7 +81,7 @@ const ChooseVictim = ({navigation, route}) => {
             }}
             onPress={() => {
                 // handleVictimSelect(false)
-                emergency.other = true
+                emergency.other = false
                 console.log(emergency)
                 navigation.replace("ChooseCondition", {emergency: emergency})
                 }   
