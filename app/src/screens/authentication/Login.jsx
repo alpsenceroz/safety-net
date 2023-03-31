@@ -111,7 +111,7 @@ export default function Login({ navigation }) {
                     handlePasswordChange(text)} />
 
             <Button labelStyle={{color: '#EA5753'}} style={{alignSelf: 'center', flexWrap: 'wrap'}} onPress={handleForgotPassword}>Forgot Your Password?</Button>
-            <Button labelStyle={{fontSize: 20}} onPress={handleLogin} style={{...globalStyles.smallAddButtonBlack, ...styles.loginButton, backgroundColor: '#EA5753'}} mode='contained'>Login</Button>
+            <Button labelStyle={{fontSize: 16}} onPress={handleLogin} style={{...globalStyles.smallAddButtonBlack, ...styles.loginButton, backgroundColor: '#EA5753'}} mode='contained'>Login</Button>
             <Text style={{alignSelf: 'center', marginTop: 20, color: '#545454'}}>Don't have an account?</Text>
             <Button labelStyle={{color: '#EA5753'}} style={{alignSelf: 'center', flexWrap: 'wrap'}} onPress={handleSignUp}>Sign Up</Button>
             </View>

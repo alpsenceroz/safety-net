@@ -1,8 +1,9 @@
-import { StyleSheet, ToastAndroid, View } from "react-native";
+import { StyleSheet, ToastAndroid, View, Image } from "react-native";
 import { Button, Text } from "react-native-paper";
 
 import auth from '@react-native-firebase/auth';
 import { useEffect } from "react";
+import globalStyles from "../../utils/Styles";
 
 export default function ({ navigation }) {
 
@@ -46,23 +47,33 @@ export default function ({ navigation }) {
 
 
     return (
-        <View>
-            { user && <Text style={styles.message}>Verification code has been sent to {user.email}</Text>}
-            <Button style={styles.verificationButton} onPress={handleVerification} mode='contained'>Send Verification Code</Button>
+        <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+            <View style={{marginHorizontal: 20, marginTop: 100}}>
+            <Image
+                style={{width: 300, height:300, alignSelf:'center'}}
+                source={require('../../assets/verify.png')}
+            />
+            { user && <Text style={styles.message}>Verification link has been sent to {user.email}</Text>}
+            <Button style={styles.verificationButton} onPress={handleVerification} mode='contained'>Send Verification Again</Button>
             <Button style={styles.logOutButton} onPress={logOut} mode='contained'>Log Out</Button>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     message: {
-
+        color: 'black',
+        alignSelf: 'center',
     },
     verificationButton: {
-
+        marginTop: 20,
+        ...globalStyles.smallAddButtonBlack,
+        backgroundColor: '#EA5753',
     },
     logOutButton:{
-
+        ...globalStyles.smallAddButtonBlack,
+        marginTop: 0
     },
 
 })
