@@ -57,7 +57,7 @@ export default function SelectLocation(props) {
       </MapView>
       <View style={styles.buttonView}>
         <Button mode='contained' style={styles.cancelButton} onPress={hideModal}>Cancel</Button>
-        {userLocation && <Button mode='contained' style={styles.userLocationButton} onPress={() => onConfirm(userLocation)}>Use User Location</Button>}
+        {userLocation && <Button mode='contained' style={styles.userLocationButton} onPress={() => onConfirm(userLocation)}>My Location</Button>}
         <Button mode='contained' style={styles.confirmButton} disabled={selection ? false : true} onPress={() => onConfirm(selection)}>Confirm</Button>
 
       </View>
@@ -75,29 +75,27 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 20,
+    marginBottom: 20
   },
   buttonView: {
     flexDirection: 'row',
     alignSelf: 'center',
+    justifyContent: 'space-between'
   },
   confirmButton: {
     backgroundColor: 'green',
-    marginRight: 7,
-    marginLeft: 7,
+
   },
   userLocationButton: {
     backgroundColor: 'blue',
-    marginRight: 7,
-    marginLeft: 7,
+
   },
   cancelButton: {
     backgroundColor: 'red',
-    marginRight: 7,
-    marginLeft: 7,
   },
   modalContainerStyle: {
     backgroundColor: 'white',
-    padding: 40,
+    padding: 30,
     margin: 20,
     flex: 1,
   },
