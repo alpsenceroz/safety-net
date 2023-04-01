@@ -51,8 +51,7 @@ const ChooseLocation = ({navigation, route}) => {
     }, [myLocation])
 
     return(
-        <View style={{flex: 1}}>
-    <Text>Select Location</Text>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
       <MapView
       ref={mapRef}
         provider={PROVIDER_GOOGLE}
@@ -75,12 +74,13 @@ const ChooseLocation = ({navigation, route}) => {
         { location && <Marker coordinate={location}/>}
       </MapView>
       <View>
-        <Button 
-        buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 20, alignSelf: 'center', width: 200, justifyContent:'center'}}
-        onPress={()=>navigation.replace('ChooseVictim', {location: location})}>Continue</Button>
-        <Button 
-        buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.button1.style, marginTop: 10, alignSelf: 'center', width: 200, justifyContent:'center'}}
+      <Button 
+        buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.smallAddButtonBlack, marginTop: 10, marginBottom: 0, backgroundColor: "#EA5753"}}
         onPress={()=>navigation.replace('ChooseVictim', {location: location})}>Use My Current Location</Button>
+        <Button 
+        textColor={globalStyles.button1.textColor} style={ {...globalStyles.smallAddButtonBlack, marginBottom: 0}}
+        onPress={()=>navigation.replace('ChooseVictim', {location: location})}>Continue</Button>
+        
       </View>
         </View>
     )

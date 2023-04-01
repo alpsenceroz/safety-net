@@ -38,10 +38,10 @@ const OtherPersonInfo = ({route, navigation}) => {
     }
 
         return(
-            <View style={{flex: 1}}backgroundColor = '#FAE3D9'>
+            <View style={{flex: 1, backgroundColor: 'white'}}>
                 <TextInput 
                    mode="outlined"
-                   outlineColor='#e90064'
+
                 placeholder="Name"
                 // onChangeText={(text) => handleName(text)}
                 onChangeText={(text)=>emergency.otherName = text}
@@ -49,9 +49,8 @@ const OtherPersonInfo = ({route, navigation}) => {
                 </TextInput>
                 
                 <Button 
-                buttonColor= {globalStyles.button1.buttonColor} 
                 textColor={globalStyles.button1.textColor} 
-                style={ {...globalStyles.button1.style, marginTop: 20, alignSelf: 'center', width: 100, justifyContent:'center'}}
+                style={ {...globalStyles.smallAddButtonBlack, marginTop: 20, alignSelf: 'center', width: 100, justifyContent:'center'}}
                 onPress={ () => {
                         handleContinue()
                     }   

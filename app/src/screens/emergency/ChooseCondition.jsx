@@ -70,7 +70,7 @@ const ChooseCondition = ({route, navigation}) => {
         backgroundColor: '#FAE3D9',
       }}
     >
-            <View style={{flex: 1,  backgroundColor: '#FAE3D9'}}>
+            <View style={{flex: 1,  backgroundColor: 'white'}}>
                  
                 <Image
         style={{width: 300, height:300, alignSelf:'center', marginTop:40, marginBottom:40}}
@@ -82,8 +82,7 @@ const ChooseCondition = ({route, navigation}) => {
                 <View style={{backgroundColor:'#ffffff', marginHorizontal: 20}}>
                 <Checkbox.Item
                 label="Need Evacuation"
-                color='#e90064'
-                style={{backgroundColor:'#ffffff'}}
+                color='#EA5753'
                 status={evacuation ? 'checked' : 'unchecked'}
                 onPress={() => { 
                     // handleCheckBox("needEvacuation")
@@ -93,8 +92,7 @@ const ChooseCondition = ({route, navigation}) => {
                     }}/>
                 <Checkbox.Item
                 label="Injured"
-                color='#e90064'
-                style={{ backgroundColor:'#ffffff'}}
+                color='#EA5753'
                 status={injured ? 'checked' : 'unchecked'}
                 onPress={() => { 
                     // handleCheckBox("isInjured")
@@ -102,9 +100,8 @@ const ChooseCondition = ({route, navigation}) => {
                     emergency.conditions['injured']= !emergency.conditions['injured']
                     }}/>
                 <TextInput 
-                    multiline={true}
+
                     mode="outlined"
-                    outlineColor='#e90064'
                     placeholder="Notes" 
                     onChangeText={(text)=>emergency.notes = text}
                     />

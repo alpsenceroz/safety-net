@@ -2,13 +2,14 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { useEffect, useState } from 'react';
 import { Button, TextInput } from 'react-native-paper';
-import { ToastAndroid, View } from 'react-native';
+import { ToastAndroid, View, Image } from 'react-native';
 
 import DatePicker from 'react-native-date-picker'
 
 import bloodTypes from '../../utils/bloodTypes.json';
 import DropDown from 'react-native-paper-dropdown';
 import globalStyles from '../../utils/Styles';
+
 
 const bloodTypeList = bloodTypes.types.map( (item) => {
     return {
@@ -86,6 +87,10 @@ export default function SelfProfile({ route, navigation }) {
     return (
         <View style={{flex: 1, backgroundColor: '#ffffff'}}>
             <View style={{marginHorizontal: 20}}>
+            <Image
+        style={{width: 300, height:300, alignSelf:'center'}}
+        source={require('../../assets/profile.png')}
+      />
 
             <DatePicker
                 modal
@@ -127,11 +132,11 @@ export default function SelfProfile({ route, navigation }) {
                 value={phoneNumber}
                 onChangeText={setPhoneNumber}
             />
-            <Button labelStyle={{color: '#ffffff'}} style={globalStyles.smallAddButtonBlack} onPress={() => setBirthDateOpen(true)} mode='outlined'>Birth Date {birthDate ? `(${birthDate.getDate()}.${birthDate.getMonth() + 1}.${birthDate.getFullYear()})` : '(Not Selected)'}</Button>
+            <Button labelStyle={{color: '#ffffff'}} style={{...globalStyles.smallAddButtonBlack, backgroundColor: '#3498db', marginBottom: 0, marginTop: 10}} onPress={() => setBirthDateOpen(true)} mode='outlined'>Birth Date {birthDate ? `(${birthDate.getDate()}.${birthDate.getMonth() + 1}.${birthDate.getFullYear()})` : '(Not Selected)'}</Button>
 
 
 
-            <Button  style={globalStyles.smallAddButtonBlack} mode='contained' onPress={saveToFirestore}>Save</Button>
+            <Button  style={{...globalStyles.smallAddButtonBlack, backgroundColor: '#EA5753', marginTop: 50}} mode='contained' onPress={saveToFirestore}>Save</Button>
             </View>
         </View>
     )

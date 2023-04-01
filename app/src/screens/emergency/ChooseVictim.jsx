@@ -49,14 +49,14 @@ const ChooseVictim = ({navigation, route}) => {
     },[])
 
     return(
-        <View  style={{flex: 1}} backgroundColor = '#FAE3D9'>
+        <View  style={{flex: 1, backgroundColor: 'white'}}>
              <Image
         style={{width: 400, height:300, alignSelf:'center', marginTop:-20}}
         source={require('../../assets/victim.png')}
       />
             <Pressable
              style={{ flexDirection: 'column',...globalStyles.button1.style, width: 300, height:150, alignItems: 'center',
-                backgroundColor: globalStyles.button1.buttonColor, textColor:globalStyles.button1.textColor,
+                backgroundColor: "#EA5753", textColor:globalStyles.button1.textColor,
                 borderRadius: 20, marginTop: 50, justifyContent:'center', alignSelf: 'center'
             }}
             onPress={() => {
@@ -72,8 +72,8 @@ const ChooseVictim = ({navigation, route}) => {
                     </Pressable>
                 
                 <Pressable
-             style={{ flexDirection: 'column',...globalStyles.button1.style, width: 300, height:150, alignItems: 'center',
-                backgroundColor: globalStyles.button1.buttonColor, textColor:globalStyles.button1.textColor,
+             style={{ flexDirection: 'column', ...globalStyles.button1.style, width: 300, height:150, alignItems: 'center',
+                backgroundColor: "#EA5753", textColor:globalStyles.button1.textColor,
                 borderRadius: 20, marginTop: 20, justifyContent:'center', alignSelf: 'center'
             }}
             onPress={() => {

@@ -7,7 +7,8 @@ import {
     Text,
     useColorScheme,
     View,
-    Pressable
+    Pressable,
+    Image
 } from 'react-native';
 
 import {
@@ -114,7 +115,9 @@ export default function Home({navigation}) {
             </Pressable>
 
             </View>
-            <View style={{...styles.circle1, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginTop: 200}}>
+            <Text style={{textAlign: 'center', fontSize: 20, marginHorizontal: 20, color: 'black', marginTop: 50 }}>In case of a Natural Disaster, press the button below.</Text>
+
+            <View style={{...styles.circle1, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginTop: 100}}>
                 <View style={{...styles.circle2, justifyContent: 'center', alignItems: 'center'}}>
                 <Pressable style={{...styles.circle3, justifyContent: 'center', alignItems: 'center'}}
                 onPress={handleEmergencyButton}
@@ -127,7 +130,13 @@ export default function Home({navigation}) {
             {/* <Button onPress={handleLogOut}>Log out</Button> */}
             {/* <Button onPress={handleEmergencyButton}>Help</Button> */}
             {/* <Button onPress={ navigateProfile }>Edit Profile</Button> */}
-
+            <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 140}}>
+            <Image
+                style={{width: 40, height:40, alignSelf:'center',}}
+                source={require('../../assets/earthquake.png')}
+            />
+            <Text style={{marginTop: 8, marginHorizontal: 10}}>Safety Net</Text>
+            </View>
         </View>
     );
 

@@ -70,11 +70,11 @@ const EmergencyReported = ({route, navigation}) => {
   
 
     return(
-        <View style={{flex: 1, justifyContent: 'space-between'}} backgroundColor = '#FAE3D9'>
+        <View style={{flex: 1, justifyContent: 'space-between'}} backgroundColor = 'white'>
             {/* <Text>Victim:{route.params.emergency.other ? route.params.emergency.otherName: "Myself" }</Text> */}
             {/* <Text>Need evacuation: {route.params.emergency.conditions.evacuation? "yes":"no"}</Text>
             <Text>Injured: {route.params.emergency.conditions.injured ? 'yes' : 'no' }</Text> */}
-            <Text style={{alignSelf:'center', fontSize:20, color: 'black', marginTop: 100}} >Your situation is reported. Stay calm.</Text>
+            <Text style={{alignSelf:'center', fontSize:20, color: 'black', marginTop: 100, textAlign: 'center'}} >Your situation is reported. Stay calm.</Text>
             <Image
         style={{width: 300, height:300, alignSelf:'center', marginTop:-180}}
         source={require('../../assets/Ambulance-pana.png')}
