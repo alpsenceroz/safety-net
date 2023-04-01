@@ -5,6 +5,7 @@ import {
     StatusBar,
     StyleSheet,
     Text,
+    ToastAndroid,
     useColorScheme,
     View,
 } from 'react-native';
@@ -12,6 +13,7 @@ import {
 import {
     Button, TextInput
 } from 'react-native-paper';
+import globalStyles from '../../utils/Styles';
 
 
 
@@ -26,18 +28,31 @@ const OtherPersonInfo = ({route, navigation}) => {
     // }
     emergency = route.params.emergency
 
+    const handleContinue = () => {
+        if(emergency.otherName) {
+            navigation.replace("ChooseCondition",{emergency: emergency})
+        } else {
+            ToastAndroid.show("Missing name", ToastAndroid.LONG);
+        }
+        
+    }
+
         return(
-            <View>
+            <View style={{flex: 1, backgroundColor: 'white'}}>
                 <TextInput 
+                   mode="outlined"
 
                 placeholder="Name"
                 // onChangeText={(text) => handleName(text)}
                 onChangeText={(text)=>emergency.otherName = text}
                 >
                 </TextInput>
-                <Button onPress={ () => {
-                    navigation.replace("ChooseCondition",{emergency: emergency 
-                    })
+                
+                <Button 
+                textColor={globalStyles.button1.textColor} 
+                style={ {...globalStyles.smallAddButtonBlack, marginTop: 20, alignSelf: 'center', width: 100, justifyContent:'center'}}
+                onPress={ () => {
+                        handleContinue()
                     }   
                     }>Continue</Button>
 

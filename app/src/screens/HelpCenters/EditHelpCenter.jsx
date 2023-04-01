@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, ToastAndroid, View } from "react-native";
 import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
@@ -7,10 +7,14 @@ import { useState, useEffect } from "react";
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
 import SelectLocationModal from "../../components/SelectLocationModal";
+import globalStyles from '../../utils/Styles';
 
 import auth from '@react-native-firebase/auth';
 
 export default function EditHelpCenter({route, navigation}) {
+    useEffect(() => {
+        navigation.setOptions({ title: 'Help Center Information' });
+      }, []);
 
     const {helpCenterId} = route.params;
 
@@ -93,6 +97,11 @@ export default function EditHelpCenter({route, navigation}) {
 
         const userId = auth().currentUser.uid;
 
+        if( !(name && citySelection && address && modalSelection && userId) ) {
+            ToastAndroid.show('Missing information!', ToastAndroid.LONG);
+            return;
+        }
+
         const newHelpCenter = {
             name: name,
             city: citySelection,
@@ -133,52 +142,57 @@ export default function EditHelpCenter({route, navigation}) {
 
     return (
 
-        <View>
+        <View style={globalStyles.mainView}>
+            <View style={globalStyles.editView}>
             <Portal>
     
-                <SelectLocationModal
-                isModalVisible={isModalVisible}
-                hideModal={hideModal}
-                onConfirm={handleModalConfirm}
-                modalSelection={modalSelection}
-            />
-                
-            </Portal>
-            <TextInput
-                mode="outlined"
-                label="Name"
-                value={name}
-                //placeholder="E-mail"
-                error={nameError}
-                onChangeText={(text) =>
-                    handleNameChange(text)} />
-            <TextInput
-                mode="outlined"
-                label="Address"
-                value={address}
-                //placeholder="E-mail"
-                //error={addressError}
-                onChangeText={(text) =>
-                    handleAddressChange(text)} />
-            <DropDown
-                label="City"
-                mode='outlined'
-                visible={isShowDropdown}
-                showDropDown={() => setIsShowDropdown(true)}
-                onDismiss={() => setIsShowDropdown(false)}
-                value={citySelection}
-                setValue={setCitySelection}
-                list={getCities()}
-            ></DropDown>
-            <Button onPress={handleSelectLocation}>Select Location</Button>
-            {modalSelection ?
-                <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
-                :
-                <Text style={styles.locationText}>Location: Not Selected</Text>
-            }
-            <Text style={styles.providedText}>Provided</Text>
-            {chips}
-            <Button onPress={editHelpCenter}>Edit Help Center</Button>
+                    <SelectLocationModal
+                    isModalVisible={isModalVisible}
+                    hideModal={hideModal}
+                    onConfirm={handleModalConfirm}
+                    modalSelection={modalSelection}
+                />
+                    
+                </Portal>
+                <TextInput
+                    mode="outlined"
+                    label="Name"
+                    value={name}
+                    //placeholder="E-mail"
+                    error={nameError}
+                    onChangeText={(text) =>
+                        handleNameChange(text)} />
+                <TextInput
+                    mode="outlined"
+                    label="Address"
+                    value={address}
+                    //placeholder="E-mail"
+                    //error={addressError}
+                    onChangeText={(text) =>
+                        handleAddressChange(text)} />
+                <DropDown
+                    label="City"
+                    mode='outlined'
+                    visible={isShowDropdown}
+                    showDropDown={() => setIsShowDropdown(true)}
+                    onDismiss={() => setIsShowDropdown(false)}
+                    value={citySelection}
+                    setValue={setCitySelection}
+                    list={getCities()}
+                    dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+                    dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
+                ></DropDown>
+                <Button style={globalStyles.smallAddButton} buttonColor='#D0342C' textColor='white' onPress={handleSelectLocation}>Select Location</Button>
+                {modalSelection ?
+                    <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
+                    :
+                    <Text style={styles.locationText}>Location: Not Selected</Text>
+                }
+                <Text style={styles.providedText}>Provided</Text>
+                {chips}
+                <Button onPress={editHelpCenter}>Edit Help Center</Button>
+            </View>
+            
         </View>
     )
 }

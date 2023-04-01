@@ -1,4 +1,5 @@
-import { StyleSheet, View } from "react-native";
+import React, {useEffect} from 'react';
+import { StyleSheet, ToastAndroid, View } from "react-native";
 import { Button, Checkbox, Chip, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 
@@ -9,9 +10,13 @@ import getCities from "../../utils/getCities";
 import SelectLocationModal from "../../components/SelectLocationModal";
 
 import auth from '@react-native-firebase/auth';
+import globalStyles from "../../utils/Styles";
+
 
 export default function AddNeeds({ navigation, route }) {
-
+    useEffect(() => {
+        navigation.setOptions({ title: 'Add Needs' });
+      }, []);
     const [chipsData, setChipsData] = useState(needsNeeds.data);
     const [name, setName] = useState('');
     const [nameError, setNameError] = useState(false);
@@ -52,6 +57,11 @@ export default function AddNeeds({ navigation, route }) {
 
         const userId = auth().currentUser.uid;
 
+        if( !(name && citySelection && address && modalSelection && userId) ) {
+            ToastAndroid.show('Missing information!', ToastAndroid.LONG);
+            return;
+        }
+
         const newNeeds = {
             name: name,
             city: citySelection,
@@ -91,7 +101,8 @@ export default function AddNeeds({ navigation, route }) {
 
     return (
 
-        <View>
+        <View style={{flex: 1, backgroundColor:'#FFFFFF'}}>
+            <View style={{flex: 1, backgroundColor:'#FFFFFF', marginHorizontal:20}}>
             <Portal>
                 <SelectLocationModal
                     isModalVisible={isModalVisible}
@@ -123,8 +134,10 @@ export default function AddNeeds({ navigation, route }) {
                 value={citySelection}
                 setValue={setCitySelection}
                 list={getCities()}
+                dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+                dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
             ></DropDown>
-            <Button onPress={handleSelectLocation}>Select Location</Button>
+            <Button style={ {...globalStyles.smallAddButtonBlack.style}} textColor='white' onPress={handleSelectLocation}>Select Location</Button>
             {modalSelection ?
                 <Text style={styles.locationText}>Location: {modalSelection.latitude.toFixed(3)}, {modalSelection.longitude.toFixed(3)}</Text>
                 :
@@ -132,7 +145,8 @@ export default function AddNeeds({ navigation, route }) {
             }
             <Text style={styles.providedText}>Needs</Text>
             {chips}
-            <Button onPress={addNeeds}>Add Needs</Button>
+            <Button style={ {...globalStyles.smallAddButtonBlack.style}} textColor='white' onPress={addNeeds}>Add Needs</Button>
+            </View>
         </View>
     )
 }
@@ -145,6 +159,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     modalContainerStyle: {
+        
         backgroundColor: 'white',
         padding: 40,
         margin: 20,

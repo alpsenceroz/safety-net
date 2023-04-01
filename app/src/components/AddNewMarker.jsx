@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Modal, Text } from 'react-native-paper';
 
+import globalStyles from '../utils/Styles';
 
 
 export default function AddNewMarker(props) {
@@ -22,15 +23,15 @@ export default function AddNewMarker(props) {
     <Modal visible={isModalVisible} onDismiss={hideModal} contentContainerStyle={styles.modalContainerStyle}>
   
       <View style={styles.buttonView}>
-        <Button onPress={() => {
+        <Button style={globalStyles.smallAddButton} buttonColor='#DB231A' textColor='white' onPress={() => {
             hideModal(true)
             navigation.navigate('Emergency', {screen: 'ChooseVictim', params: {location: modalSelection}})
             }}>Add New Emergency</Button>
-        <Button onPress={() => {
+        <Button style={globalStyles.smallAddButton}  buttonColor='#438CA3' textColor='white' onPress={() => {
             hideModal(true)
             navigation.push('AddHelpCenter',{location: modalSelection})
         }}>Add New Help Center</Button>
-          <Button onPress={() => {
+          <Button style={globalStyles.smallAddButton}  buttonColor='#598344' textColor='white' onPress={() => {
             hideModal(true)
             navigation.push('AddNeeds', {location: modalSelection})
         }}>Add Other Need</Button>
@@ -67,7 +68,9 @@ const styles = StyleSheet.create({
   modalContainerStyle: {
     backgroundColor: 'white',
     padding: 40,
-    margin: 20,
+    marginVertical: '70%',
+    marginHorizontal: '20%',
+    borderRadius: 20,
     flex: 1,
   },
 

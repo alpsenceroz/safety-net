@@ -11,6 +11,7 @@ import {
     useColorScheme,
     View,
     FlatList,
+    Image,
 } from 'react-native';
 
 import {
@@ -23,11 +24,15 @@ import {
 } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 import SelectLocationModal from "../../components/SelectLocationModal";
+import globalStyles from '../../utils/Styles';
 
 
 
 
 const DisplayEmergency = ({route, navigation}) => {
+    useEffect(() => {
+        navigation.setOptions({ title: 'Emergency Information' });
+      }, []);
     const emergencyID = route.params.emergencyID;
     const [emergency, setEmergency] = useState(false)
     const [isModalVisible, setModalVisible] = useState(false);
@@ -78,7 +83,12 @@ useEffect(() => {
 }, [emergency])
 
     return(
-        <View>
+        <View style={globalStyles.mainView}>
+            <View style={globalStyles.editView}>
+            <Image
+            style={{width: 400, height:300, alignSelf:'center', justifyContent:'center'}}
+            source={require('../../assets/checklist.png')}
+            />
             <Portal>
                 <SelectLocationModal
                 isModalVisible={isModalVisible}
@@ -87,9 +97,8 @@ useEffect(() => {
                 modalSelection={modalSelection}
                 />  
             </Portal>
-            <Text>Name: {emergency?.other ? emergency.otherName : user?.name }</Text>
+            <Text>Name: {emergency?.otherName ? emergency.otherName : user?.name }</Text>
 
-            {emergency?.other && {infos}}
            
             <TextInput
             mode="outlined"
@@ -119,22 +128,13 @@ useEffect(() => {
             status={emergency?.rescued ? 'checked' : 'unchecked'}
             onPress={ () =>  setEmergency((prevEmergency) => ({...prevEmergency, rescued: !emergency.rescued}))}
             />
-            <Button onPress={handleSelectLocation} disabled={true}>Edit Location</Button>
-            <Button onPress={ async()=> {
-                emergency.conditions = conditions
-                await firestore().collection('emergencies').doc(emergencyID).set(emergency)
-                navigation.pop()
-
-            }}>Save Changes</Button>
-            <Button onPress={ async()=> {
-                await firestore().collection('emergencies').doc(emergencyID).delete()
-                navigation.pop()
-
-            }} disabled={true}>Delete Emergency</Button>
+        
             {/* <Button onPress={ async () =>  {
                 await firestore().collection('emergencies').doc(emergencyID).set({...emergency, rescued: true})
                 navigation.pop()
                 }}>Mark as rescued</Button> */}
+            </View>
+           
         </View>
     )
 

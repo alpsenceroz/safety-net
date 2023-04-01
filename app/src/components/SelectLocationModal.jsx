@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button, Modal, Text } from 'react-native-paper';
+import globalStyles from '../utils/Styles';
 
 
 
@@ -42,14 +43,21 @@ export default function SelectLocation(props) {
       <MapView
         provider={PROVIDER_GOOGLE}
         style={{ flex: 1 }}
+        customMapStyle={globalStyles.map}
         showsUserLocation={true}
         onLongPress={(e) => handleMapClick(e.nativeEvent.coordinate)}
+        initialRegion={{
+          latitude: 39,
+          longitude: 33.5,
+          latitudeDelta: 10,
+          longitudeDelta: 12,
+        }}
       >
         {selection && <Marker coordinate={selection} />}
       </MapView>
       <View style={styles.buttonView}>
         <Button mode='contained' style={styles.cancelButton} onPress={hideModal}>Cancel</Button>
-        {userLocation && <Button mode='contained' style={styles.userLocationButton} onPress={() => onConfirm(userLocation)}>Use User Location</Button>}
+        {userLocation && <Button mode='contained' style={styles.userLocationButton} onPress={() => onConfirm(userLocation)}>My Location</Button>}
         <Button mode='contained' style={styles.confirmButton} disabled={selection ? false : true} onPress={() => onConfirm(selection)}>Confirm</Button>
 
       </View>
@@ -67,29 +75,27 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 20,
+    marginBottom: 20
   },
   buttonView: {
     flexDirection: 'row',
     alignSelf: 'center',
+    justifyContent: 'space-between'
   },
   confirmButton: {
-    backgroundColor: 'green',
-    marginRight: 7,
-    marginLeft: 7,
+    backgroundColor: '#3A6351',
+
   },
   userLocationButton: {
-    backgroundColor: 'blue',
-    marginRight: 7,
-    marginLeft: 7,
+    backgroundColor: '#4694AC',
+
   },
   cancelButton: {
-    backgroundColor: 'red',
-    marginRight: 7,
-    marginLeft: 7,
+    backgroundColor: '#D0342C',
   },
   modalContainerStyle: {
     backgroundColor: 'white',
-    padding: 40,
+    padding: 30,
     margin: 20,
     flex: 1,
   },

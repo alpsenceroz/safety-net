@@ -13,10 +13,18 @@ export default function OtherNeedsNavigation() {
 
     return (
         <Stack.Navigator initialRouteName="List">
-            <Stack.Screen name="List" component={Needs} />
-            <Stack.Screen name="AddNeeds" component={AddNeeds}    />
-            <Stack.Screen name="EditNeeds" component={EditNeeds} />
-            <Stack.Screen name="DisplayNeeds" component={DisplayNeeds} />
+            <Stack.Screen name="List" component={Needs} options={{
+                headerShown: false,
+            }}/>
+            <Stack.Screen name="AddNeeds" component={AddNeeds}  options={{
+                title: "Add Needs",
+            }}  />
+            <Stack.Screen name="EditNeeds" component={EditNeeds} options={{
+                title: "Edit Needs",
+            }}/>
+            <Stack.Screen name="DisplayNeeds" component={DisplayNeeds} options={{
+                title: "Display Needs",
+            }}/>
         </Stack.Navigator>
     )
 }

@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 import needsNeeds from '../../utils/userNeeds.json'
 import DropDown from "react-native-paper-dropdown";
 import getCities from "../../utils/getCities";
-import { Button, Card, Checkbox, Chip, Text } from "react-native-paper";
+import { Button, Card, Checkbox, Chip, Text, IconButton} from "react-native-paper";
 
 import MciIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import auth from '@react-native-firebase/auth';
+import globalStyles from "../../utils/Styles";
 
 const ALL_CITIES_LABEL = "All Cities";
 
@@ -20,28 +21,49 @@ needsNeeds.data.forEach( (value) => {
 } )
 
 function NeedsItem(props) {
+   
     const { name, provided, city, onPress } = props;
 
     let chips;
+    
     if (provided) {
         chips = provided.map((item) => {
-            return (<Chip 
-                key={item} 
-                style={styles.providedChip} 
-                icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#0e4ff1" />}
-                >{item}</Chip>)
+            let displayText  = item;
+            if (item.length > 5){
+                displayText = item.substring(0, 5) + ".";
+            }
+            return (
+                <Chip 
+                    key={item} 
+                    style={styles.providedChip} 
+                    icon={() => <MciIcon name={iconMap.get(item)} size={30} color="#27515E" />}
+                    textStyle={styles.chipText}
+                >
+                    { displayText} {/* Use substring() to extract first 5 characters */}
+                </Chip>
+            )
         })
+        
     }
 
 
     return (
-        <Card onPress={onPress}>
+        <Card  style={styles.card} onPress={onPress}>
             <Card.Title
                 title={name}
                 subtitle={city}
             />
             <Card.Content style={styles.cardContent}>
-                {chips}
+                {Object.values(chips).slice(0, 3).map((chip, index) => (
+        <Text style={{marginRight:5}} key={index}> {chip} </Text>
+        ))}
+        {Object.values(chips).length > 3 && (
+                <IconButton
+                    icon="plus"
+                    size={16}
+                    style={{marginLeft:-10, color: 'black'}}
+                />
+        )}
             </Card.Content>
         </Card>
 
@@ -140,34 +162,42 @@ export default function Needs({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <Button onPress={addHelpCenter}>Add Needs</Button>
-            <DropDown
-                label="City"
-                mode='outlined'
-                visible={isShowDropdown}
-                showDropDown={() => setIsShowDropdown(true)}
-                onDismiss={() => setIsShowDropdown(false)}
-                value={citySelection}
-                setValue={handleCitySelection}
-                list={allCities}
-            ></DropDown>
-            <Checkbox.Item label="Only Your Needs" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
+        <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFFFF'}}>
+            <View style={{ flex: 1 , marginHorizontal: 20}}>
+                <Text style={globalStyles.screenTitle.style}>Needs</Text>
 
-            <View style={{ flex: 1 }}>
-                <Text style={styles.sectionTitle}>Needs</Text>
-                <FlatList
-                    data={onlyUser ? yourHelpCenters : needs}
-                    renderItem={({ item }) => <NeedsItem 
-                    name={item.data.name} 
-                    provided={item.data.needs} 
-                    city={item.data.city} 
-                    onPress={ item.data.user === user.uid ? () => handleCardPressEdit(item.id) : () => handleCardPressDisplay(item.id)} 
+                <Button 
+                buttonColor= {globalStyles.button1.buttonColor} textColor={globalStyles.button1.textColor} style={ {...globalStyles.screenAddButton.style, alignSelf: 'center', width: 200, justifyContent:'center'}}
+
+                onPress={addHelpCenter}>Add Need</Button>
+                <DropDown
+                    label="City"
+                    mode='outlined'
+                    visible={isShowDropdown}
+                    showDropDown={() => setIsShowDropdown(true)}
+                    onDismiss={() => setIsShowDropdown(false)}
+                    value={citySelection}
+                    setValue={handleCitySelection}
+                    list={allCities}
+                    dropDownItemStyle={{backgroundColor: "#FCEDEE",}}
+                    dropDownItemSelectedStyle={{backgroundColor: "#F8D1D2",}}
+                ></DropDown>
+                <Checkbox.Item label="Only Your Needs" status={onlyUser ? 'checked' : 'unchecked'} onPress={() => setOnlyUser((current) => !current)} />
+
+                <View style={{ flex: 1 }}>
+                    <FlatList
+                        data={onlyUser ? yourHelpCenters : needs}
+                        renderItem={({ item }) => <NeedsItem 
+                        name={item.data.name} 
+                        provided={item.data.needs} 
+                        city={item.data.city} 
+                        onPress={ item.data.user === user.uid ? () => handleCardPressEdit(item.id) : () => handleCardPressDisplay(item.id)} 
+                        />
+                    }
+                        keyExtractor={item => item.id}
                     />
-                }
-                    keyExtractor={item => item.id}
-                />
 
+                </View>
             </View>
         </SafeAreaView>
     )
@@ -184,14 +214,24 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 22,
         textAlign: 'center',
+        marginTop: 30,
+        marginVertical: 10
     },
     cardContent: {
         flexDirection: 'row',
     },
     providedChip: {
-        backgroundColor: 'lightblue',
-        marginRight: 10,
-
+        backgroundColor: 'white',
+        marginRight: 2,
     },
+    card: {
+        backgroundColor: '#A4CDDA',
+        borderRadius: 20,
+        marginTop: 5,     
+    },
+    chipText: {
+        marginRight:5,
+        color: 'black'
+    }
 
 })

@@ -14,11 +14,21 @@ const EmergencyNavigation = () => {
     return(
 
             <Stack.Navigator initialRouteName="ChooseLocation">
-                <Stack.Screen name="ChooseLocation" component={ChooseLocation}/>
-                <Stack.Screen name="ChooseVictim" component={ChooseVictim}/>
-                <Stack.Screen name="ChooseCondition" component={ChooseCondition}/>
-                <Stack.Screen name="EmergencyReported" component={EmergencyReported}/>
-                <Stack.Screen name="OtherPersonInfo" component={OtherPersonInfo}/>
+                <Stack.Screen name="ChooseLocation" component={ChooseLocation} options={{
+                    title: "Choose Location"
+                }}/>
+                <Stack.Screen name="ChooseVictim" component={ChooseVictim} options={{
+                    title: "For whom?"
+                }}/>
+                <Stack.Screen name="ChooseCondition" component={ChooseCondition} options={{
+                    title: "Choose Condition"
+                }}/>
+                <Stack.Screen name="EmergencyReported" component={EmergencyReported} options={{
+                    title: "Emergency Reported"
+                }}/>
+                <Stack.Screen name="OtherPersonInfo" component={OtherPersonInfo} options={{
+                    title: "Other Person Info"
+                }}/>
             </Stack.Navigator>
 
     )
