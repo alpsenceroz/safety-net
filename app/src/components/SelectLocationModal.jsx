@@ -83,15 +83,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   confirmButton: {
-    backgroundColor: 'green',
+    backgroundColor: '#3A6351',
 
   },
   userLocationButton: {
-    backgroundColor: 'blue',
+    backgroundColor: '#4694AC',
 
   },
   cancelButton: {
-    backgroundColor: 'red',
+    backgroundColor: '#D0342C',
   },
   modalContainerStyle: {
     backgroundColor: 'white',
